@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fitnessapp/Widgets/alertdialogs.dart';
+import 'package:fitnessapp/widgets/alertdialogs.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/recordtypes.dart';
 import 'package:fitnessapp/common/models/modeluser.dart';

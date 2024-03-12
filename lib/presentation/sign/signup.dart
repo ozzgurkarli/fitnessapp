@@ -1,6 +1,6 @@
-import 'package:fitnessapp/Widgets/assets.dart';
-import 'package:fitnessapp/Widgets/customizedwidgets.dart';
-import 'package:fitnessapp/Widgets/packagedropdown.dart';
+import 'package:fitnessapp/widgets/assets.dart';
+import 'package:fitnessapp/widgets/customizedwidgets.dart';
+import 'package:fitnessapp/widgets/packagedropdown.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';

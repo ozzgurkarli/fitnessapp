@@ -1,4 +1,4 @@
-import 'package:fitnessapp/Widgets/assets.dart';
+import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/presentation/sign/resetpassword.dart';
 import 'package:fitnessapp/presentation/sign/signin.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';

@@ -1,4 +1,4 @@
-import 'package:fitnessapp/Widgets/customizedwidgets.dart';
+import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
