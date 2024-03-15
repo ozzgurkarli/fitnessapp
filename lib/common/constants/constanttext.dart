@@ -37,6 +37,7 @@ class ConstantText {
   static const List<String> CONTINUE = ["Continue", "Devam Et"];
   static const List<String> EDIT = ["Edit", "Düzenle"];
   static const List<String> HISTORY = ["History", "Geçmiş"];
+  static const List<String> NEXT = ["Next", "Sonraki"];
 
   static const List<String> SIGNIN = ["Sign In", "Giriş Yap"];
   static const List<String> CREATEACCOUNT = ["Sign Up", "Hesap Oluştur"];
@@ -74,4 +75,8 @@ class ConstantText {
   static const List<String> LEG = ["Leg", "Bacak"];
   static const List<String> SHOULDER = ["Shoulder", "Omuz"];
   static const List<String> TRICEPS = ["Triceps", "Arka Kol"];
+
+  static const List<String> SELECTMOVE = ["Select move", "Hareket seç"];
+  static const List<String> ADDMOVE = ["Add move to program", "Hareketi programlara ekle"];
+  static const List<String> ADDEDMOVES = ["See added moves", "Eklenen hareketleri gör"];
 }

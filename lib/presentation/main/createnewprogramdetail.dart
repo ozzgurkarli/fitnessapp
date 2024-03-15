@@ -1,7 +1,9 @@
 import 'package:fitnessapp/common/constants/colors.dart';
-import 'package:fitnessapp/common/constants/constanttext.dart';
-import 'package:fitnessapp/widgets/createprogrampages.dart';
+import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
+import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogramscreenproperties.dart';
+import 'package:fitnessapp/widgets/createprogrampage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateNewProgramDetail extends StatefulWidget {
   const CreateNewProgramDetail({super.key});
@@ -11,9 +13,10 @@ class CreateNewProgramDetail extends StatefulWidget {
 }
 
 class _CreateNewProgramDetailState extends State<CreateNewProgramDetail> {
-  List<List<String>> list = [ConstantText.ABDOMEN, ConstantText.BACK, ConstantText.CHEST];
+  PageController controller = PageController();
   @override
   Widget build(BuildContext context) {
+    context.read<CubitCreateProgramScreenProperties>().setProperties();
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
       appBar: AppBar(
@@ -22,13 +25,18 @@ class _CreateNewProgramDetailState extends State<CreateNewProgramDetail> {
         foregroundColor: ColorC.foregroundColor,
         surfaceTintColor: Colors.transparent,
       ),
-      body: Center(
-          child: PageView.builder(
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          return CreateProgramPage(list[index]);
-        },
-      )),
+      body: Center(child:
+          BlocBuilder<CubitCreateProgramScreenProperties, List<List<String>>>(
+              builder: (context, state) {
+        return PageView.builder(
+          itemCount: state.length,
+          controller: controller,
+          itemBuilder: (contextx, index) {
+            context.read<CubitCreateProgramMovesList>().clearList();
+            return CreateProgramPage(state[index], controller);
+          },
+        );
+      })),
     );
   }
 }

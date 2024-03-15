@@ -1,6 +1,9 @@
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdowncreateprogramitems.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownlanguage.dart';
+import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownmoves.dart';
+import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
+import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogramscreenproperties.dart';
 import 'package:fitnessapp/cubit/welcome/cubitwelcomelanguage.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
 import 'package:fitnessapp/widgets/assets.dart';
@@ -85,6 +88,9 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => CubitInputOnChanged()),
             BlocProvider(create: (context) => CubitDropDownLanguage()),
             BlocProvider(create: (context) => CubitWelcomeLanguage()),
+            BlocProvider(create: (context) => CubitCreateProgramScreenProperties()),
+            BlocProvider(create: (context) => CubitDropDownMoves()),
+            BlocProvider(create: (context) => CubitCreateProgramMovesList()),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,

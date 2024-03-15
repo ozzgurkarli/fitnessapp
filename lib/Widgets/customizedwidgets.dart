@@ -95,11 +95,12 @@ class CustomizedTextFieldPassword extends StatelessWidget {
 class CustomizedElevatedButton extends StatelessWidget {
   CustomizedElevatedButton(
       this.onPressed, this.text, this.icon, this.margin, this.alignment,
-      {super.key, this.gradientColor, this.weight});
+      {super.key, this.gradientColor, this.weight, this.customWidth});
 
   final VoidCallback? onPressed;
   String text;
   IconData icon;
+  double? customWidth;
   double margin;
   FontWeight? weight;
   MainAxisAlignment alignment;
@@ -108,7 +109,7 @@ class CustomizedElevatedButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: Sizes.width / 4.5,
+      width: customWidth ?? Sizes.width / 4.5,
       margin: EdgeInsets.only(right: margin),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
