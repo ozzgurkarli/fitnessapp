@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_build_context_synchronously
+// ignore_for_file: must_be_immutable, use_build_context_synchronously, empty_catches
 
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
@@ -10,23 +10,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomizedTextField extends StatelessWidget {
-  CustomizedTextField(this.controller, this.labelText, {super.key});
+  CustomizedTextField(this.controller, this.labelText, this.obsecure,
+      {super.key});
 
   TextEditingController controller;
-
   String labelText;
+  bool obsecure;
 
   @override
   Widget build(BuildContext context) {
-
     return TextField(
       textCapitalization: TextCapitalization.words,
-      keyboardType: TextInputType.text,
+      keyboardType: obsecure ? TextInputType.number : TextInputType.text,
       controller: controller,
       onChanged: (value) {
-        context.read<CubitInputOnChanged>().onChanged(context, labelText, value, controller);
+        context
+            .read<CubitInputOnChanged>()
+            .onChanged(context, labelText, value, controller);
       },
-      obscureText: false,
+      obscureText: obsecure,
       style: const TextStyle(
           color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
       decoration: InputDecoration(
@@ -54,13 +56,22 @@ class CustomizedTextFieldPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return TextField(
       textCapitalization: TextCapitalization.words,
       keyboardType: TextInputType.number,
       controller: controller,
       onChanged: (value) {
-        context.read<CubitInputOnChanged>().onChangedPassword(context, labelText, value, controller);
+        try {
+          int.parse(value);
+        } catch (e) {
+          if (controller.text.length > 0) {
+            controller.text =
+                controller.text.substring(0, controller.text.length - 1);
+          }
+        }
+        context
+            .read<CubitInputOnChanged>()
+            .onChangedPassword(context, labelText, value, controller);
       },
       obscureText: true,
       style: const TextStyle(
@@ -81,101 +92,18 @@ class CustomizedTextFieldPassword extends StatelessWidget {
   }
 }
 
-class CustomizedInputRowText extends StatelessWidget {
-  CustomizedInputRowText(
-      this.controller, this.labelText, this.icon, this.passwordField,
-      {super.key});
-
-  TextEditingController controller;
-  String labelText;
-  Widget icon;
-
-  bool passwordField;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: Sizes.width / 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: Sizes.height / 15,
-            width: Sizes.width / 1.6,
-            child: CustomizedTextField(controller, labelText),
-          ),
-          Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomizedInputRowPassword extends StatelessWidget {
-  CustomizedInputRowPassword(
-      this.controller, this.labelText, this.icon, this.passwordField,
-      {super.key});
-
-  TextEditingController controller;
-  String labelText;
-  Widget icon;
-
-  bool passwordField;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: Sizes.width / 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: Sizes.height / 15,
-            width: Sizes.width / 1.6,
-            child: CustomizedTextFieldPassword(controller, labelText),
-          ),
-          Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon),
-        ],
-      ),
-    );
-  }
-}
-
-class CustomizedInputRowHalf extends StatelessWidget {
-  CustomizedInputRowHalf(this.controller, this.labelText, this.icon,
-      {super.key});
-
-  TextEditingController controller;
-  String labelText;
-  Widget icon;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          height: Sizes.height / 15,
-          width: Sizes.width / 4,
-          child: CustomizedTextField(controller, labelText),
-        ),
-        Container(
-            margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon),
-      ],
-    );
-  }
-}
-
 class CustomizedElevatedButton extends StatelessWidget {
-  CustomizedElevatedButton(this.onPressed, this.text, this.icon, this.margin,
-      {super.key});
+  CustomizedElevatedButton(
+      this.onPressed, this.text, this.icon, this.margin, this.alignment,
+      {super.key, this.gradientColor, this.weight});
 
   final VoidCallback? onPressed;
   String text;
   IconData icon;
   double margin;
+  FontWeight? weight;
+  MainAxisAlignment alignment;
+  List<Color>? gradientColor;
 
   @override
   Widget build(BuildContext context) {
@@ -184,21 +112,26 @@ class CustomizedElevatedButton extends StatelessWidget {
       margin: EdgeInsets.only(right: margin),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          gradient: const LinearGradient(
-              colors: [ColorC.foregroundColor, ColorC.thirdColor])),
+          gradient:
+              LinearGradient(colors: gradientColor ?? ColorC.defaultGradient)),
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
-              disabledBackgroundColor: Colors.transparent,
-              disabledForegroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
+              elevation: 0,
+              surfaceTintColor: Colors.red,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12))),
           onPressed: onPressed,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [Text(text), Icon(icon)],
+            mainAxisAlignment: alignment,
+            children: [
+              Text(
+                text,
+                style: TextStyle(fontWeight: weight ?? FontWeight.w500),
+              ),
+              Icon(icon)
+            ],
           )),
     );
   }
@@ -236,8 +169,8 @@ class CustomizedSignUpDatePicker extends StatelessWidget {
             controller: SignUp.birthDateController,
             style: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
-            decoration: const InputDecoration(
-                labelText: ConstantText.BIRTHDATE,
+            decoration: InputDecoration(
+                labelText: ConstantText.BIRTHDATE[ConstantText.index],
                 filled: true,
                 prefixIcon: Icon(
                   Icons.calendar_today,

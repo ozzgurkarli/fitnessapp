@@ -6,6 +6,10 @@ class ColorC
   static const Color foregroundColor = Color(0xFF00BFFF);
   static const Color thirdColor = Color(0xFF0066CC);
 
-  static const Color disabledColorFirst = Color(0xFF808080);
-  static const Color disabledColorLast = Color(0xFFD3D3D3);
+  static const Color premiumGFirst = Color(0xFFFFBF00);
+  static const Color premiumGLast = Color(0xFFFF6D00);
+  Color c = Colors.teal;
+
+  static const List<Color> defaultGradient = [ColorC.foregroundColor, ColorC.thirdColor];
+  static const List<Color> premiumGradient = [ColorC.premiumGFirst, ColorC.premiumGLast];
 }

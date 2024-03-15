@@ -8,20 +8,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CubitInputMail extends Cubit<Widget> {
   CubitInputMail() : super(const Loading());
 
-  bool isMailValid(String emailController) {
-    if (emailController.split('@').length > 1 &&
-        emailController.split(".com").length > 1) {
+  void isMailValid(String controller) {
+    if (controller.split('@').length > 1 &&
+        controller.split(".com").length > 1) {
       SignUp.mailValid = true;
       SignIn.mailValid = true;
       ResetPassword.mailValid = true;
       emit(const Check());
-      return true;
+      return;
     }
 
     SignUp.mailValid = false;
     SignIn.mailValid = false;
     ResetPassword.mailValid = false;
     emit(const Loading());
-    return false;
   }
 }

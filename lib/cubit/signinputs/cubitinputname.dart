@@ -6,15 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CubitInputName extends Cubit<Widget> {
   CubitInputName() : super(const Loading());
 
-  void isNameValid(String nameController){
-
-    if (nameController.length > 1) {
-
+  void isNameValid(String controller) {
+    if (controller.length > 1) {
       SignUp.nameValid = true;
       emit(const Check());
       return;
     }
-      SignUp.nameValid = false;
-      emit(const Loading());
+    SignUp.nameValid = false;
+    emit(const Loading());
   }
 }

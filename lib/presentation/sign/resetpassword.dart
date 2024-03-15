@@ -15,16 +15,15 @@ class ResetPassword extends StatefulWidget {
 
   static bool mailValid = false;
 
-  static TextEditingController emailController = TextEditingController();
 
   @override
   State<ResetPassword> createState() => _SignInState();
 }
 
 class _SignInState extends State<ResetPassword> {
+  TextEditingController emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    context.read<CubitInputMail>().isMailValid(ResetPassword.emailController.text);
     context.read<CubitInputResetPasswordValid>().checkValidReset();
 
     return GestureDetector(
@@ -45,11 +44,24 @@ class _SignInState extends State<ResetPassword> {
                 SizedBox(
                   height: Sizes.height / 6,
                 ),
-                BlocBuilder<CubitInputMail, Widget>(
-                  builder: (context, state) {
-                    return CustomizedInputRowText(ResetPassword.emailController,
-                        ConstantText.EMAIL, state, false);
-                  },
+                Container(
+                  margin: EdgeInsets.only(left: Sizes.width / 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: Sizes.height / 15,
+                        width: Sizes.width / 1.6,
+                        child: CustomizedTextField(
+                            emailController, ConstantText.EMAIL[ConstantText.index], false),
+                      ),
+                      BlocBuilder<CubitInputMail, Widget>(
+                        builder: (context, icon) {
+                          return icon;
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: Sizes.height / 7.4,
@@ -57,8 +69,8 @@ class _SignInState extends State<ResetPassword> {
                 BlocBuilder<CubitInputResetPasswordValid, bool>(
                   builder: (contextt, state) {
                     return CustomizedElevatedButton(() async {
-                        await context.read<CubitInputResetPasswordValid>().resetPasswordMail(context);
-                    }, ConstantText.CONTINUE, Icons.keyboard_arrow_right, 0);
+                        await context.read<CubitInputResetPasswordValid>().resetPasswordMail(context, emailController.text);
+                    }, ConstantText.CONTINUE[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
                   },
                 ),
                 SizedBox(
@@ -66,8 +78,8 @@ class _SignInState extends State<ResetPassword> {
                 ),
                 TextButton(
                     onPressed: () {Navigator.pop(context);},
-                    child: const Text(
-                      ConstantText.TURNBACK,
+                    child: Text(
+                      ConstantText.TURNBACK[ConstantText.index],
                     )),
               ],
             ),

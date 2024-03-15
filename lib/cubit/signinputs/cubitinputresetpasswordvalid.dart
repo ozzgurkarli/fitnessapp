@@ -32,7 +32,7 @@ class CubitInputResetPasswordValid extends Cubit<bool>
     return false;
   }
 
-  Future<void> resetPasswordMail(BuildContext context) async {
+  Future<void> resetPasswordMail(BuildContext context, String email) async {
 
     await Future<void>.delayed(const Duration(milliseconds: 50));
     ModelUser user = ModelUser.empty();
@@ -40,24 +40,24 @@ class CubitInputResetPasswordValid extends Cubit<bool>
 
     if(await checkValidReset()){
       try{
-        user = await dbUser.findUserByMail((ResetPassword.emailController.text));     // user not found error
-        recentlyLogged = await dbUser.findResetLog(ResetPassword.emailController.text);
+        user = await dbUser.findUserByMail((email));     // user not found error
+        recentlyLogged = await dbUser.findResetLog(email);
 
         if(recentlyLogged){
           throw Exception(ErrorMessages.RESETMAILALREADYSENT);
         }
       }catch(e){
-        showDialog(context: context, builder: (context)=> AlertDialogError(ConstantText.RESETMAILSENTFAIL, e.toString()));
+        showDialog(context: context, builder: (context)=> AlertDialogError(ConstantText.RESETMAILSENTFAIL[ConstantText.index], e.toString()));
         return;
       }
       user.recordType = recordTypes.PASSWORDCHANGE;
       user.recordDate = Timestamp.fromDate(DateTime.now());
       dbUser.insertUserLog(user);
-      auth.resetPasswordMail(ResetPassword.emailController.text);
-      showDialog(context: context, builder: (context)=>AlertDialogInputOneActionValid(ConstantText.RESETMAILSENT));
+      auth.resetPasswordMail(email);
+      showDialog(context: context, builder: (context)=>AlertDialogInputOneActionValid(ConstantText.RESETMAILSENT[ConstantText.index]));
     }
     else{
-      showDialog(context: context, builder: (context)=> AlertDialogInputOneActionValid(ConstantText.SIGNUPFIELDCHECK));
+      showDialog(context: context, builder: (context)=> AlertDialogInputOneActionValid(ConstantText.FILLALLFIELDS[ConstantText.index]));
     }
   }
 

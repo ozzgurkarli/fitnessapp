@@ -12,11 +12,11 @@ class CubitDropdownFrequencyItems extends Cubit<List<DropdownMenuItem>>
   void listOfFrequencies(){
     list.clear();
     
-    list.add(DropdownMenuItem(value: SportsFrequency.NEVER,child: const Text(ConstantText.NEVER, style: TextStyle(color: Colors.white),),));
-    list.add(DropdownMenuItem(value: SportsFrequency.BETWEEN1AND3INMONTH,child: const Text(ConstantText.BETWEEN1AND3INMONTH, style: TextStyle(color: Colors.white),),));
-    list.add(DropdownMenuItem(value: SportsFrequency.BETWEEN1AND2INWEEK,child: const Text(ConstantText.BETWEEN1AND2INWEEK, style: TextStyle(color: Colors.white),),));
-    list.add(DropdownMenuItem(value: SportsFrequency.PLUS3INWEEK,child: const Text(ConstantText.PLUS3INWEEK, style: TextStyle(color: Colors.white),),));
-    list.add(DropdownMenuItem(value: SportsFrequency.EVERYDAY,child: const Text(ConstantText.EVERYDAY, style: TextStyle(color: Colors.white),),));
+    list.add(DropdownMenuItem(value: SportsFrequency.NEVER,child: Text(ConstantText.NEVER[ConstantText.index], style: TextStyle(color: Colors.white),),));
+    list.add(DropdownMenuItem(value: SportsFrequency.BETWEEN1AND3INMONTH,child: Text(ConstantText.BETWEEN1AND3INMONTH[ConstantText.index], style: TextStyle(color: Colors.white),),));
+    list.add(DropdownMenuItem(value: SportsFrequency.BETWEEN1AND2INWEEK,child: Text(ConstantText.BETWEEN1AND2INWEEK[ConstantText.index], style: TextStyle(color: Colors.white),),));
+    list.add(DropdownMenuItem(value: SportsFrequency.PLUS3INWEEK,child: Text(ConstantText.PLUS3INWEEK[ConstantText.index], style: TextStyle(color: Colors.white),),));
+    list.add(DropdownMenuItem(value: SportsFrequency.EVERYDAY,child: Text(ConstantText.EVERYDAY[ConstantText.index], style: TextStyle(color: Colors.white),),));
 
     emit(list);
   }

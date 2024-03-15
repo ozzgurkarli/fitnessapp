@@ -13,11 +13,11 @@ class CubitInputOnChanged extends Cubit<void> {
 
   void onChanged(BuildContext context, String labelText, String value,
       TextEditingController controller) {
-    if (labelText == ConstantText.NAME) {
+    if (labelText == ConstantText.NAME[ConstantText.index]) {
       context.read<CubitInputName>().isNameValid(value);
-    } else if (labelText == ConstantText.SURNAME) {
+    } else if (labelText == ConstantText.SURNAME[ConstantText.index]) {
       context.read<CubitInputSurname>().isSurnameValid(value);
-    } else if (labelText == ConstantText.EMAIL) {
+    } else if (labelText == ConstantText.EMAIL[ConstantText.index]) {
       context.read<CubitInputMail>().isMailValid(value);
     }
     context.read<CubitInputCheckValid>().checkValidSignUp();

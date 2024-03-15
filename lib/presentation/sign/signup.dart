@@ -61,15 +61,23 @@ class _SignUpState extends State<SignUp> {
     context
         .read<CubitInputSurname>()
         .isSurnameValid(SignUp.surnameController.text);
-    context.read<CubitInputMail>().isMailValid(SignUp.emailController.text);
-    context.read<CubitInputPassword>().isPasswordValid(SignUp.passwordController.text);
+    context
+        .read<CubitInputMail>()
+        .isMailValid(SignUp.emailController.text);
+    context
+        .read<CubitInputPassword>()
+        .isPasswordValid(SignUp.passwordController.text);
     context.read<CubitInputHeight>().isHeightValid(SignUp.heightController);
     context.read<CubitInputKg>().isKgValid(SignUp.kgController);
-    context.read<CubitInputBirthDate>().isDateValid(SignUp.birthDateController.text);
+    context
+        .read<CubitInputBirthDate>()
+        .isDateValid(SignUp.birthDateController.text);
     context.read<CubitInputGender>().isGenderValid(SignUp.genderController);
 
     return GestureDetector(
-      onTap: (){FocusManager.instance.primaryFocus?.unfocus();},
+      onTap: () {
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         backgroundColor: ColorC.backgroundColor,
         body: SingleChildScrollView(
@@ -81,7 +89,7 @@ class _SignUpState extends State<SignUp> {
                   height: Sizes.height / 50,
                 ),
                 const Logo(),
-                CustomizedText(ConstantText.SIGNUP, 18),
+                CustomizedText(ConstantText.SIGNUP[ConstantText.index], 18),
                 SizedBox(
                   height: Sizes.height / 35,
                 ),
@@ -90,32 +98,79 @@ class _SignUpState extends State<SignUp> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      BlocBuilder<CubitInputName, Widget>(
-                        builder: (context, state) {
-                          return CustomizedInputRowHalf(
-                              SignUp.nameController, ConstantText.NAME, state);
-                        },
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: Sizes.height / 15,
+                            width: Sizes.width / 4,
+                            child: CustomizedTextField(SignUp.nameController,
+                                ConstantText.NAME[ConstantText.index], false),
+                          ),
+                          BlocBuilder<CubitInputName, Widget>(
+                            builder: (context, icon) {
+                              return icon;
+                            },
+                          ),
+                        ],
                       ),
-                      BlocBuilder<CubitInputSurname, Widget>(
-                        builder: (context, state) {
-                          return CustomizedInputRowHalf(SignUp.surnameController,
-                              ConstantText.SURNAME, state);
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: Sizes.height / 15,
+                            width: Sizes.width / 4,
+                            child: CustomizedTextField(SignUp.surnameController,
+                                ConstantText.SURNAME[ConstantText.index], false),
+                          ),
+                          BlocBuilder<CubitInputSurname, Widget>(
+                            builder: (context, icon) {
+                              return icon;
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: Sizes.width / 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: Sizes.height / 15,
+                        width: Sizes.width / 1.6,
+                        child: CustomizedTextField(
+                            SignUp.emailController, ConstantText.EMAIL[ConstantText.index], false),
+                      ),
+                      BlocBuilder<CubitInputMail, Widget>(
+                        builder: (context, icon) {
+                          return icon;
                         },
                       ),
                     ],
                   ),
                 ),
-                BlocBuilder<CubitInputMail, Widget>(
-                  builder: (context, state) {
-                    return CustomizedInputRowText(
-                        SignUp.emailController, ConstantText.EMAIL, state, false);
-                  },
-                ),
-                BlocBuilder<CubitInputPassword, Widget>(
-                  builder: (context, state) {
-                    return CustomizedInputRowPassword(
-                        SignUp.passwordController, ConstantText.PASSWORD, state, true);
-                  },
+                Container(
+                  margin: EdgeInsets.only(left: Sizes.width / 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: Sizes.height / 15,
+                        width: Sizes.width / 1.6,
+                        child:
+                            CustomizedTextFieldPassword(SignUp.passwordController,
+                        ConstantText.PASSWORD[ConstantText.index]),
+                      ),
+                      BlocBuilder<CubitInputPassword, Widget>(
+                        builder: (context, icon) {
+                          return icon;
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: Sizes.width / 20),
@@ -161,7 +216,8 @@ class _SignUpState extends State<SignUp> {
                         builder: (context, list) {
                           return BlocBuilder<CubitInputKg, Widget>(
                             builder: (context, state) {
-                              return DropDownKg(list, SignUp.kgController, state);
+                              return DropDownKg(
+                                  list, SignUp.kgController, state);
                             },
                           );
                         },
@@ -169,7 +225,8 @@ class _SignUpState extends State<SignUp> {
                     ],
                   ),
                 ),
-                BlocBuilder<CubitDropdownFrequencyItems, List<DropdownMenuItem>>(
+                BlocBuilder<CubitDropdownFrequencyItems,
+                    List<DropdownMenuItem>>(
                   builder: (context, list) {
                     return BlocBuilder<CubitInputFrequency, Widget>(
                       builder: (context, state) {
@@ -186,10 +243,16 @@ class _SignUpState extends State<SignUp> {
                   builder: (context, state) {
                     return CustomizedElevatedButton(() {
                       showDialog(context: context, builder: (context) => state);
-                    }, ConstantText.CONTINUE, Icons.keyboard_arrow_right, 0);
+                    }, ConstantText.CONTINUE[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
                   },
                 ),
-                TextButton(onPressed: (){Navigator.pop(context);}, child: const Text(ConstantText.SIGNIN,))
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: Text(
+                      ConstantText.SIGNIN[ConstantText.index],
+                    ))
               ],
             ),
           ),

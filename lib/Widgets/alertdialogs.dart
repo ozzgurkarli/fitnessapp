@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/cubit/signinputs/cubitinputcheckvalid.dart';
-import 'package:fitnessapp/presentation/home.dart';
+import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,37 +18,37 @@ class AlertDialogInputValid extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: ColorC.foregroundColor,
-      content: const Text(ConstantText.SIGNUPWANTTOCONTINUE, style: TextStyle(color: ColorC.backgroundColor),),
+      content: Text(ConstantText.SIGNUPWANTTOCONTINUE[ConstantText.index], style: TextStyle(color: ColorC.backgroundColor),),
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       actions: [
         TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text(
-              ConstantText.EDIT,
+            child: Text(
+              ConstantText.EDIT[ConstantText.index],
               style: TextStyle(color: ColorC.backgroundColor),
             )),
         TextButton(
             onPressed: () async{
               bool success = true;
               try{
-                await context.read<CubitInputCheckValid>().insertUser(name);
+                await context.read<CubitInputCheckValid>().insertUser();
               }
               on FirebaseAuthException catch(e){
                 success = false;
-                  showDialog(context: context, builder: (context) => AlertDialogError(ConstantText.SIGNUPERROR, e.code));
+                  showDialog(context: context, builder: (context) => AlertDialogError(ConstantText.SIGNUPERROR[ConstantText.index], e.code));
               }
               catch(e){
                 success = false;
-                  showDialog(context: context, builder: (context) => AlertDialogError.empty(ConstantText.SIGNUPERROR));
+                  showDialog(context: context, builder: (context) => AlertDialogError.empty(ConstantText.SIGNUPERROR[ConstantText.index]));
               }
               if(success){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Home()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>const Ground()));
               }
             },
-            child: const Text(
-              ConstantText.CONTINUE,
+            child: Text(
+              ConstantText.CONTINUE[ConstantText.index],
               style: TextStyle(color: ColorC.backgroundColor),
             ))
       ],
@@ -72,8 +72,8 @@ class AlertDialogInputOneActionValid extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text(
-              ConstantText.OK,
+            child: Text(
+              ConstantText.OK[ConstantText.index],
               style: TextStyle(color: ColorC.backgroundColor),
             )),
       ],
@@ -99,8 +99,8 @@ class AlertDialogError extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text(
-              ConstantText.OK,
+            child: Text(
+              ConstantText.OK[ConstantText.index],
               style: TextStyle(color: ColorC.backgroundColor),
             )),
       ],

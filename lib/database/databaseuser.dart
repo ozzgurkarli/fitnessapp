@@ -29,7 +29,7 @@ class DatabaseUser
   }
 
   Future<bool> findResetLog(String mail)async{
-    DateTime findLogDate = DateTime.now().add(const Duration(minutes: -30));
+    DateTime findLogDate = DateTime.now().add(const Duration(minutes: -1));
     return await refUserLog.where("email", isEqualTo: mail).where("recordType", isEqualTo: recordTypes.PASSWORDCHANGE).where("recordDate", isGreaterThan: findLogDate).get().then((value){
       if(value.docs.isNotEmpty){
         return true;

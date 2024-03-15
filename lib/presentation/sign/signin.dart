@@ -19,20 +19,15 @@ class SignIn extends StatefulWidget {
   static bool mailValid = false;
   static bool passwordValid = false;
 
-  static TextEditingController emailController = TextEditingController();
-  static TextEditingController passwordController = TextEditingController();
-
   @override
   State<SignIn> createState() => _SignInState();
 }
 
 class _SignInState extends State<SignIn> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    context.read<CubitInputMail>().isMailValid(SignIn.emailController.text);
-    context
-        .read<CubitInputPassword>()
-        .isPasswordValid(SignIn.passwordController.text);
     context.read<CubitInputSignInValid>().checkValidSignIn();
 
     return GestureDetector(
@@ -53,17 +48,43 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: Sizes.height / 6,
                 ),
-                BlocBuilder<CubitInputMail, Widget>(
-                  builder: (context, state) {
-                    return CustomizedInputRowText(SignIn.emailController,
-                        ConstantText.EMAIL, state, false);
-                  },
+                Container(
+                  margin: EdgeInsets.only(left: Sizes.width / 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: Sizes.height / 15,
+                        width: Sizes.width / 1.6,
+                        child: CustomizedTextField(
+                            emailController, ConstantText.EMAIL[ConstantText.index], false),
+                      ),
+                      BlocBuilder<CubitInputMail, Widget>(
+                        builder: (context, icon) {
+                          return icon;
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                BlocBuilder<CubitInputPassword, Widget>(
-                  builder: (context, state) {
-                    return CustomizedInputRowPassword(SignIn.passwordController,
-                        ConstantText.PASSWORD, state, true);
-                  },
+                Container(
+                  margin: EdgeInsets.only(left: Sizes.width / 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: Sizes.height / 15,
+                        width: Sizes.width / 1.6,
+                        child: CustomizedTextFieldPassword(
+                            passwordController, ConstantText.PASSWORD[ConstantText.index]),
+                      ),
+                      BlocBuilder<CubitInputPassword, Widget>(
+                        builder: (context, icon) {
+                          return icon;
+                        },
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: Sizes.height / 17,
@@ -71,12 +92,12 @@ class _SignInState extends State<SignIn> {
                 BlocBuilder<CubitInputSignInValid, bool>(
                   builder: (contextt, state) {
                     return CustomizedElevatedButton(() async {
-                      if (state) {
-                        await context
-                            .read<CubitInputSignInValid>()
-                            .checkValidSignInHelper(context);
-                      }
-                    }, ConstantText.SIGNIN, Icons.keyboard_arrow_right, 0);
+                      await context
+                          .read<CubitInputSignInValid>()
+                          .checkValidSignInHelper(context, emailController.text,
+                              passwordController.text);
+                    }, ConstantText.SIGNIN[ConstantText.index], Icons.keyboard_arrow_right, 0,
+                        MainAxisAlignment.center);
                   },
                 ),
                 SizedBox(
@@ -89,8 +110,8 @@ class _SignInState extends State<SignIn> {
                           MaterialPageRoute(
                               builder: (context) => ResetPassword()));
                     },
-                    child: const Text(
-                      ConstantText.FORGOTPASSWORD,
+                    child: Text(
+                      ConstantText.FORGOTPASSWORD[ConstantText.index],
                     )),
                 TextButton(
                     onPressed: () {
@@ -99,8 +120,8 @@ class _SignInState extends State<SignIn> {
                           MaterialPageRoute(
                               builder: (context) => const SignUp()));
                     },
-                    child: const Text(
-                      ConstantText.CREATEACCOUNT,
+                    child: Text(
+                      ConstantText.CREATEACCOUNT[ConstantText.index],
                     )),
               ],
             ),

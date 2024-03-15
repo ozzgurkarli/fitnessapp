@@ -9,11 +9,11 @@ class CubitWelcomeText extends Cubit<String>{
     
     SPChanges sp = SPChanges();
     String name = await sp.readName(); 
-    if(name == ConstantText.NODATA){
-      emit(ConstantText.WELCOMEAPPNEW);
+    if(name == ConstantText.NODATA[ConstantText.index]){
+      emit(ConstantText.WELCOMEAPPNEW[ConstantText.index]);
     }
     else{
-      emit("${ConstantText.WELCOMEAPPOLD}$name.");
+      emit("${ConstantText.WELCOMEAPPOLD[ConstantText.index]}$name.");
     }
   }
 }

@@ -1,8 +1,8 @@
+import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
-import 'package:fitnessapp/presentation/home.dart';
 import 'package:fitnessapp/presentation/sign/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,7 +13,7 @@ class  CubitWelcomeButton extends Cubit<Widget> {
   void isUserRegistered() async {
     SPChanges sp = SPChanges();
     String name = await sp.readName();
-    if (name == ConstantText.NODATA) {
+    if (name == ConstantText.NODATA[0]) {
       emit(const ToSignButton());
     } else {
       emit(const ToHomeButton());
@@ -27,7 +27,7 @@ class ToHomeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomizedElevatedButton(() {Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Home()));}, ConstantText.START, Icons.keyboard_arrow_right, Sizes.width / 8);
+          context, MaterialPageRoute(builder: (context) => const Ground()));}, ConstantText.START[ConstantText.index], Icons.keyboard_arrow_right, Sizes.width / 8,MainAxisAlignment.center);
   }
 }
 
@@ -39,6 +39,6 @@ class ToSignButton extends StatelessWidget {
     return CustomizedElevatedButton(() {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SignIn()));
-    }, ConstantText.START, Icons.keyboard_arrow_right, Sizes.width / 8);
+    }, ConstantText.START[ConstantText.index], Icons.keyboard_arrow_right, Sizes.width / 8, MainAxisAlignment.center);
   }
 }

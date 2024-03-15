@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitnessapp/presentation/sign/signin.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';
 
 class DatabaseAuth {
@@ -11,10 +10,10 @@ class DatabaseAuth {
     userCredential.user!.sendEmailVerification();
   }
 
-  Future<void> signUser()async{
+  Future<void> signUser(String email, String password)async{
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: SignIn.emailController.text,
-        password: SignIn.passwordController.text
+        email: email,
+        password: password
       );
   }
 

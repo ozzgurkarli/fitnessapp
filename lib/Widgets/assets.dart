@@ -7,12 +7,14 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'lib/common/assets/animation_loading.gif',
-      height: Sizes.height / 15,
-      width: Sizes.width / 8,
-      fit: BoxFit.fill,
-    );
+    return Container(
+        margin: EdgeInsets.only(bottom: Sizes.height / 100),
+        child: Image.asset(
+          'lib/common/assets/animation_loading.gif',
+          height: Sizes.height / 15,
+          width: Sizes.width / 8,
+          fit: BoxFit.fill,
+        ));
   }
 }
 
@@ -35,7 +37,8 @@ class Check extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      margin: EdgeInsets.only(bottom: Sizes.height / 100),
       height: Sizes.height / 15,
       width: Sizes.width / 8,
       child: const Icon(

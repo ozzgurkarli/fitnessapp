@@ -29,13 +29,13 @@ class CubitInputCheckValid extends Cubit<Widget>
         return;
       }
       await Future<void>.delayed(const Duration(milliseconds: 50));
-      emit(AlertDialogInputOneActionValid(ConstantText.SIGNUPFIELDCHECK));
+      emit(AlertDialogInputOneActionValid(ConstantText.FILLALLFIELDS[ConstantText.index]));
   }
 
-  Future<void> insertUser(String name)async{
+  Future<void> insertUser()async{
       await auth.createUser();
       int id = await dbIdCount.getCountAndIncrease();
-      spChanges.insertData(id, name);
+      spChanges.insertData(id, SignUp.nameController.text);
       dbUser.insertUser(ModelUser(id, SignUp.nameController.text, SignUp.surnameController.text, SignUp.emailController.text, SignUp.heightController!.toDouble(), SignUp.kgController!.toDouble(), SignUp.birthDateController.text, SignUp.genderController, SignUp.frequencyController));  
       dbUser.insertUserLog(ModelUser.log(id, SignUp.nameController.text, SignUp.surnameController.text, SignUp.emailController.text, SignUp.heightController!.toDouble(), SignUp.kgController!.toDouble(), SignUp.birthDateController.text, SignUp.genderController, SignUp.frequencyController, recordTypes.SIGNUP, Timestamp.fromDate(DateTime.now())));  
   }

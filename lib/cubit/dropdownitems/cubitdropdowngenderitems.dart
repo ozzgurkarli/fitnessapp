@@ -11,8 +11,8 @@ class CubitDropdownGenderItems extends Cubit<List<DropdownMenuItem>>
   void listOfGenders(){
     list.clear();
     
-    list.add(const DropdownMenuItem(value: 0,child: Text(ConstantText.FEMALE, style: TextStyle(color: Colors.white),),));
-    list.add(const DropdownMenuItem(value: 1,child: Text(ConstantText.MALE, style: TextStyle(color: Colors.white),),));
+    list.add(DropdownMenuItem(value: 0,child: Text(ConstantText.FEMALE[ConstantText.index], style: TextStyle(color: Colors.white),),));
+    list.add(DropdownMenuItem(value: 1,child: Text(ConstantText.MALE[ConstantText.index], style: TextStyle(color: Colors.white),),));
 
     emit(list);
   }
