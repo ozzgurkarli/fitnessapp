@@ -85,7 +85,14 @@ class CubitCreateProgramMovesList extends Cubit<void> {
     list.add(ModelProgramMove(muscle, indexCounter++, moveName: moveName));
   }
 
-  void removeFromProgram(int index) async {}
+  void removeFromProgram(int index) async {
+    indexCounter--;
+    for (int i = index; i < list.length - 1; i++) {
+      list[i + 1].index = list[i + 1].index! - 1;
+      list[i] = list[i + 1];
+    }
+    list.removeAt(list.length - 1);
+  }
 
   void clearList() {
     list.clear();
