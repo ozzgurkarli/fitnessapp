@@ -30,7 +30,6 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
   @override
   Widget build(BuildContext context) {
     context.read<CubitDropDownMoves>().listOfMoves(widget.label[0]);
-    filter = ModelProgramMove.empty();
     CreateProgramPage.moveController = null;
 
     return Scaffold(
@@ -82,10 +81,8 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
               CustomizedElevatedButton(
                 () {
                   if (CreateProgramPage.moveController != null) {
-                    filter.muscle = widget.label[0];
-                    context
-                        .read<CubitCreateProgramMovesList>()
-                        .addToProgram(filter, CreateProgramPage.moveController!);
+                    context.read<CubitCreateProgramMovesList>().addToProgram(
+                        widget.label[0], CreateProgramPage.moveController!);
                   }
                 },
                 ConstantText.ADDMOVE[ConstantText.index],

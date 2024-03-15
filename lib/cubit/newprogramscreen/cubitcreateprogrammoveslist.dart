@@ -3,6 +3,7 @@ import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelprogrammove.dart';
 import 'package:fitnessapp/database/databasemove.dart';
+import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,6 +39,34 @@ class CubitCreateProgramMovesList extends Cubit<void> {
                                   borderRadius: BorderRadius.circular(12),
                                   gradient: const LinearGradient(
                                       colors: ColorC.defaultGradient)),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.only(left: Sizes.width / 40),
+                                    child: Text(
+                                      list[index].moveName!,
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 16),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      removeFromProgram(list[index].index!);
+                                      Navigator.pop(context);
+                                      showAddedMoves(context);
+                                    },
+                                    child: const Icon(
+                                      Icons.cancel_outlined,
+                                      color: Colors.red,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                             SizedBox(
                               height: Sizes.height / 40,
@@ -52,18 +81,22 @@ class CubitCreateProgramMovesList extends Cubit<void> {
             ));
   }
 
-  void addToProgram(ModelProgramMove item, String moveName) async{
-    item.index = indexCounter++;
-    item.moveId = await findIdByMoveName(item, moveName);
-    list.add(item);
+  void addToProgram(String muscle, String moveName) async {
+    list.add(ModelProgramMove(muscle, indexCounter++, moveName: moveName));
   }
 
-  void clearList(){
+  void removeFromProgram(int index) async {}
+
+  void clearList() {
     list.clear();
     indexCounter = 0;
   }
 
-  Future<int> findIdByMoveName(ModelProgramMove item, String moveName)async{
+  Future<int> findIdByMoveName(ModelProgramMove item, String moveName) async {
     return await dbMove.getIdByMoveName(item, moveName);
+  }
+
+  Future<String> findNameByMoveId(ModelProgramMove item) async {
+    return await dbMove.getNameByMoveId(item);
   }
 }

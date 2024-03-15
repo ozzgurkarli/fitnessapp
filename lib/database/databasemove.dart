@@ -33,4 +33,15 @@ class DatabaseMove {
       return ModelMove.fromJson(value.docs.first.data()).moveId;
     });
   }
+
+  Future<String> getNameByMoveId(ModelProgramMove item)async{
+    refMove = FirebaseFirestore.instance
+        .collection("MOVES")
+        .doc(item.muscle!.toUpperCase())
+        .collection(item.muscle!.toUpperCase());
+
+    return await refMove.where("moveId", isEqualTo: item.moveId).get().then((value){
+      return ModelMove.fromJson(value.docs.first.data()).moveName;
+    });
+  }
 }

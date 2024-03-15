@@ -1,5 +1,4 @@
 import 'package:fitnessapp/common/constants/colors.dart';
-import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
 import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogramscreenproperties.dart';
 import 'package:fitnessapp/widgets/createprogrampage.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,6 @@ class _CreateNewProgramDetailState extends State<CreateNewProgramDetail> {
           itemCount: state.length,
           controller: controller,
           itemBuilder: (contextx, index) {
-            context.read<CubitCreateProgramMovesList>().clearList();
             return CreateProgramPage(state[index], controller);
           },
         );
