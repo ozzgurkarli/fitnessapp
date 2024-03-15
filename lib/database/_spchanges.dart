@@ -14,7 +14,7 @@ class SPChanges
     sp.setInt("PROGRAMCOUNT", 0);
   }
   
-  Future<void> setLanguage(int index)async{
+  Future<void> setLanguage(int index)async{ 
     var sp = await SharedPreferences.getInstance();
 
     sp.setInt("LANGUAGE", index);
