@@ -57,8 +57,8 @@ class _SignInState extends State<SignIn> {
                         SizedBox(
                           height: Sizes.height / 15,
                           width: Sizes.width / 1.6,
-                          child: CustomizedTextField(
-                              emailController, ConstantText.EMAIL[ConstantText.index], false),
+                          child: CustomizedTextField(emailController,
+                              ConstantText.EMAIL[ConstantText.index], false),
                         ),
                         BlocBuilder<CubitInputMail, Widget>(
                           builder: (context, icon) {
@@ -76,8 +76,8 @@ class _SignInState extends State<SignIn> {
                         SizedBox(
                           height: Sizes.height / 15,
                           width: Sizes.width / 1.6,
-                          child: CustomizedTextFieldPassword(
-                              passwordController, ConstantText.PASSWORD[ConstantText.index]),
+                          child: CustomizedTextFieldPassword(passwordController,
+                              ConstantText.PASSWORD[ConstantText.index]),
                         ),
                         BlocBuilder<CubitInputPassword, Widget>(
                           builder: (context, icon) {
@@ -95,9 +95,12 @@ class _SignInState extends State<SignIn> {
                       return CustomizedElevatedButton(() async {
                         await context
                             .read<CubitInputSignInValid>()
-                            .checkValidSignInHelper(context, emailController.text,
-                                passwordController.text);
-                      }, ConstantText.SIGNIN[ConstantText.index], Icons.keyboard_arrow_right, 0,
+                            .checkValidSignInHelper(context,
+                                emailController.text, passwordController.text);
+                      },
+                          ConstantText.SIGNIN[ConstantText.index],
+                          Icons.keyboard_arrow_right,
+                          0,
                           MainAxisAlignment.center);
                     },
                   ),
@@ -105,6 +108,10 @@ class _SignInState extends State<SignIn> {
                     height: Sizes.height / 17,
                   ),
                   TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(ColorC.thirdColor),
+                      ),
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -115,6 +122,10 @@ class _SignInState extends State<SignIn> {
                         ConstantText.FORGOTPASSWORD[ConstantText.index],
                       )),
                   TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(ColorC.thirdColor),
+                      ),
                       onPressed: () {
                         Navigator.push(
                             context,

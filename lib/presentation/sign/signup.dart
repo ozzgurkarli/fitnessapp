@@ -141,7 +141,7 @@ class _SignUpState extends State<SignUp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-            height: Sizes.height / 18,
+                          height: Sizes.height / 18,
                           width: Sizes.width / 1.6,
                           child: CustomizedTextField(SignUp.emailController,
                               ConstantText.EMAIL[ConstantText.index], false),
@@ -160,7 +160,7 @@ class _SignUpState extends State<SignUp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-            height: Sizes.height / 18,
+                          height: Sizes.height / 18,
                           width: Sizes.width / 1.6,
                           child: CustomizedTextFieldPassword(
                               SignUp.passwordController,
@@ -258,6 +258,10 @@ class _SignUpState extends State<SignUp> {
                     },
                   ),
                   TextButton(
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(ColorC.thirdColor),
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                       },

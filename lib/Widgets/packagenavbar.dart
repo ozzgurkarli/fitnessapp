@@ -21,6 +21,7 @@ class BottomNavBar extends StatelessWidget {
         padding:
             EdgeInsets.only(top: Sizes.height / 67, bottom: Sizes.height / 67, left: iosPadding, right: iosPadding),
         child: GNav(
+          padding: Platform.isIOS ? const EdgeInsets.all(18) : const EdgeInsets.all(25),
             tabBackgroundGradient:
                 const LinearGradient(colors: ColorC.defaultGradient),
             color: Colors.white,
@@ -30,6 +31,7 @@ class BottomNavBar extends StatelessWidget {
             onTabChange: (value) => onTabChange!(value),
             tabs:  [
               GButton(
+                style: GnavStyle.google,
                 icon: Icons.fitness_center_outlined,
                 text: ConstantText.MYWORKOUTS[ConstantText.index],
               ),

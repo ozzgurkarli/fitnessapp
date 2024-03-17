@@ -355,7 +355,7 @@ class DropDownLanguage extends StatelessWidget {
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
                     borderSide:
-                        const BorderSide(width: 0, color: ColorC.foregroundColor),
+                        const BorderSide(width: 0, color: Colors.grey),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   // Add more decoration..

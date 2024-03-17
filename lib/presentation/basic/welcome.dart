@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownlanguage.dart';
 import 'package:fitnessapp/cubit/welcome/cubitwelcomelanguage.dart';
@@ -13,14 +15,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class Welcome extends StatefulWidget {
   const Welcome({super.key});
 
-  static bool buildCompleted= false;
+  static bool buildCompleted = false;
 
   @override
   State<Welcome> createState() => _WelcomeState();
 }
 
 class _WelcomeState extends State<Welcome> {
-
   @override
   Widget build(BuildContext context) {
     context.read<CubitWelcomeButton>().isUserRegistered();
@@ -29,46 +30,60 @@ class _WelcomeState extends State<Welcome> {
 
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              SizedBox(height: Sizes.height/15,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+      body: Container(
+        height: Sizes.height,
+        width: Sizes.width,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('lib/common/assets/background.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  BlocBuilder<CubitWelcomeLanguage, int>(
-                    builder: (context, ind) {
-                      return BlocBuilder<CubitDropDownLanguage, List<DropdownMenuItem>>(
-                      builder: (context, list) {
-                        return DropDownLanguage(list, ConstantText.index);
-                      }
-                      );
-                    }
+                  SizedBox(
+                    height: Sizes.height / 15,
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      BlocBuilder<CubitWelcomeLanguage, int>(
+                          builder: (context, ind) {
+                        return BlocBuilder<CubitDropDownLanguage,
+                            List<DropdownMenuItem>>(builder: (context, list) {
+                          return DropDownLanguage(list, ConstantText.index);
+                        });
+                      }),
+                    ],
+                  ),
+                  SizedBox(
+                      height: Sizes.height / 2,
+                      width: Sizes.width / 2,
+                      child:
+                          Image.asset('lib/common/assets/animation_logo.gif')),
+                  BlocBuilder<CubitWelcomeText, String>(
+                    builder: (context, state) {
+                      return CustomizedText(state.toString(), 22);
+                    },
+                  ),
+                  SizedBox(
+                    height: Sizes.height / 7,
+                  ),
+                  Align(
+                      alignment: Alignment.bottomRight,
+                      child: BlocBuilder<CubitWelcomeButton, Widget>(
+                        builder: (context, state) {
+                          return state;
+                        },
+                      )),
                 ],
               ),
-      
-              
-              SizedBox(
-                height: Sizes.height/2,
-                width: Sizes.width/2,
-                child: Image.asset('lib/common/assets/animation_logo.gif')),
-      
-              BlocBuilder<CubitWelcomeText,String>(builder: (context, state) {
-                return CustomizedText(state.toString(), 22);
-              },),
-      
-              SizedBox(height: Sizes.height/7,),
-      
-              Align(
-                alignment: Alignment.bottomRight,
-                child:  BlocBuilder<CubitWelcomeButton,Widget>(builder: (context, state) {
-                    return state;
-                  },)
-                ),
-            ],
+            ),
           ),
         ),
       ),
