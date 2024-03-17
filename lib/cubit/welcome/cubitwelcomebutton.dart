@@ -1,3 +1,4 @@
+import 'package:fitnessapp/common/constants/user.dart';
 import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
@@ -16,6 +17,7 @@ class  CubitWelcomeButton extends Cubit<Widget> {
     if (name == ConstantText.NODATA[0]) {
       emit(const ToSignButton());
     } else {
+      UserC.id = await sp.readID();
       emit(const ToHomeButton());
     }
   }

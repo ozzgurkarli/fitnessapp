@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitnessapp/common/constants/idCountTypes.dart';
+import 'package:fitnessapp/common/constants/user.dart';
 import 'package:fitnessapp/widgets/alertdialogs.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/recordtypes.dart';
@@ -34,9 +36,10 @@ class CubitInputCheckValid extends Cubit<Widget>
 
   Future<void> insertUser()async{
       await auth.createUser();
-      int id = await dbIdCount.getCountAndIncrease();
+      int id = await dbIdCount.getCountAndIncrease(IDCountTypes.userId);
       spChanges.insertData(id, SignUp.nameController.text);
       dbUser.insertUser(ModelUser(id, SignUp.nameController.text, SignUp.surnameController.text, SignUp.emailController.text, SignUp.heightController!.toDouble(), SignUp.kgController!.toDouble(), SignUp.birthDateController.text, SignUp.genderController, SignUp.frequencyController));  
       dbUser.insertUserLog(ModelUser.log(id, SignUp.nameController.text, SignUp.surnameController.text, SignUp.emailController.text, SignUp.heightController!.toDouble(), SignUp.kgController!.toDouble(), SignUp.birthDateController.text, SignUp.genderController, SignUp.frequencyController, recordTypes.SIGNUP, Timestamp.fromDate(DateTime.now())));  
+      UserC.id = await spChanges.readID();
   }
 }

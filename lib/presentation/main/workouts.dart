@@ -17,10 +17,6 @@ class Workouts extends StatefulWidget {
 }
 
 class _WorkoutsState extends State<Workouts> {
-  List<String> dd = [];
-  List<int> ddd = [];
-  List<String> aaa = ["PROG1", "PROG2"];
-  final List<int> dataList = [1, 2, 3, 4]; // Örnek veri listesi
   @override
   Widget build(BuildContext context) {
     return Scaffold(

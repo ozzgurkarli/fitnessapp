@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitnessapp/common/constants/user.dart';
 import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/widgets/alertdialogs.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
@@ -42,6 +43,7 @@ class CubitInputSignInValid<T extends Object?> extends Cubit<bool> {
     }
     String? signInError = await trySignIn(email, password);
     if (signInError == null) {
+      UserC.id = await spChanges.readID();
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const Ground()),

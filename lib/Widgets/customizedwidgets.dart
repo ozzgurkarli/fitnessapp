@@ -173,23 +173,23 @@ class CustomizedSignUpDatePicker extends StatelessWidget {
             decoration: InputDecoration(
                 labelText: ConstantText.BIRTHDATE[ConstantText.index],
                 filled: true,
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.calendar_today,
                   color: ColorC.foregroundColor,
                 ),
-                disabledBorder: OutlineInputBorder(
+                disabledBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 3, color: ColorC.foregroundColor)),
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 3, color: ColorC.foregroundColor)),
-                enabledBorder: OutlineInputBorder(
+                enabledBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 3, color: ColorC.foregroundColor)),
-                errorBorder: OutlineInputBorder(
+                errorBorder: const OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 3, color: ColorC.foregroundColor)),
-                border: OutlineInputBorder(
+                border: const OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 3, color: ColorC.foregroundColor))),
             readOnly: true,

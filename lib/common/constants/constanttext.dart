@@ -38,6 +38,7 @@ class ConstantText {
   static const List<String> EDIT = ["Edit", "Düzenle"];
   static const List<String> HISTORY = ["History", "Geçmiş"];
   static const List<String> NEXT = ["Next", "Sonraki"];
+  static const List<String> CREATE = ["Create", "Oluştur"];
 
   static const List<String> SIGNIN = ["Sign In", "Giriş Yap"];
   static const List<String> CREATEACCOUNT = ["Sign Up", "Hesap Oluştur"];
@@ -63,7 +64,6 @@ class ConstantText {
 
   static const List<String> CREATENEWPROGRAM = ["Create new program", "Yeni program oluştur"];
   static const List<String> ASKAITOCREATE = ["Ask AI to create", "Yapay zekadan oluşturmasını iste"];
-  static const List<String> ASKPTTOCREATE = ["Ask PT to create", "Kişisel antrenörden oluşturmasını iste"];
   static const List<String> ADDFROMPROGRAMS = ["Add from my existing programs", "Var olan programlarımdan ekle"];
   static const List<String> ADDPROGRAMTODAY = ["Add program to day", "Güne program ekle"];
 
@@ -79,4 +79,5 @@ class ConstantText {
   static const List<String> SELECTMOVE = ["Select move", "Hareket seç"];
   static const List<String> ADDMOVE = ["Add move to program", "Hareketi programlara ekle"];
   static const List<String> ADDEDMOVES = ["See added moves", "Eklenen hareketleri gör"];
+  static const List<String> MOVEADDED = ["Move added to program", "Hareket programa eklendi"];
 }

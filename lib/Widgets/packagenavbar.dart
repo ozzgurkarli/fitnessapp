@@ -12,37 +12,39 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding:
-          EdgeInsets.only(top: Sizes.height / 40, bottom: Sizes.height / 40),
-      child: GNav(
-          tabBackgroundGradient:
-              const LinearGradient(colors: ColorC.defaultGradient),
-          color: Colors.white,
-          activeColor: Colors.white,
-          mainAxisAlignment: MainAxisAlignment.center,
-          tabBorderRadius: 30,
-          onTabChange: (value) => onTabChange!(value),
-          tabs:  [
-            GButton(
-              icon: Icons.fitness_center_outlined,
-              text: ConstantText.MYWORKOUTS[ConstantText.index],
-            ),
-            GButton(
-              icon: Icons.people,
-              text: ConstantText.STATISTICS[ConstantText.index],
-            ),
-            GButton(
-              icon: Icons.power_settings_new,
-              text: ConstantText.CATALOG[ConstantText.index],
-            ),
-            GButton(
-              icon: Icons.edit_calendar,
-              text: ConstantText.HELPER[ConstantText.index],
-              backgroundGradient:
-                  LinearGradient(colors: ColorC.premiumGradient),
-            ),
-          ]),
+    return SafeArea(
+      child: Container(
+        padding:
+            EdgeInsets.only(top: Sizes.height / 40, bottom: Sizes.height / 40),
+        child: GNav(
+            tabBackgroundGradient:
+                const LinearGradient(colors: ColorC.defaultGradient),
+            color: Colors.white,
+            activeColor: Colors.white,
+            mainAxisAlignment: MainAxisAlignment.center,
+            tabBorderRadius: 30,
+            onTabChange: (value) => onTabChange!(value),
+            tabs:  [
+              GButton(
+                icon: Icons.fitness_center_outlined,
+                text: ConstantText.MYWORKOUTS[ConstantText.index],
+              ),
+              GButton(
+                icon: Icons.trending_up,
+                text: ConstantText.STATISTICS[ConstantText.index],
+              ),
+              GButton(
+                icon: Icons.power_settings_new,
+                text: ConstantText.CATALOG[ConstantText.index],
+              ),
+              GButton(
+                icon: Icons.keyboard_double_arrow_up,
+                text: ConstantText.HELPER[ConstantText.index],
+                backgroundGradient:
+                    const LinearGradient(colors: ColorC.premiumGradient),
+              ),
+            ]),
+      ),
     );
   }
 }

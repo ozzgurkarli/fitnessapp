@@ -65,21 +65,6 @@ class CubitDropdownProgramItems extends Cubit<void> {
                       weight: FontWeight.w800,
                     ),
                   ),
-                  SizedBox(
-                    height: Sizes.height / 40,
-                  ),
-                  SizedBox(
-                    width: Sizes.width / 1.6,
-                    child: CustomizedElevatedButton(
-                      () {},
-                      ConstantText.ASKPTTOCREATE[ConstantText.index],
-                      Icons.add,
-                      0,
-                      MainAxisAlignment.spaceBetween,
-                      gradientColor: ColorC.premiumGradient,
-                      weight: FontWeight.w800,
-                    ),
-                  ),
                 ],
               ),
             ));

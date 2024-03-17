@@ -5,8 +5,8 @@ class DatabaseIDCount
 {
   var refCount = FirebaseFirestore.instance.collection("IDCOUNT");
 
-  Future<int> getCountAndIncrease()async{
-    return await refCount.get().then((value){
+  Future<int> getCountAndIncrease(String type)async{
+    return await refCount.where("type", isEqualTo: type).get().then((value){
       var info = ModelIDCount.fromJson(value.docs.first.data());
       info.id += 1;
       refCount.doc(value.docs.first.id).update(info.toJson());

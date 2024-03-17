@@ -1,20 +1,20 @@
 class ModelIDCount
 {
-  int emptyColumn;
+  String type;
   int id;
 
-  ModelIDCount(this.emptyColumn, this.id):super();
+  ModelIDCount(this.type, this.id):super();
 
   factory ModelIDCount.fromJson(Map<dynamic, dynamic> json) {
     return ModelIDCount(
-        json["emptyColumn"] as int,
+        json["type"] as String,
         json["id"] as int);
   }
 
   Map<String, dynamic> toJson() {
     return {
       "id": id,
-      "emptyColumn": emptyColumn
+      "type": type
     };
   }
 }

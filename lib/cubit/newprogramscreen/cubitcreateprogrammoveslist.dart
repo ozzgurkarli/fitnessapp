@@ -1,10 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
+import 'package:fitnessapp/common/constants/idCountTypes.dart';
 import 'package:fitnessapp/common/constants/size.dart';
+import 'package:fitnessapp/common/constants/user.dart';
+import 'package:fitnessapp/common/models/modelprogram.dart';
 import 'package:fitnessapp/common/models/modelprogrammove.dart';
+import 'package:fitnessapp/database/databaseidcount.dart';
 import 'package:fitnessapp/database/databasemove.dart';
-import 'package:fitnessapp/widgets/assets.dart';
-import 'package:fitnessapp/widgets/customizedwidgets.dart';
+import 'package:fitnessapp/database/databaseprogram.dart';
+import 'package:fitnessapp/widgets/createprogrampage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,6 +17,8 @@ class CubitCreateProgramMovesList extends Cubit<void> {
   CubitCreateProgramMovesList() : super(List.empty());
 
   DatabaseMove dbMove = DatabaseMove();
+  DatabaseIDCount dbCount = DatabaseIDCount();
+  DatabaseProgram dbProgram = DatabaseProgram();
 
   List<ModelProgramMove> list = [];
   int indexCounter = 0;
@@ -50,19 +57,22 @@ class CubitCreateProgramMovesList extends Cubit<void> {
                                       list[index].moveName!,
                                       style: const TextStyle(
                                           color: Colors.white,
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.w400,
                                           fontSize: 16),
                                     ),
                                   ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      removeFromProgram(list[index].index!);
-                                      Navigator.pop(context);
-                                      showAddedMoves(context);
-                                    },
-                                    child: const Icon(
-                                      Icons.cancel_outlined,
-                                      color: Colors.red,
+                                  Padding(
+                                    padding: EdgeInsets.only(right: Sizes.width * 0.02),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        removeFromProgram(list[index].index!);
+                                        Navigator.pop(context);
+                                        showAddedMoves(context);
+                                      },
+                                      child: const Icon(
+                                        Icons.cancel_outlined,
+                                        color: Colors.red,
+                                      ),
                                     ),
                                   )
                                 ],
@@ -81,8 +91,18 @@ class CubitCreateProgramMovesList extends Cubit<void> {
             ));
   }
 
-  void addToProgram(String muscle, String moveName) async {
+  void addToProgram(
+      String muscle, String moveName, BuildContext context) async {
     list.add(ModelProgramMove(muscle, indexCounter++, moveName: moveName));
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      margin: EdgeInsets.all(Sizes.height/20),
+      content: Align(alignment: Alignment.center, child: Text(ConstantText.MOVEADDED[ConstantText.index])),
+      backgroundColor: ColorC.thirdColor,
+      showCloseIcon: true,
+      closeIconColor: ColorC.foregroundColor,
+      behavior: SnackBarBehavior.floating,
+    ));
+    CreateProgramPage.moveController = null;
   }
 
   void removeFromProgram(int index) async {
@@ -92,6 +112,13 @@ class CubitCreateProgramMovesList extends Cubit<void> {
       list[i] = list[i + 1];
     }
     list.removeAt(list.length - 1);
+  }
+
+  void createProgram(String programName)async{
+    int programId = await dbCount.getCountAndIncrease(IDCountTypes.programId);
+    ModelProgram program = ModelProgram(UserC.id, programId, programName, Timestamp.fromDate(DateTime.now()));
+
+    dbProgram.insertProgram(program);
   }
 
   void clearList() {
