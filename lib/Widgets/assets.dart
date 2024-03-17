@@ -25,8 +25,8 @@ class Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'lib/common/assets/logo.png',
-      height: Sizes.height / 3.5,
-      width: Sizes.height / 3.5,
+      height: Sizes.height / 6,
+      width: Sizes.height / 6,
       fit: BoxFit.fill,
     );
   }

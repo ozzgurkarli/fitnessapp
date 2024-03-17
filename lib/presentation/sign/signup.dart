@@ -86,10 +86,16 @@ class _SignUpState extends State<SignUp> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: Sizes.height / 15
+                  ),
                   const Logo(),
+                  SizedBox(
+                    height: Sizes.height / 50,
+                  ),
                   CustomizedText(ConstantText.SIGNUP[ConstantText.index], 18),
                   SizedBox(
-                    height: Sizes.height / 35,
+                    height: Sizes.height / 50,
                   ),
                   Container(
                     margin: EdgeInsets.only(left: Sizes.width / 20),
@@ -235,7 +241,7 @@ class _SignUpState extends State<SignUp> {
                     },
                   ),
                   SizedBox(
-                    height: Sizes.height / 30,
+                    height: Sizes.height / 35,
                   ),
                   BlocBuilder<CubitInputCheckValid, Widget>(
                     builder: (context, state) {

@@ -360,7 +360,7 @@ class DropDownLanguage extends StatelessWidget {
         children: [
           SizedBox(
             height: Sizes.height / 15,
-            width: Sizes.width / 4,
+            width: Sizes.width / 3.3,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(
                 isExpanded: true,

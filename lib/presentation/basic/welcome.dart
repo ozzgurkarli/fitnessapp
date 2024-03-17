@@ -51,10 +51,13 @@ class _WelcomeState extends State<Welcome> {
               ),
       
               
-              Image.asset('lib/common/assets/animation_logo.gif'),
+              SizedBox(
+                height: Sizes.height/2,
+                width: Sizes.width/2,
+                child: Image.asset('lib/common/assets/animation_logo.gif')),
       
               BlocBuilder<CubitWelcomeText,String>(builder: (context, state) {
-                return CustomizedText(state.toString(), 24);
+                return CustomizedText(state.toString(), 22);
               },),
       
               SizedBox(height: Sizes.height/7,),

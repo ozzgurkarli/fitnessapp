@@ -42,9 +42,12 @@ class _SignInState extends State<SignIn> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: Sizes.height / 15,
+                  ),
                   const Logo(),
                   SizedBox(
-                    height: Sizes.height / 6,
+                    height: Sizes.height / 5,
                   ),
                   Container(
                     margin: EdgeInsets.only(left: Sizes.width / 20),

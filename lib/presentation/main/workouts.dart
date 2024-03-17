@@ -25,41 +25,54 @@ class _WorkoutsState extends State<Workouts> {
         child: Center(
             child: Column(
           children: [
+            SizedBox(
+              height: Sizes.height / 15,
+            ),
             const Logo(),
+            SizedBox(
+              height: Sizes.height / 15,
+            ),
             Container(
               decoration: BoxDecoration(
-                color: Colors.orangeAccent,
-                borderRadius: BorderRadius.circular(12)
-              ),
+                  color: Colors.orangeAccent,
+                  borderRadius: BorderRadius.circular(12)),
               width: Sizes.width * 43 / 60,
               height: Sizes.height / 10,
               child: ListTile(
-                onTap: (){},
+                onTap: () {},
                 tileColor: Colors.transparent,
                 subtitle: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Buraya reklamınızı koyabilirsiniz...", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                    Text(
+                      "Buraya reklamınızı koyabilirsiniz...",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w600),
+                    ),
                   ],
                 ),
               ),
             ),
             SizedBox(
               height: Sizes.height / 50,
-            ),Container(
+            ),
+            Container(
               decoration: BoxDecoration(
-                color: Colors.orangeAccent,
-                borderRadius: BorderRadius.circular(12)
-              ),
+                  color: Colors.orangeAccent,
+                  borderRadius: BorderRadius.circular(12)),
               width: Sizes.width * 43 / 60,
               height: Sizes.height / 10,
               child: ListTile(
-                onTap: (){},
+                onTap: () {},
                 tileColor: Colors.transparent,
                 subtitle: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Buraya reklamınızı koyabilirsiniz...", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),),
+                    Text(
+                      "Buraya reklamınızı koyabilirsiniz...",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.w600),
+                    ),
                   ],
                 ),
               ),
