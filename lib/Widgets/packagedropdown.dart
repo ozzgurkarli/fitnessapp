@@ -47,11 +47,6 @@ class DropDownGender extends StatelessWidget {
                 ),
                 hint: Row(
                   children: [
-                    const Icon(
-                      Icons.list,
-                      size: 16,
-                      color: Colors.white,
-                    ),
                     const SizedBox(
                       width: 4,
                     ),
@@ -157,11 +152,6 @@ class DropDownKg extends StatelessWidget {
                 ),
                 hint: Row(
                   children: [
-                    const Icon(
-                      Icons.list,
-                      size: 16,
-                      color: Colors.white,
-                    ),
                     const SizedBox(
                       width: 4,
                     ),
@@ -267,11 +257,6 @@ class DropDownHeight extends StatelessWidget {
                 ),
                 hint: Row(
                   children: [
-                    const Icon(
-                      Icons.list,
-                      size: 16,
-                      color: Colors.white,
-                    ),
                     const SizedBox(
                       width: 4,
                     ),
@@ -377,11 +362,6 @@ class DropDownLanguage extends StatelessWidget {
                 ),
                 hint: Row(
                   children: [
-                    const Icon(
-                      Icons.list,
-                      size: 16,
-                      color: Colors.white,
-                    ),
                     const SizedBox(
                       width: 4,
                     ),
@@ -485,11 +465,6 @@ class DropDownFrequency extends StatelessWidget {
                 ),
                 hint: Row(
                   children: [
-                    const Icon(
-                      Icons.list,
-                      size: 16,
-                      color: Colors.white,
-                    ),
                     const SizedBox(
                       width: 4,
                     ),
@@ -595,11 +570,6 @@ class DropDownProgram extends StatelessWidget {
                 ),
                 hint: Row(
                   children: [
-                    const Icon(
-                      Icons.list,
-                      size: 16,
-                      color: Colors.white,
-                    ),
                     const SizedBox(
                       width: 4,
                     ),
@@ -698,11 +668,6 @@ class DropDownMove extends StatelessWidget {
                 ),
                 hint: Row(
                   children: [
-                    const Icon(
-                      Icons.list,
-                      size: 16,
-                      color: Colors.white,
-                    ),
                     const SizedBox(
                       width: 4,
                     ),

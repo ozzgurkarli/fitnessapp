@@ -84,7 +84,7 @@ class _SignUpState extends State<SignUp> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(height: Sizes.height / 18),
+                  SizedBox(height: Sizes.height / 27),
                   const Logo(),
                   SizedBox(
                     height: Sizes.height / 50,

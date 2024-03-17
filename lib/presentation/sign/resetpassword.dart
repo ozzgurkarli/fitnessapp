@@ -38,6 +38,9 @@ class _SignInState extends State<ResetPassword> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    height: Sizes.height / 27,
+                  ),
                   const Logo(),
                   SizedBox(
                     height: Sizes.height / 6,

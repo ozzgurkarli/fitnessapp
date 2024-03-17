@@ -38,14 +38,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-  //     options: const FirebaseOptions(
-  //   apiKey: 'AIzaSyA6SxbbIxtCd8NUJsinLALMf7LQgzjVw-c',
-  //   appId: '1:618704980936:web:ebac5d553b5c80c8984efd',
-  //   messagingSenderId: '618704980936',
-  //   projectId: 'fitnessappozgur',
-  // )
-  );
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+        options: const FirebaseOptions(
+      apiKey: 'AIzaSyA6SxbbIxtCd8NUJsinLALMf7LQgzjVw-c',
+      appId: '1:618704980936:web:ebac5d553b5c80c8984efd',
+      messagingSenderId: '618704980936',
+      projectId: 'fitnessappozgur',
+    ));
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(const MyApp());
 }
 
@@ -59,61 +62,65 @@ class MyApp extends StatelessWidget {
     Sizes.width = MediaQuery.of(context).size.width;
     SPChanges spChanges = SPChanges();
 
-    if(kIsWeb){
-      Sizes.width = Sizes.width/3;
-    }
-    if(Platform.isIOS){
-      Sizes.width = Sizes.width * 0.9;
+    if (kIsWeb) {
+      Sizes.width = Sizes.width / 3;
+    } else {
+      if (Platform.isIOS) {
+        Sizes.height = Sizes.height * 0.95;
+        Sizes.width = Sizes.width * 1.07;
+      } else {}
     }
     return FutureBuilder(
-      future: spChanges.getLanguage(),
-      builder: (context, snapshot) {
-        if(snapshot.hasData){
-          ConstantText.index = snapshot.data!;
-          return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (context) => CubitWelcomeButton()),
-            BlocProvider(create: (context) => CubitWelcomeText()),
-            BlocProvider(create: (context) => CubitDropdownGenderItems()),
-            BlocProvider(create: (context) => CubitDropdownKgItems()),
-            BlocProvider(create: (context) => CubitDropdownHeightItems()),
-            BlocProvider(create: (context) => CubitDropdownFrequencyItems()),
-            BlocProvider(create: (context) => CubitInputMail()),
-            BlocProvider(create: (context) => CubitInputPassword()),
-            BlocProvider(create: (context) => CubitInputBirthDate()),
-            BlocProvider(create: (context) => CubitInputName()),
-            BlocProvider(create: (context) => CubitInputSurname()),
-            BlocProvider(create: (context) => CubitInputGender()),
-            BlocProvider(create: (context) => CubitInputHeight()),
-            BlocProvider(create: (context) => CubitInputKg()),
-            BlocProvider(create: (context) => CubitInputFrequency()),
-            BlocProvider(create: (context) => CubitInputCheckValid()),
-            BlocProvider(create: (context) => CubitInputSignInValid()),
-            BlocProvider(create: (context) => CubitInputResetPasswordValid()),
-            BlocProvider(create: (context) => CubitDropdownProgramItems()),
-            BlocProvider(create: (context) => CubitInputOnChanged()),
-            BlocProvider(create: (context) => CubitDropDownLanguage()),
-            BlocProvider(create: (context) => CubitWelcomeLanguage()),
-            BlocProvider(create: (context) => CubitCreateProgramScreenProperties()),
-            BlocProvider(create: (context) => CubitDropDownMoves()),
-            BlocProvider(create: (context) => CubitCreateProgramMovesList()),
-          ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              inputDecorationTheme: const InputDecorationTheme(
-                labelStyle: TextStyle(color: Colors.grey), //<-- SEE HERE
+        future: spChanges.getLanguage(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            ConstantText.index = snapshot.data!;
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider(create: (context) => CubitWelcomeButton()),
+                BlocProvider(create: (context) => CubitWelcomeText()),
+                BlocProvider(create: (context) => CubitDropdownGenderItems()),
+                BlocProvider(create: (context) => CubitDropdownKgItems()),
+                BlocProvider(create: (context) => CubitDropdownHeightItems()),
+                BlocProvider(
+                    create: (context) => CubitDropdownFrequencyItems()),
+                BlocProvider(create: (context) => CubitInputMail()),
+                BlocProvider(create: (context) => CubitInputPassword()),
+                BlocProvider(create: (context) => CubitInputBirthDate()),
+                BlocProvider(create: (context) => CubitInputName()),
+                BlocProvider(create: (context) => CubitInputSurname()),
+                BlocProvider(create: (context) => CubitInputGender()),
+                BlocProvider(create: (context) => CubitInputHeight()),
+                BlocProvider(create: (context) => CubitInputKg()),
+                BlocProvider(create: (context) => CubitInputFrequency()),
+                BlocProvider(create: (context) => CubitInputCheckValid()),
+                BlocProvider(create: (context) => CubitInputSignInValid()),
+                BlocProvider(
+                    create: (context) => CubitInputResetPasswordValid()),
+                BlocProvider(create: (context) => CubitDropdownProgramItems()),
+                BlocProvider(create: (context) => CubitInputOnChanged()),
+                BlocProvider(create: (context) => CubitDropDownLanguage()),
+                BlocProvider(create: (context) => CubitWelcomeLanguage()),
+                BlocProvider(
+                    create: (context) => CubitCreateProgramScreenProperties()),
+                BlocProvider(create: (context) => CubitDropDownMoves()),
+                BlocProvider(
+                    create: (context) => CubitCreateProgramMovesList()),
+              ],
+              child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(
+                  inputDecorationTheme: const InputDecorationTheme(
+                    labelStyle: TextStyle(color: Colors.grey), //<-- SEE HERE
+                  ),
+                ),
+                home: const Welcome(),
               ),
-            ),
-            home: const Welcome(),
-          ),
-        );
-        }
-        else{
-          return const Loading();
-        }
-      }
-    );
+            );
+          } else {
+            return const Loading();
+          }
+        });
   }
 }
 

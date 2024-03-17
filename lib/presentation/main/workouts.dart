@@ -26,11 +26,11 @@ class _WorkoutsState extends State<Workouts> {
             child: Column(
           children: [
             SizedBox(
-              height: Sizes.height / 15,
+              height: Sizes.height / 18,
             ),
             const Logo(),
             SizedBox(
-              height: Sizes.height / 15,
+              height: Sizes.height / 18,
             ),
             Container(
               decoration: BoxDecoration(

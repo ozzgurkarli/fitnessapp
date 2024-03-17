@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
+
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
@@ -10,12 +12,14 @@ class BottomNavBar extends StatelessWidget {
   void Function(int)? onTabChange;
   BottomNavBar({super.key, this.onTabChange});
 
+  double iosPadding = Platform.isIOS ? Sizes.width/33 : 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
         padding:
-            EdgeInsets.only(top: Sizes.height / 40, bottom: Sizes.height / 40),
+            EdgeInsets.only(top: Sizes.height / 67, bottom: Sizes.height / 67, left: iosPadding, right: iosPadding),
         child: GNav(
             tabBackgroundGradient:
                 const LinearGradient(colors: ColorC.defaultGradient),
