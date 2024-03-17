@@ -37,12 +37,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-    apiKey: 'AIzaSyA6SxbbIxtCd8NUJsinLALMf7LQgzjVw-c',
-    appId: '1:618704980936:web:ebac5d553b5c80c8984efd',
-    messagingSenderId: '618704980936',
-    projectId: 'fitnessappozgur',
-  ));
+  //     options: const FirebaseOptions(
+  //   apiKey: 'AIzaSyA6SxbbIxtCd8NUJsinLALMf7LQgzjVw-c',
+  //   appId: '1:618704980936:web:ebac5d553b5c80c8984efd',
+  //   messagingSenderId: '618704980936',
+  //   projectId: 'fitnessappozgur',
+  // )
+  );
   runApp(const MyApp());
 }
 
