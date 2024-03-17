@@ -34,7 +34,7 @@ class _HomeState extends State<Ground> {
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
       bottomNavigationBar: BottomNavBar(onTabChange: (index) => NavigateBottomBar(index),),
-      body: pages[selectedIndex],
+      body: SafeArea(child: pages[selectedIndex]),
     );
   }
 }

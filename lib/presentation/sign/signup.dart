@@ -81,179 +81,178 @@ class _SignUpState extends State<SignUp> {
       child: Scaffold(
         backgroundColor: ColorC.backgroundColor,
         body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: Sizes.height / 50,
-                ),
-                const Logo(),
-                CustomizedText(ConstantText.SIGNUP[ConstantText.index], 18),
-                SizedBox(
-                  height: Sizes.height / 35,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: Sizes.width / 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: Sizes.height / 15,
-                            width: Sizes.width / 4,
-                            child: CustomizedTextField(SignUp.nameController,
-                                ConstantText.NAME[ConstantText.index], false),
-                          ),
-                          BlocBuilder<CubitInputName, Widget>(
-                            builder: (context, icon) {
-                              return icon;
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            height: Sizes.height / 15,
-                            width: Sizes.width / 4,
-                            child: CustomizedTextField(SignUp.surnameController,
-                                ConstantText.SURNAME[ConstantText.index], false),
-                          ),
-                          BlocBuilder<CubitInputSurname, Widget>(
-                            builder: (context, icon) {
-                              return icon;
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Logo(),
+                  CustomizedText(ConstantText.SIGNUP[ConstantText.index], 18),
+                  SizedBox(
+                    height: Sizes.height / 35,
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: Sizes.width / 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: Sizes.height / 15,
-                        width: Sizes.width / 1.6,
-                        child: CustomizedTextField(
-                            SignUp.emailController, ConstantText.EMAIL[ConstantText.index], false),
-                      ),
-                      BlocBuilder<CubitInputMail, Widget>(
-                        builder: (context, icon) {
-                          return icon;
-                        },
-                      ),
-                    ],
+                  Container(
+                    margin: EdgeInsets.only(left: Sizes.width / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: Sizes.height / 15,
+                              width: Sizes.width / 4,
+                              child: CustomizedTextField(SignUp.nameController,
+                                  ConstantText.NAME[ConstantText.index], false),
+                            ),
+                            BlocBuilder<CubitInputName, Widget>(
+                              builder: (context, icon) {
+                                return icon;
+                              },
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: Sizes.height / 15,
+                              width: Sizes.width / 4,
+                              child: CustomizedTextField(SignUp.surnameController,
+                                  ConstantText.SURNAME[ConstantText.index], false),
+                            ),
+                            BlocBuilder<CubitInputSurname, Widget>(
+                              builder: (context, icon) {
+                                return icon;
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: Sizes.width / 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: Sizes.height / 15,
-                        width: Sizes.width / 1.6,
-                        child:
-                            CustomizedTextFieldPassword(SignUp.passwordController,
-                        ConstantText.PASSWORD[ConstantText.index]),
-                      ),
-                      BlocBuilder<CubitInputPassword, Widget>(
-                        builder: (context, icon) {
-                          return icon;
-                        },
-                      ),
-                    ],
+                  Container(
+                    margin: EdgeInsets.only(left: Sizes.width / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: Sizes.height / 15,
+                          width: Sizes.width / 1.6,
+                          child: CustomizedTextField(
+                              SignUp.emailController, ConstantText.EMAIL[ConstantText.index], false),
+                        ),
+                        BlocBuilder<CubitInputMail, Widget>(
+                          builder: (context, icon) {
+                            return icon;
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: Sizes.width / 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      BlocBuilder<CubitDropdownGenderItems,
-                          List<DropdownMenuItem>>(
-                        builder: (context, list) {
-                          return BlocBuilder<CubitInputGender, Widget>(
-                            builder: (context, state) {
-                              return DropDownGender(
-                                  list, SignUp.genderController, state);
-                            },
-                          );
-                        },
-                      ),
-                      BlocBuilder<CubitInputBirthDate, Widget>(
+                  Container(
+                    margin: EdgeInsets.only(left: Sizes.width / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: Sizes.height / 15,
+                          width: Sizes.width / 1.6,
+                          child:
+                              CustomizedTextFieldPassword(SignUp.passwordController,
+                          ConstantText.PASSWORD[ConstantText.index]),
+                        ),
+                        BlocBuilder<CubitInputPassword, Widget>(
+                          builder: (context, icon) {
+                            return icon;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: Sizes.width / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BlocBuilder<CubitDropdownGenderItems,
+                            List<DropdownMenuItem>>(
+                          builder: (context, list) {
+                            return BlocBuilder<CubitInputGender, Widget>(
+                              builder: (context, state) {
+                                return DropDownGender(
+                                    list, SignUp.genderController, state);
+                              },
+                            );
+                          },
+                        ),
+                        BlocBuilder<CubitInputBirthDate, Widget>(
+                          builder: (context, state) {
+                            return CustomizedSignUpDatePicker(state);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: Sizes.width / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        BlocBuilder<CubitDropdownHeightItems,
+                            List<DropdownMenuItem>>(
+                          builder: (context, list) {
+                            return BlocBuilder<CubitInputHeight, Widget>(
+                              builder: (context, state) {
+                                return DropDownHeight(
+                                    list, SignUp.heightController, state);
+                              },
+                            );
+                          },
+                        ),
+                        BlocBuilder<CubitDropdownKgItems, List<DropdownMenuItem>>(
+                          builder: (context, list) {
+                            return BlocBuilder<CubitInputKg, Widget>(
+                              builder: (context, state) {
+                                return DropDownKg(
+                                    list, SignUp.kgController, state);
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  BlocBuilder<CubitDropdownFrequencyItems,
+                      List<DropdownMenuItem>>(
+                    builder: (context, list) {
+                      return BlocBuilder<CubitInputFrequency, Widget>(
                         builder: (context, state) {
-                          return CustomizedSignUpDatePicker(state);
+                          return DropDownFrequency(
+                              list, SignUp.frequencyController, state);
                         },
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: Sizes.width / 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      BlocBuilder<CubitDropdownHeightItems,
-                          List<DropdownMenuItem>>(
-                        builder: (context, list) {
-                          return BlocBuilder<CubitInputHeight, Widget>(
-                            builder: (context, state) {
-                              return DropDownHeight(
-                                  list, SignUp.heightController, state);
-                            },
-                          );
-                        },
-                      ),
-                      BlocBuilder<CubitDropdownKgItems, List<DropdownMenuItem>>(
-                        builder: (context, list) {
-                          return BlocBuilder<CubitInputKg, Widget>(
-                            builder: (context, state) {
-                              return DropDownKg(
-                                  list, SignUp.kgController, state);
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                BlocBuilder<CubitDropdownFrequencyItems,
-                    List<DropdownMenuItem>>(
-                  builder: (context, list) {
-                    return BlocBuilder<CubitInputFrequency, Widget>(
-                      builder: (context, state) {
-                        return DropDownFrequency(
-                            list, SignUp.frequencyController, state);
-                      },
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: Sizes.height / 30,
-                ),
-                BlocBuilder<CubitInputCheckValid, Widget>(
-                  builder: (context, state) {
-                    return CustomizedElevatedButton(() {
-                      showDialog(context: context, builder: (context) => state);
-                    }, ConstantText.CONTINUE[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
-                  },
-                ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
+                      );
                     },
-                    child: Text(
-                      ConstantText.SIGNIN[ConstantText.index],
-                    ))
-              ],
+                  ),
+                  SizedBox(
+                    height: Sizes.height / 30,
+                  ),
+                  BlocBuilder<CubitInputCheckValid, Widget>(
+                    builder: (context, state) {
+                      return CustomizedElevatedButton(() {
+                        showDialog(context: context, builder: (context) => state);
+                      }, ConstantText.CONTINUE[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
+                    },
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        ConstantText.SIGNIN[ConstantText.index],
+                      ))
+                ],
+              ),
             ),
           ),
         ),

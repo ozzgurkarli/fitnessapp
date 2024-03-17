@@ -29,42 +29,44 @@ class _WelcomeState extends State<Welcome> {
 
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(height: Sizes.height/15,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                BlocBuilder<CubitWelcomeLanguage, int>(
-                  builder: (context, ind) {
-                    return BlocBuilder<CubitDropDownLanguage, List<DropdownMenuItem>>(
-                    builder: (context, list) {
-                      return DropDownLanguage(list, ConstantText.index);
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(height: Sizes.height/15,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  BlocBuilder<CubitWelcomeLanguage, int>(
+                    builder: (context, ind) {
+                      return BlocBuilder<CubitDropDownLanguage, List<DropdownMenuItem>>(
+                      builder: (context, list) {
+                        return DropDownLanguage(list, ConstantText.index);
+                      }
+                      );
                     }
-                    );
-                  }
-                ),
-              ],
-            ),
-
-            
-            Image.asset('lib/common/assets/animation_logo.gif'),
-
-            BlocBuilder<CubitWelcomeText,String>(builder: (context, state) {
-              return CustomizedText(state.toString(), 24);
-            },),
-
-            SizedBox(height: Sizes.height/7,),
-
-            Align(
-              alignment: Alignment.bottomRight,
-              child:  BlocBuilder<CubitWelcomeButton,Widget>(builder: (context, state) {
-                  return state;
-                },)
+                  ),
+                ],
               ),
-          ],
+      
+              
+              Image.asset('lib/common/assets/animation_logo.gif'),
+      
+              BlocBuilder<CubitWelcomeText,String>(builder: (context, state) {
+                return CustomizedText(state.toString(), 24);
+              },),
+      
+              SizedBox(height: Sizes.height/7,),
+      
+              Align(
+                alignment: Alignment.bottomRight,
+                child:  BlocBuilder<CubitWelcomeButton,Widget>(builder: (context, state) {
+                    return state;
+                  },)
+                ),
+            ],
+          ),
         ),
       ),
     );

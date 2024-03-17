@@ -33,55 +33,54 @@ class _SignInState extends State<ResetPassword> {
       child: Scaffold(
         backgroundColor: ColorC.backgroundColor,
         body: SingleChildScrollView(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: Sizes.height / 50,
-                ),
-                const Logo(),
-                SizedBox(
-                  height: Sizes.height / 6,
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: Sizes.width / 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: Sizes.height / 15,
-                        width: Sizes.width / 1.6,
-                        child: CustomizedTextField(
-                            emailController, ConstantText.EMAIL[ConstantText.index], false),
-                      ),
-                      BlocBuilder<CubitInputMail, Widget>(
-                        builder: (context, icon) {
-                          return icon;
-                        },
-                      ),
-                    ],
+          child: SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Logo(),
+                  SizedBox(
+                    height: Sizes.height / 6,
                   ),
-                ),
-                SizedBox(
-                  height: Sizes.height / 7.4,
-                ),
-                BlocBuilder<CubitInputResetPasswordValid, bool>(
-                  builder: (contextt, state) {
-                    return CustomizedElevatedButton(() async {
-                        await context.read<CubitInputResetPasswordValid>().resetPasswordMail(context, emailController.text);
-                    }, ConstantText.CONTINUE[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
-                  },
-                ),
-                SizedBox(
-                  height: Sizes.height / 17,
-                ),
-                TextButton(
-                    onPressed: () {Navigator.pop(context);},
-                    child: Text(
-                      ConstantText.TURNBACK[ConstantText.index],
-                    )),
-              ],
+                  Container(
+                    margin: EdgeInsets.only(left: Sizes.width / 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: Sizes.height / 15,
+                          width: Sizes.width / 1.6,
+                          child: CustomizedTextField(
+                              emailController, ConstantText.EMAIL[ConstantText.index], false),
+                        ),
+                        BlocBuilder<CubitInputMail, Widget>(
+                          builder: (context, icon) {
+                            return icon;
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: Sizes.height / 7.4,
+                  ),
+                  BlocBuilder<CubitInputResetPasswordValid, bool>(
+                    builder: (contextt, state) {
+                      return CustomizedElevatedButton(() async {
+                          await context.read<CubitInputResetPasswordValid>().resetPasswordMail(context, emailController.text);
+                      }, ConstantText.CONTINUE[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
+                    },
+                  ),
+                  SizedBox(
+                    height: Sizes.height / 17,
+                  ),
+                  TextButton(
+                      onPressed: () {Navigator.pop(context);},
+                      child: Text(
+                        ConstantText.TURNBACK[ConstantText.index],
+                      )),
+                ],
+              ),
             ),
           ),
         ),
