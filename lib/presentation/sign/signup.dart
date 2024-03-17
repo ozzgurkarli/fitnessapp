@@ -61,9 +61,7 @@ class _SignUpState extends State<SignUp> {
     context
         .read<CubitInputSurname>()
         .isSurnameValid(SignUp.surnameController.text);
-    context
-        .read<CubitInputMail>()
-        .isMailValid(SignUp.emailController.text);
+    context.read<CubitInputMail>().isMailValid(SignUp.emailController.text);
     context
         .read<CubitInputPassword>()
         .isPasswordValid(SignUp.passwordController.text);
@@ -86,9 +84,7 @@ class _SignUpState extends State<SignUp> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    height: Sizes.height / 15
-                  ),
+                  SizedBox(height: Sizes.height / 18),
                   const Logo(),
                   SizedBox(
                     height: Sizes.height / 50,
@@ -106,7 +102,7 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              height: Sizes.height / 15,
+                              height: Sizes.height / 18,
                               width: Sizes.width / 4,
                               child: CustomizedTextField(SignUp.nameController,
                                   ConstantText.NAME[ConstantText.index], false),
@@ -122,10 +118,12 @@ class _SignUpState extends State<SignUp> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SizedBox(
-                              height: Sizes.height / 15,
+                              height: Sizes.height / 18,
                               width: Sizes.width / 4,
-                              child: CustomizedTextField(SignUp.surnameController,
-                                  ConstantText.SURNAME[ConstantText.index], false),
+                              child: CustomizedTextField(
+                                  SignUp.surnameController,
+                                  ConstantText.SURNAME[ConstantText.index],
+                                  false),
                             ),
                             BlocBuilder<CubitInputSurname, Widget>(
                               builder: (context, icon) {
@@ -143,10 +141,10 @@ class _SignUpState extends State<SignUp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: Sizes.height / 15,
+            height: Sizes.height / 18,
                           width: Sizes.width / 1.6,
-                          child: CustomizedTextField(
-                              SignUp.emailController, ConstantText.EMAIL[ConstantText.index], false),
+                          child: CustomizedTextField(SignUp.emailController,
+                              ConstantText.EMAIL[ConstantText.index], false),
                         ),
                         BlocBuilder<CubitInputMail, Widget>(
                           builder: (context, icon) {
@@ -162,11 +160,11 @@ class _SignUpState extends State<SignUp> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: Sizes.height / 15,
+            height: Sizes.height / 18,
                           width: Sizes.width / 1.6,
-                          child:
-                              CustomizedTextFieldPassword(SignUp.passwordController,
-                          ConstantText.PASSWORD[ConstantText.index]),
+                          child: CustomizedTextFieldPassword(
+                              SignUp.passwordController,
+                              ConstantText.PASSWORD[ConstantText.index]),
                         ),
                         BlocBuilder<CubitInputPassword, Widget>(
                           builder: (context, icon) {
@@ -216,7 +214,8 @@ class _SignUpState extends State<SignUp> {
                             );
                           },
                         ),
-                        BlocBuilder<CubitDropdownKgItems, List<DropdownMenuItem>>(
+                        BlocBuilder<CubitDropdownKgItems,
+                            List<DropdownMenuItem>>(
                           builder: (context, list) {
                             return BlocBuilder<CubitInputKg, Widget>(
                               builder: (context, state) {
@@ -241,13 +240,21 @@ class _SignUpState extends State<SignUp> {
                     },
                   ),
                   SizedBox(
-                    height: Sizes.height / 35,
+                    height: Sizes.height / 40,
                   ),
                   BlocBuilder<CubitInputCheckValid, Widget>(
                     builder: (context, state) {
-                      return CustomizedElevatedButton(() {
-                        showDialog(context: context, builder: (context) => state);
-                      }, ConstantText.CONTINUE[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
+                      return CustomizedElevatedButton(
+                        () {
+                          showDialog(
+                              context: context, builder: (context) => state);
+                        },
+                        ConstantText.CONTINUE[ConstantText.index],
+                        Icons.keyboard_arrow_right,
+                        0,
+                        MainAxisAlignment.center,
+                        customWidth: Sizes.width / 3.3,
+                      );
                     },
                   ),
                   TextButton(

@@ -164,7 +164,7 @@ class CustomizedSignUpDatePicker extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          height: Sizes.height / 15,
+          height: Sizes.height / 18,
           width: Sizes.width / 4,
           child: TextField(
             controller: SignUp.birthDateController,

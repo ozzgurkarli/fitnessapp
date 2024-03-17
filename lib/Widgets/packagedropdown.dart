@@ -29,7 +29,7 @@ class DropDownGender extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: Sizes.height / 15,
+            height: Sizes.height / 18,
             width: Sizes.width / 4,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(
@@ -139,7 +139,7 @@ class DropDownKg extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: Sizes.height / 15,
+            height: Sizes.height / 18,
             width: Sizes.width / 4,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(
@@ -249,7 +249,7 @@ class DropDownHeight extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: Sizes.height / 15,
+            height: Sizes.height / 18,
             width: Sizes.width / 4,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(
@@ -359,7 +359,7 @@ class DropDownLanguage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: Sizes.height / 15,
+            height: Sizes.height / 18,
             width: Sizes.width / 3.3,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(
@@ -467,7 +467,7 @@ class DropDownFrequency extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: Sizes.height / 15,
+            height: Sizes.height / 18,
             width: Sizes.width / 1.6,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(
@@ -577,7 +577,7 @@ class DropDownProgram extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: Sizes.height / 15,
+            height: Sizes.height / 18,
             width: Sizes.width / 1.6,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(
@@ -680,7 +680,7 @@ class DropDownMove extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: Sizes.height / 15,
+            height: Sizes.height / 18,
             width: Sizes.width / 1.6,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(

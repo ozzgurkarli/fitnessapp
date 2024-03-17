@@ -43,7 +43,7 @@ class _SignInState extends State<SignIn> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: Sizes.height / 15,
+                    height: Sizes.height / 18,
                   ),
                   const Logo(),
                   SizedBox(
