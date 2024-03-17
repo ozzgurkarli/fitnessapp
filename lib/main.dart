@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdowncreateprogramitems.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownlanguage.dart';
@@ -59,6 +61,9 @@ class MyApp extends StatelessWidget {
 
     if(kIsWeb){
       Sizes.width = Sizes.width/3;
+    }
+    if(Platform.isIOS){
+      Sizes.width = Sizes.width * 0.9;
     }
     return FutureBuilder(
       future: spChanges.getLanguage(),
