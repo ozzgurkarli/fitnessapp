@@ -40,49 +40,45 @@ class _WelcomeState extends State<Welcome> {
           ),
         ),
         child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
-          child: SafeArea(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: Sizes.height / 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      BlocBuilder<CubitWelcomeLanguage, int>(
-                          builder: (context, ind) {
-                        return BlocBuilder<CubitDropDownLanguage,
-                            List<DropdownMenuItem>>(builder: (context, list) {
-                          return DropDownLanguage(list, ConstantText.index);
-                        });
-                      }),
-                    ],
-                  ),
-                  SizedBox(
-                      height: Sizes.height / 2,
-                      width: Sizes.width / 2,
-                      child:
-                          Image.asset('lib/common/assets/animation_logo.gif')),
-                  BlocBuilder<CubitWelcomeText, String>(
-                    builder: (context, state) {
-                      return CustomizedText(state.toString(), 22);
-                    },
-                  ),
-                  SizedBox(
-                    height: Sizes.height / 7,
-                  ),
-                  Align(
-                      alignment: Alignment.bottomRight,
-                      child: BlocBuilder<CubitWelcomeButton, Widget>(
-                        builder: (context, state) {
-                          return state;
-                        },
-                      )),
-                ],
-              ),
+          filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: Sizes.height / 9,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    BlocBuilder<CubitWelcomeLanguage, int>(
+                        builder: (context, ind) {
+                      return BlocBuilder<CubitDropDownLanguage,
+                          List<DropdownMenuItem>>(builder: (context, list) {
+                        return DropDownLanguage(list, ConstantText.index);
+                      });
+                    }),
+                  ],
+                ),
+                SizedBox(
+                  height: Sizes.height / 1.6,
+                ),
+                BlocBuilder<CubitWelcomeText, String>(
+                  builder: (context, state) {
+                    return Card(elevation: 3, color: Colors.black54, child: CustomizedText(state.toString(), 22));
+                  },
+                ),
+                SizedBox(
+                  height: Sizes.height / 70,
+                ),
+                Align(
+                    alignment: Alignment.bottomRight,
+                    child: BlocBuilder<CubitWelcomeButton, Widget>(
+                      builder: (context, state) {
+                        return state;
+                      },
+                    )),
+              ],
             ),
           ),
         ),

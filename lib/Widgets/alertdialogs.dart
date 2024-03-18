@@ -18,7 +18,7 @@ class AlertDialogInputValid extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: ColorC.foregroundColor,
-      content: Text(ConstantText.SIGNUPWANTTOCONTINUE[ConstantText.index], style: TextStyle(color: ColorC.backgroundColor),),
+      content: Text(ConstantText.SIGNUPWANTTOCONTINUE[ConstantText.index], style: const TextStyle(color: ColorC.textColor),),
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       actions: [
         TextButton(
@@ -27,7 +27,7 @@ class AlertDialogInputValid extends StatelessWidget {
             },
             child: Text(
               ConstantText.EDIT[ConstantText.index],
-              style: TextStyle(color: ColorC.backgroundColor),
+              style: const TextStyle(color: ColorC.textColor),
             )),
         TextButton(
             onPressed: () async{
@@ -49,7 +49,7 @@ class AlertDialogInputValid extends StatelessWidget {
             },
             child: Text(
               ConstantText.CONTINUE[ConstantText.index],
-              style: TextStyle(color: ColorC.backgroundColor),
+              style: const TextStyle(color: ColorC.textColor),
             ))
       ],
     );
@@ -65,7 +65,7 @@ class AlertDialogInputOneActionValid extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: ColorC.foregroundColor,
-      content: Text(labelText, style: const TextStyle(color: ColorC.backgroundColor),),
+      content: Text(labelText, style: const TextStyle(color: ColorC.textColor),),
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       actions: [
         TextButton(
@@ -74,7 +74,7 @@ class AlertDialogInputOneActionValid extends StatelessWidget {
             },
             child: Text(
               ConstantText.OK[ConstantText.index],
-              style: TextStyle(color: ColorC.backgroundColor),
+              style: const TextStyle(color: ColorC.textColor),
             )),
       ],
     );
@@ -92,7 +92,7 @@ class AlertDialogError extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: ColorC.foregroundColor,
-      content: Text(message + errorMessage, style: const TextStyle(color: ColorC.backgroundColor),),
+      content: Text(message + errorMessage, style: const TextStyle(color: ColorC.textColor),),
       shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(30)),
       actions: [
         TextButton(
@@ -101,7 +101,7 @@ class AlertDialogError extends StatelessWidget {
             },
             child: Text(
               ConstantText.OK[ConstantText.index],
-              style: TextStyle(color: ColorC.backgroundColor),
+              style: const TextStyle(color: ColorC.textColor),
             )),
       ],
     );

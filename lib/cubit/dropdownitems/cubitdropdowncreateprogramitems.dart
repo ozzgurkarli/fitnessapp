@@ -3,8 +3,13 @@
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
+import 'package:fitnessapp/common/models/modelprogram.dart';
 import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
+import 'package:fitnessapp/database/_spchanges.dart';
+import 'package:fitnessapp/database/databaseprogram.dart';
+import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/presentation/main/createnewprogramdetail.dart';
+import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,14 +19,13 @@ class CubitDropdownProgramItems extends Cubit<void> {
 
   List<DropdownMenuItem> list = [];
 
-  void listOfPrograms(BuildContext context) {
+  DatabaseProgram dbProgram = DatabaseProgram();
+  SPChanges spChanges = SPChanges();
+
+  void showOptions(BuildContext context) {
     list.clear();
 
-    showOptions(context);
-  }
-
-  Future<Widget?> showOptions(BuildContext context) async {
-    return await showDialog(
+    showDialog(
         context: context,
         barrierColor: Colors.black87,
         builder: (context) => Center(
@@ -32,7 +36,7 @@ class CubitDropdownProgramItems extends Cubit<void> {
                     width: Sizes.width / 1.6,
                     child: CustomizedElevatedButton(() {
                       Navigator.pop(context);
-                      showOptions(context);
+                      showPrograms(context);
                     }, ConstantText.ADDFROMPROGRAMS[ConstantText.index],
                         Icons.add, 0, MainAxisAlignment.spaceBetween),
                   ),
@@ -46,7 +50,8 @@ class CubitDropdownProgramItems extends Cubit<void> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => CreateNewProgramDetail()));
+                              builder: (context) =>
+                                  const CreateNewProgramDetail()));
                     }, ConstantText.CREATENEWPROGRAM[ConstantText.index],
                         Icons.add, 0, MainAxisAlignment.spaceBetween),
                   ),
@@ -68,5 +73,52 @@ class CubitDropdownProgramItems extends Cubit<void> {
                 ],
               ),
             ));
+  }
+
+  void showPrograms(BuildContext context) async {
+    int userId = await spChanges.readID();
+    List<ModelProgram> list = [];
+    showDialog(
+      context: context,
+      barrierColor: Colors.black87,
+      builder: (context) => FutureBuilder(
+        future: dbProgram.getProgramsById(userId),
+        builder: (context, fList) {
+          if (fList.hasData) {
+            list = fList.data!;
+            list.sort((a, b) => b.recordDate.compareTo(a.recordDate),);
+            return Center(
+              child: SizedBox(
+                width: Sizes.width / 1.6,
+                height: Sizes.height * 0.066 * list.length,
+                child: ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        SizedBox(
+                          width: Sizes.width / 1.6,
+                          child: CustomizedElevatedButton(() {
+                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const Ground()), (route) => false);
+                          }, list[index].programName,
+                              Icons.add, 0, MainAxisAlignment.spaceBetween),
+                        ),
+                        SizedBox(
+                          height: Sizes.height / 40,
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            );
+          } else if (ConnectionState.waiting == fList.connectionState) {
+            return const Center(child: Loading());
+          } else {
+            return const Loading();
+          }
+        },
+      ),
+    );
   }
 }

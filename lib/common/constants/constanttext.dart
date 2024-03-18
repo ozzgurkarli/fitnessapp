@@ -76,8 +76,11 @@ class ConstantText {
   static const List<String> SHOULDER = ["Shoulder", "Omuz"];
   static const List<String> TRICEPS = ["Triceps", "Arka Kol"];
 
+  static const List<String> PROGRAMNAME = ["Program name", "Program adı"];
   static const List<String> SELECTMOVE = ["Select move", "Hareket seç"];
   static const List<String> ADDMOVE = ["Add move to program", "Hareketi programlara ekle"];
   static const List<String> ADDEDMOVES = ["See added moves", "Eklenen hareketleri gör"];
   static const List<String> MOVEADDED = ["Move added to program", "Hareket programa eklendi"];
+  static const List<String> ALREADYADDED = ["Move is already added to program", "Hareket programa zaten eklendi"];
+  static const List<String> MOVEISNOTSELECTED = ["Move is not selected", "Hareket seçilmedi"];
 }

@@ -86,6 +86,8 @@ flutter:
     - lib/common/assets/Biceps.png
     - lib/common/assets/Shoulder.png
     - lib/common/assets/background.jpg
+    - lib/common/assets/container1.jpeg
+    - lib/common/assets/container2.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -32,7 +32,7 @@ class _CreateNewProgramDetailState extends State<CreateNewProgramDetail> {
           controller: controller,
           itemBuilder: (contextx, index) {
             return CreateProgramPage(state[index], controller);
-          },
+          }, 
         );
       })),
     );

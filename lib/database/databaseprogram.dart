@@ -8,4 +8,15 @@ class DatabaseProgram
   void insertProgram(ModelProgram program){
     refProgram.doc().set(program.toJson());
   }
+
+  Future<List<ModelProgram>> getProgramsById(int userId)async{
+    List<ModelProgram> list = [];
+    await refProgram.where("userId", isEqualTo: userId).get().then((value){
+      for(var inf in value.docs){
+        list.add(ModelProgram.fromJson(inf.data()));
+      }
+    });
+
+    return list;
+  }
 }

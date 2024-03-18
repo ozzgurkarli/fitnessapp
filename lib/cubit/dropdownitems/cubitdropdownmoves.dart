@@ -1,3 +1,4 @@
+import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/models/modelmove.dart';
 import 'package:fitnessapp/database/databasemove.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class CubitDropDownMoves extends Cubit<List<DropdownMenuItem>> {
       if (list.length == i) {
         list.add(DropdownMenuItem(
           value: item.moveName,
-          child: Text(item.moveName, style: TextStyle(color: Colors.white)),
+          child: Text(item.moveName, style: const TextStyle(color: ColorC.textColor)),
         ));
       }
       if (list.length == moveList.length) {

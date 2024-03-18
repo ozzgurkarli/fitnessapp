@@ -138,6 +138,8 @@ class CustomizedElevatedButton extends StatelessWidget {
   }
 }
 
+
+
 class CustomizedText extends StatelessWidget {
   CustomizedText(this.text, this.size, {super.key});
 
@@ -148,7 +150,7 @@ class CustomizedText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(fontSize: size, color: Colors.white),
+      style: TextStyle(fontSize: size, color: ColorC.thirdColor),
     );
   }
 }

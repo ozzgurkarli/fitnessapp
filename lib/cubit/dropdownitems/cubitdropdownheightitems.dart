@@ -1,3 +1,4 @@
+import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,7 @@ class CubitDropdownHeightItems extends Cubit<List<DropdownMenuItem>> {
           value: i,
           child: Text(
             "$value ${ConstantText.CM[ConstantText.index]}",
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(color: ColorC.textColor),
           ),
         ));
       }

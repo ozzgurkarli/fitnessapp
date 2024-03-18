@@ -8,6 +8,7 @@ import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.da
 import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogramscreenproperties.dart';
 import 'package:fitnessapp/cubit/welcome/cubitwelcomelanguage.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
+import 'package:fitnessapp/presentation/basic/splashscreen.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_core/firebase_core.dart';
@@ -111,10 +112,10 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: ThemeData(
                   inputDecorationTheme: const InputDecorationTheme(
-                    labelStyle: TextStyle(color: Colors.grey), //<-- SEE HERE
+                    labelStyle: TextStyle(color: Colors.grey),
                   ),
                 ),
-                home: const Welcome(),
+                home: const SplashScreen(),
               ),
             );
           } else {

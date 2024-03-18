@@ -12,7 +12,8 @@ class ColorC
 
   static const Color premiumGFirst = Color(0xFFFFBF00);
   static const Color premiumGLast = Color(0xFFFF6D00);
-  Color c = Colors.teal;
+
+  static const Color textColor = Colors.white;
 
   static const List<Color> defaultGradient = [ColorC.foregroundColor, ColorC.thirdColor];
   static const List<Color> premiumGradient = [ColorC.premiumGFirst, ColorC.premiumGLast];

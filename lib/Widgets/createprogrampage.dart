@@ -6,8 +6,6 @@ import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelprogrammove.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownmoves.dart';
 import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
-import 'package:fitnessapp/database/databasemove.dart';
-import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/widgets/packagedropdown.dart';
@@ -26,14 +24,11 @@ class CreateProgramPage extends StatefulWidget {
 }
 
 class _CreateProgramPageState extends State<CreateProgramPage> {
-  DatabaseMove dbMove = DatabaseMove();
   ModelProgramMove filter = ModelProgramMove.empty();
   bool lastPage = false;
   @override
   Widget build(BuildContext context) {
     context.read<CubitDropDownMoves>().listOfMoves(widget.label[0]);
-    CreateProgramPage.moveController = null;
-
     widget.label[0] == ConstantText.CARDIO[0]
         ? lastPage = true
         : lastPage = false;
@@ -48,7 +43,10 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
               SizedBox(
                 height: Sizes.height / 14,
               ),
-              SizedBox(height: Sizes.height/3.3, child: Image.asset('lib/common/assets/${widget.label[0]}.png')),
+              SizedBox(
+                  height: Sizes.height / 3.3,
+                  child:
+                      Image.asset('lib/common/assets/${widget.label[0]}.png')),
               SizedBox(
                 height: Sizes.height / 14,
               ),
@@ -86,12 +84,10 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
               ),
               CustomizedElevatedButton(
                 () {
-                  if (CreateProgramPage.moveController != null) {
-                    context.read<CubitCreateProgramMovesList>().addToProgram(
+                  context.read<CubitCreateProgramMovesList>().addToProgram(
                         widget.label[0],
-                        CreateProgramPage.moveController!,
+                        CreateProgramPage.moveController,
                         context);
-                  }
                 },
                 ConstantText.ADDMOVE[ConstantText.index],
                 Icons.add,
@@ -105,9 +101,9 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
               CustomizedElevatedButton(
                 () {
                   lastPage
-                      ? Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder: (c) => Ground()),
-                          (route) => false)
+                      ? context
+                          .read<CubitCreateProgramMovesList>()
+                          .createProgram(context)
                       : widget.controller.animateToPage(
                           widget.controller.page!.toInt() + 1,
                           duration: const Duration(milliseconds: 400),

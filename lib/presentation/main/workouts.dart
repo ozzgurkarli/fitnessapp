@@ -36,7 +36,10 @@ class _WorkoutsState extends State<Workouts> {
             ),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.orangeAccent,
+                  image: DecorationImage(
+                    image: AssetImage('lib/common/assets/container1.jpeg'),
+                    fit: BoxFit.cover,
+                  ),
                   borderRadius: BorderRadius.circular(12)),
               width: Sizes.width * 43 / 60,
               height: Sizes.height / 10,
@@ -49,7 +52,7 @@ class _WorkoutsState extends State<Workouts> {
                     Text(
                       "Buraya reklamınızı koyabilirsiniz...",
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w600),
+                          color: ColorC.textColor, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -60,7 +63,10 @@ class _WorkoutsState extends State<Workouts> {
             ),
             Container(
               decoration: BoxDecoration(
-                  color: Colors.orangeAccent,
+                  image: DecorationImage(
+                    image: AssetImage('lib/common/assets/container2.jpg'),
+                    fit: BoxFit.cover,
+                  ),
                   borderRadius: BorderRadius.circular(12)),
               width: Sizes.width * 43 / 60,
               height: Sizes.height / 10,
@@ -73,7 +79,7 @@ class _WorkoutsState extends State<Workouts> {
                     Text(
                       "Buraya reklamınızı koyabilirsiniz...",
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w600),
+                          color: ColorC.textColor, fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
@@ -92,7 +98,7 @@ class _WorkoutsState extends State<Workouts> {
                       return CustomizedElevatedButton(() {
                         context
                             .read<CubitDropdownProgramItems>()
-                            .listOfPrograms(context);
+                            .showOptions(context);
                       },
                           ConstantText.ADDPROGRAMTODAY[ConstantText.index],
                           Icons.keyboard_arrow_down,
@@ -109,9 +115,8 @@ class _WorkoutsState extends State<Workouts> {
                       return CustomizedElevatedButton(() {
                         context
                             .read<CubitDropdownProgramItems>()
-                            .listOfPrograms(context);
-                      }, "", Icons.history, 0,
-                          MainAxisAlignment.spaceBetween);
+                            .showOptions(context);
+                      }, "", Icons.history, 0, MainAxisAlignment.spaceBetween);
                     }))
               ],
             ),

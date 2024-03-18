@@ -39,8 +39,8 @@ class DropDownGender extends StatelessWidget {
                   // the menu padding when button's width is not specified.
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, color: ColorC.foregroundColor),
+                    borderSide: const BorderSide(
+                        width: 0, color: ColorC.foregroundColor),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   // Add more decoration..
@@ -56,7 +56,7 @@ class DropDownGender extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: ColorC.textColor,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -112,8 +112,7 @@ class DropDownGender extends StatelessWidget {
             ),
           ),
           Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100),
-              child: icon)
+              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon)
         ],
       ),
     );
@@ -144,8 +143,8 @@ class DropDownKg extends StatelessWidget {
                   // the menu padding when button's width is not specified.
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, color: ColorC.foregroundColor),
+                    borderSide: const BorderSide(
+                        width: 0, color: ColorC.foregroundColor),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   // Add more decoration..
@@ -161,7 +160,7 @@ class DropDownKg extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: ColorC.textColor,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -217,8 +216,7 @@ class DropDownKg extends StatelessWidget {
             ),
           ),
           Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100),
-              child: icon)
+              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon)
         ],
       ),
     );
@@ -249,8 +247,8 @@ class DropDownHeight extends StatelessWidget {
                   // the menu padding when button's width is not specified.
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, color: ColorC.foregroundColor),
+                    borderSide: const BorderSide(
+                        width: 0, color: ColorC.foregroundColor),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   // Add more decoration..
@@ -266,7 +264,7 @@ class DropDownHeight extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: ColorC.textColor,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -322,8 +320,7 @@ class DropDownHeight extends StatelessWidget {
             ),
           ),
           Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100),
-              child: icon)
+              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon)
         ],
       ),
     );
@@ -339,7 +336,7 @@ class DropDownLanguage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(right: Sizes.width/8),
+      margin: EdgeInsets.only(right: Sizes.width / 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -354,8 +351,7 @@ class DropDownLanguage extends StatelessWidget {
                   // the menu padding when button's width is not specified.
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, color: Colors.grey),
+                    borderSide: const BorderSide(width: 0, color: Colors.grey),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   // Add more decoration..
@@ -371,7 +367,7 @@ class DropDownLanguage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: ColorC.textColor,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -457,8 +453,8 @@ class DropDownFrequency extends StatelessWidget {
                   // the menu padding when button's width is not specified.
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, color: ColorC.foregroundColor),
+                    borderSide: const BorderSide(
+                        width: 0, color: ColorC.foregroundColor),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   // Add more decoration..
@@ -474,7 +470,7 @@ class DropDownFrequency extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: ColorC.textColor,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -530,14 +526,12 @@ class DropDownFrequency extends StatelessWidget {
             ),
           ),
           Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100),
-              child: icon)
+              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon)
         ],
       ),
     );
   }
 }
-
 
 class DropDownProgram extends StatelessWidget {
   DropDownProgram(this.list, {super.key});
@@ -562,8 +556,8 @@ class DropDownProgram extends StatelessWidget {
                   // the menu padding when button's width is not specified.
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, color: ColorC.foregroundColor),
+                    borderSide: const BorderSide(
+                        width: 0, color: ColorC.foregroundColor),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   // Add more decoration..
@@ -579,7 +573,7 @@ class DropDownProgram extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: ColorC.textColor,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -593,21 +587,19 @@ class DropDownProgram extends StatelessWidget {
                   }
                   return ConstantText.ADDPROGRAMTODAY[ConstantText.index];
                 },
-                onChanged: (value) {
-                },
-                onSaved: (value) {
-                },
+                onChanged: (value) {},
+                onSaved: (value) {},
                 buttonStyleData: ButtonStyleData(
                   height: 50,
                   width: 160,
                   padding: const EdgeInsets.only(left: 14, right: 14),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(
-                      color: Colors.black26,
-                    ),
-                    gradient: const LinearGradient(colors: ColorC.defaultGradient)
-                  ),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Colors.black26,
+                      ),
+                      gradient:
+                          const LinearGradient(colors: ColorC.defaultGradient)),
                   elevation: 2,
                 ),
                 iconStyleData: const IconStyleData(
@@ -622,7 +614,8 @@ class DropDownProgram extends StatelessWidget {
                 dropdownStyleData: DropdownStyleData(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
-                      gradient: const LinearGradient(colors: ColorC.defaultGradient),
+                      gradient:
+                          const LinearGradient(colors: ColorC.defaultGradient),
                       color: ColorC.foregroundColor),
                 ),
                 menuItemStyleData: const MenuItemStyleData(
@@ -660,8 +653,8 @@ class DropDownMove extends StatelessWidget {
                   // the menu padding when button's width is not specified.
                   contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
-                    borderSide:
-                        const BorderSide(width: 0, color: ColorC.foregroundColor),
+                    borderSide: const BorderSide(
+                        width: 0, color: ColorC.foregroundColor),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   // Add more decoration..
@@ -677,7 +670,7 @@ class DropDownMove extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: ColorC.textColor,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -687,7 +680,7 @@ class DropDownMove extends StatelessWidget {
                 items: list,
                 validator: (value) {
                   if (value == null) {
-                    return ConstantText.SELECTMOVE  [ConstantText.index];
+                    return ConstantText.SELECTMOVE[ConstantText.index];
                   }
                   return null;
                 },
@@ -727,7 +720,16 @@ class DropDownMove extends StatelessWidget {
                 menuItemStyleData: const MenuItemStyleData(
                   padding: EdgeInsets.symmetric(horizontal: 16),
                 ),
-                dropdownSearchData: DropdownSearchData(searchController: searchController, searchInnerWidgetHeight: 200, searchInnerWidget: SearchBar(leading: const Icon(Icons.search), controller: searchController, shape: MaterialStateProperty.all<OutlinedBorder?>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),)),
+                dropdownSearchData: DropdownSearchData(
+                    searchController: searchController,
+                    searchInnerWidgetHeight: 200,
+                    searchInnerWidget: SearchBar(
+                      leading: const Icon(Icons.search),
+                      controller: searchController,
+                      shape: MaterialStateProperty.all<OutlinedBorder?>(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12))),
+                    )),
               ),
             ),
           ),

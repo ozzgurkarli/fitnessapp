@@ -93,7 +93,7 @@ class _SignInState extends State<SignIn> {
                   BlocBuilder<CubitInputSignInValid, bool>(
                     builder: (contextt, state) {
                       return CustomizedElevatedButton(() async {
-                        await context
+                        context
                             .read<CubitInputSignInValid>()
                             .checkValidSignInHelper(context,
                                 emailController.text, passwordController.text);
