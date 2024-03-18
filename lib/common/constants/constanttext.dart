@@ -83,4 +83,9 @@ class ConstantText {
   static const List<String> MOVEADDED = ["Move added to program", "Hareket programa eklendi"];
   static const List<String> ALREADYADDED = ["Move is already added to program", "Hareket programa zaten eklendi"];
   static const List<String> MOVEISNOTSELECTED = ["Move is not selected", "Hareket seçilmedi"];
+  
+  static const List<String> NOTSTARTED = ["Not started", "Başlanmadı"];
+
+  
+  static const List<String> NOEXERCISEFOUND12HOURS = ["No workouts started in the last 12 hours were found", "Son 12 saat içerisinde başlatılmış egzersiz bulunamadı"];
 }

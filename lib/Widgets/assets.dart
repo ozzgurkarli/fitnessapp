@@ -32,6 +32,18 @@ class Logo extends StatelessWidget {
   }
 }
 
+class NoData extends StatelessWidget {
+  const NoData({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(
+      'lib/common/assets/no-data.gif',
+      fit: BoxFit.fill,
+    );
+  }
+}
+
 class Check extends StatelessWidget {
   const Check({super.key});
 

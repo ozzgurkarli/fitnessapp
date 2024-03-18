@@ -1,11 +1,16 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
+import 'package:fitnessapp/common/constants/idcounttypes.dart';
 import 'package:fitnessapp/common/constants/size.dart';
+import 'package:fitnessapp/common/models/modelexercise.dart';
 import 'package:fitnessapp/common/models/modelprogram.dart';
 import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
+import 'package:fitnessapp/database/databaseexercise.dart';
+import 'package:fitnessapp/database/databaseidcount.dart';
 import 'package:fitnessapp/database/databaseprogram.dart';
 import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/presentation/main/createnewprogramdetail.dart';
@@ -20,6 +25,8 @@ class CubitDropdownProgramItems extends Cubit<void> {
   List<DropdownMenuItem> list = [];
 
   DatabaseProgram dbProgram = DatabaseProgram();
+  DatabaseExercise dbExercise = DatabaseExercise();
+  DatabaseIDCount dbIdCount = DatabaseIDCount();
   SPChanges spChanges = SPChanges();
 
   void showOptions(BuildContext context) {
@@ -98,7 +105,9 @@ class CubitDropdownProgramItems extends Cubit<void> {
                       children: [
                         SizedBox(
                           width: Sizes.width / 1.6,
-                          child: CustomizedElevatedButton(() {
+                          child: CustomizedElevatedButton(() async{
+                            int exerciseId = await dbIdCount.getCountAndIncrease(IDCountTypes.exerciseId);
+                            dbExercise.insertExercise(ModelExercise(exerciseId, userId, list[index].programId, list[index].programName, Timestamp.now(), false));
                             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const Ground()), (route) => false);
                           }, list[index].programName,
                               Icons.add, 0, MainAxisAlignment.spaceBetween),

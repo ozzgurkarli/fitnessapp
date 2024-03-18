@@ -6,6 +6,7 @@ import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdowncreateprogramitems.dart';
+import 'package:fitnessapp/cubit/exercise/cubitexercisebuilder.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
@@ -21,111 +22,150 @@ class Workouts extends StatefulWidget {
 class _WorkoutsState extends State<Workouts> {
   @override
   Widget build(BuildContext context) {
+    context.read<CubitExerciseBuilder>().workoutsPage();
+
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
-      body: SingleChildScrollView(
-        child: Center(
-            child: Column(
-          children: [
-            SizedBox(
-              height: Sizes.height / 18,
-            ),
-            const Logo(),
-            SizedBox(
-              height: Sizes.height / 18,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('lib/common/assets/container1.jpeg'),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(12)),
-              width: Sizes.width * 43 / 60,
-              height: Sizes.height / 10,
-              child: ListTile(
-                onTap: () {},
-                tileColor: Colors.transparent,
-                subtitle: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Buraya reklamınızı koyabilirsiniz...",
-                      style: TextStyle(
-                          color: ColorC.textColor, fontWeight: FontWeight.w600),
-                    ),
-                  ],
+      body: Center(
+          child: Column(
+        children: [
+          SizedBox(
+            height: Sizes.height / 18,
+          ),
+          const Logo(),
+          SizedBox(
+            height: Sizes.height / 20,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('lib/common/assets/container1.jpeg'),
+                  fit: BoxFit.cover,
                 ),
+                borderRadius: BorderRadius.circular(12)),
+            width: Sizes.width * 43 / 60,
+            height: Sizes.height / 10,
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.transparent,
+              subtitle: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Buraya reklamınızı koyabilirsiniz...",
+                    style: TextStyle(
+                        color: ColorC.textColor, fontWeight: FontWeight.w600),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: Sizes.height / 50,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('lib/common/assets/container2.jpg'),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius: BorderRadius.circular(12)),
-              width: Sizes.width * 43 / 60,
-              height: Sizes.height / 10,
-              child: ListTile(
-                onTap: () {},
-                tileColor: Colors.transparent,
-                subtitle: const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Buraya reklamınızı koyabilirsiniz...",
-                      style: TextStyle(
-                          color: ColorC.textColor, fontWeight: FontWeight.w600),
-                    ),
-                  ],
+          ),
+          SizedBox(
+            height: Sizes.height / 50,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('lib/common/assets/container2.jpg'),
+                  fit: BoxFit.cover,
                 ),
+                borderRadius: BorderRadius.circular(12)),
+            width: Sizes.width * 43 / 60,
+            height: Sizes.height / 10,
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.transparent,
+              subtitle: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Buraya reklamınızı koyabilirsiniz...",
+                    style: TextStyle(
+                        color: ColorC.textColor, fontWeight: FontWeight.w600),
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: Sizes.height / 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                    width: Sizes.width / 2,
-                    child: BlocBuilder<CubitDropdownProgramItems, void>(
-                        builder: (context, state) {
-                      return CustomizedElevatedButton(() {
-                        context
-                            .read<CubitDropdownProgramItems>()
-                            .showOptions(context);
-                      },
-                          ConstantText.ADDPROGRAMTODAY[ConstantText.index],
-                          Icons.keyboard_arrow_down,
-                          0,
-                          MainAxisAlignment.spaceBetween);
-                    })),
-                SizedBox(
-                  width: Sizes.width / 20,
+          ),
+          SizedBox(
+            height: Sizes.height / 50,
+          ),
+          Container(
+            decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage('lib/common/assets/container2.jpg'),
+                  fit: BoxFit.cover,
                 ),
-                SizedBox(
-                    width: Sizes.width / 6,
-                    child: BlocBuilder<CubitDropdownProgramItems, void>(
-                        builder: (context, state) {
-                      return CustomizedElevatedButton(() {
-                        context
-                            .read<CubitDropdownProgramItems>()
-                            .showOptions(context);
-                      }, "", Icons.history, 0, MainAxisAlignment.spaceBetween);
-                    }))
-              ],
+                borderRadius: BorderRadius.circular(12)),
+            width: Sizes.width * 43 / 60,
+            height: Sizes.height / 10,
+            child: ListTile(
+              onTap: () {},
+              tileColor: Colors.transparent,
+              subtitle: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Buraya reklamınızı koyabilirsiniz...",
+                    style: TextStyle(
+                        color: ColorC.textColor, fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
             ),
-            SizedBox(
-              height: Sizes.height / 20,
-            ),
-          ],
-        )),
-      ),
+          ),
+          SizedBox(
+            height: Sizes.height / 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                  width: Sizes.width / 2,
+                  child: BlocBuilder<CubitDropdownProgramItems, void>(
+                      builder: (context, state) {
+                    return CustomizedElevatedButton(() {
+                      context
+                          .read<CubitDropdownProgramItems>()
+                          .showOptions(context);
+                    },
+                        ConstantText.ADDPROGRAMTODAY[ConstantText.index],
+                        Icons.keyboard_arrow_down,
+                        0,
+                        MainAxisAlignment.spaceBetween);
+                  })),
+              SizedBox(
+                width: Sizes.width / 22,
+              ),
+              SizedBox(
+                  width: Sizes.width / 6,
+                  child: BlocBuilder<CubitDropdownProgramItems, void>(
+                      builder: (context, state) {
+                    return CustomizedElevatedButton(() {
+                      context
+                          .read<CubitDropdownProgramItems>()
+                          .showOptions(context);
+                    }, "", Icons.history, 0, MainAxisAlignment.spaceBetween);
+                  }))
+            ],
+          ),
+          SizedBox(
+            height: Sizes.height / 20,
+          ),
+
+          BlocBuilder<CubitExerciseBuilder, Widget>(builder: (context, futureBuilder) {
+             return SizedBox(
+              height: Sizes.height / 10,
+              width: Sizes.width * 43 / 60,
+              child: futureBuilder
+            );
+          },),
+          
+          SizedBox(
+            height: Sizes.height / 50,
+          ),
+        ],
+      )),
     );
   }
 }

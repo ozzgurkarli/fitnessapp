@@ -88,6 +88,7 @@ flutter:
     - lib/common/assets/background.jpg
     - lib/common/assets/container1.jpeg
     - lib/common/assets/container2.jpg
+    - lib/common/assets/no-data.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
