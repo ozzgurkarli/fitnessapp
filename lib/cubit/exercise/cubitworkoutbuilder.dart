@@ -1,24 +1,24 @@
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
-import 'package:fitnessapp/common/models/modelexercise.dart';
+import 'package:fitnessapp/common/models/modelworkout.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
-import 'package:fitnessapp/database/databaseexercise.dart';
+import 'package:fitnessapp/database/databaseworkout.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CubitExerciseBuilder extends Cubit<Widget> {
-  CubitExerciseBuilder() : super(const Center(child: Loading()));
+class CubitWorkoutBuilder extends Cubit<Widget> {
+  CubitWorkoutBuilder() : super(const Center(child: Loading()));
 
-  DatabaseExercise dbExercise = DatabaseExercise();
+  DatabaseWorkout dbExercise = DatabaseWorkout();
   SPChanges spChanges = SPChanges();
 
   void workoutsPage() async {
     int userId = await spChanges.readID();
-    List<ModelExercise> list = [];
+    List<ModelWorkout> list = [];
     emit(FutureBuilder(
-      future: dbExercise.getExercisesLast12Hour(userId),
+      future: dbExercise.getWorkoutsLast12Hour(userId),
       builder: (context, fList) {
         if (fList.hasData) {
           list = fList.data!;
@@ -71,7 +71,7 @@ class CubitExerciseBuilder extends Cubit<Widget> {
                       content: Align(
                           alignment: Alignment.center,
                           child:
-                              Text(ConstantText.NOEXERCISEFOUND12HOURS[ConstantText.index])),
+                              Text(ConstantText.NOWORKOUTFOUNDIN12HOURS[ConstantText.index])),
                       backgroundColor: ColorC.foregroundColor,
                       showCloseIcon: true,
                       closeIconColor: ColorC.thirdColor,

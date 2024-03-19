@@ -6,7 +6,7 @@ import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdowncreateprogramitems.dart';
-import 'package:fitnessapp/cubit/exercise/cubitexercisebuilder.dart';
+import 'package:fitnessapp/cubit/exercise/cubitworkoutbuilder.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class Workouts extends StatefulWidget {
 class _WorkoutsState extends State<Workouts> {
   @override
   Widget build(BuildContext context) {
-    context.read<CubitExerciseBuilder>().workoutsPage();
+    context.read<CubitWorkoutBuilder>().workoutsPage();
 
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
@@ -30,11 +30,11 @@ class _WorkoutsState extends State<Workouts> {
           child: Column(
         children: [
           SizedBox(
-            height: Sizes.height / 18,
+            height: Sizes.height / 22,
           ),
           const Logo(),
           SizedBox(
-            height: Sizes.height / 20,
+            height: Sizes.height / 22,
           ),
           Container(
             decoration: BoxDecoration(
@@ -44,7 +44,7 @@ class _WorkoutsState extends State<Workouts> {
                 ),
                 borderRadius: BorderRadius.circular(12)),
             width: Sizes.width * 43 / 60,
-            height: Sizes.height / 10,
+            height: Sizes.height / 11,
             child: ListTile(
               onTap: () {},
               tileColor: Colors.transparent,
@@ -71,7 +71,7 @@ class _WorkoutsState extends State<Workouts> {
                 ),
                 borderRadius: BorderRadius.circular(12)),
             width: Sizes.width * 43 / 60,
-            height: Sizes.height / 10,
+            height: Sizes.height / 11,
             child: ListTile(
               onTap: () {},
               tileColor: Colors.transparent,
@@ -98,7 +98,7 @@ class _WorkoutsState extends State<Workouts> {
                 ),
                 borderRadius: BorderRadius.circular(12)),
             width: Sizes.width * 43 / 60,
-            height: Sizes.height / 10,
+            height: Sizes.height / 11,
             child: ListTile(
               onTap: () {},
               tileColor: Colors.transparent,
@@ -115,7 +115,7 @@ class _WorkoutsState extends State<Workouts> {
             ),
           ),
           SizedBox(
-            height: Sizes.height / 20,
+            height: Sizes.height / 22,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -150,10 +150,10 @@ class _WorkoutsState extends State<Workouts> {
             ],
           ),
           SizedBox(
-            height: Sizes.height / 20,
+            height: Sizes.height / 22,
           ),
 
-          BlocBuilder<CubitExerciseBuilder, Widget>(builder: (context, futureBuilder) {
+          BlocBuilder<CubitWorkoutBuilder, Widget>(builder: (context, futureBuilder) {
              return SizedBox(
               height: Sizes.height / 10,
               width: Sizes.width * 43 / 60,
@@ -162,7 +162,7 @@ class _WorkoutsState extends State<Workouts> {
           },),
           
           SizedBox(
-            height: Sizes.height / 50,
+            height: Sizes.height / 77,
           ),
         ],
       )),

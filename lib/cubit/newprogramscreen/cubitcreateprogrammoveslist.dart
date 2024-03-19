@@ -199,7 +199,7 @@ class CubitCreateProgramMovesList extends Cubit<void> {
                           BorderSide(width: 3, color: ColorC.foregroundColor))),
             ),
             actions: [
-              CustomizedElevatedButton(() {Navigator.pop(context); }, ConstantText.COMPLETE[ConstantText.index], Icons.check, 20, MainAxisAlignment.center)
+              CustomizedElevatedButton(() {Navigator.pop(context); }, ConstantText.COMPLETE[ConstantText.index], Icons.check, 20, MainAxisAlignment.center, customWidth: Sizes.width/3.5,)
             ],
           );
         });
