@@ -136,7 +136,7 @@ class CustomizedElevatedButton extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: TextStyle(fontWeight: weight ?? FontWeight.w500),
+                  style: TextStyle(fontWeight: weight ?? FontWeight.w500, fontSize: 13),
                 ),
                 Icon(icon)
               ],

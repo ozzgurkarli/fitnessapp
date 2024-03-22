@@ -12,7 +12,7 @@ class BottomNavBar extends StatelessWidget {
   void Function(int)? onTabChange;
   BottomNavBar({super.key, this.onTabChange});
 
-  double iosPadding = Platform.isIOS ? Sizes.width/33 : 0;
+  double iosPadding = Platform.isIOS ? Sizes.width/33 : Sizes.width/67;
 
   @override
   Widget build(BuildContext context) {
