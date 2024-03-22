@@ -1,5 +1,6 @@
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
+import 'package:fitnessapp/common/constants/helpermethods.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
@@ -46,7 +47,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
                   ),
                   Text(
                     list.first.completed
-                        ? list.first.duration.toString()
+                        ? HelperMethods.editDuration(list.first.duration!)
                         : ConstantText.NOTSTARTED[ConstantText.index],
                     style: const TextStyle(
                         color: ColorC.textColor, fontWeight: FontWeight.w600),
@@ -70,8 +71,8 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
                       margin: EdgeInsets.all(Sizes.height / 20),
                       content: Align(
                           alignment: Alignment.center,
-                          child:
-                              Text(ConstantText.NOWORKOUTFOUNDIN12HOURS[ConstantText.index])),
+                          child: Text(ConstantText
+                              .NOWORKOUTFOUNDIN12HOURS[ConstantText.index])),
                       backgroundColor: ColorC.foregroundColor,
                       showCloseIcon: true,
                       closeIconColor: ColorC.thirdColor,

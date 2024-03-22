@@ -59,7 +59,7 @@ class ConstantText {
 
   static const List<String> MYWORKOUTS = ["My Workouts", "Antrenmanlarım"];
   static const List<String> STATISTICS = ["Statistics", "Istatistik"];
-  static const List<String> CATALOG = ["Catalog", "Katalog"];
+  static const List<String> MOVECATALOG = ["Move Catalog", "Hareket Kataloğu"];
   static const List<String> HELPER = ["Helper", "Yardımcı"];
 
   static const List<String> CREATENEWPROGRAM = ["Create new program", "Yeni program oluştur"];
@@ -86,6 +86,20 @@ class ConstantText {
   
   static const List<String> NOTSTARTED = ["Not started", "Başlanmadı"];
 
+  static const List<String> MINUTES = ["minutes", "dakika"];
   
   static const List<String> NOWORKOUTFOUNDIN12HOURS = ["No workouts started in the last 12 hours were found", "Son 12 saat içerisinde başlatılmış antrenman bulunamadı"];
+
+  static const List<String> JANUARY = ["January", "Ocak"];
+  static const List<String> FEBRUARY = ["February", "Şubat"];
+  static const List<String> MARCH = ["March", "Mart"];
+  static const List<String> APRIL = ["April", "Nisan"];
+  static const List<String> MAY = ["May", "Mayıs"];
+  static const List<String> JUNE = ["June", "Haziran"];
+  static const List<String> JULY = ["July", "Temmuz"];
+  static const List<String> AUGUST = ["August", "Ağustos"];
+  static const List<String> SEPTEMBER = ["September", "Eylül"];
+  static const List<String> OCTOBER = ["October", "Ekim"];
+  static const List<String> NOVEMBER = ["November", "Kasım"];
+  static const List<String> DECEMBER = ["December", "Aralık"];
 }

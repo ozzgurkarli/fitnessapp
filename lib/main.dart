@@ -4,9 +4,11 @@ import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdowncreateprogramitems.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownlanguage.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownmoves.dart';
-import 'package:fitnessapp/cubit/exercise/cubitworkoutbuilder.dart';
-import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
-import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogramscreenproperties.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitmove.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogrammoveslist.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogramscreenproperties.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitworkouthistory.dart';
 import 'package:fitnessapp/cubit/welcome/cubitwelcomelanguage.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
 import 'package:fitnessapp/presentation/basic/splashscreen.dart';
@@ -70,7 +72,9 @@ class MyApp extends StatelessWidget {
       if (Platform.isIOS) {
         Sizes.height = Sizes.height * 0.95;
         Sizes.width = Sizes.width * 1.07;
-      } else {}
+      } else {
+        Sizes.height = Sizes.height * 1.03;
+      }
     }
     return FutureBuilder(
         future: spChanges.getLanguage(),
@@ -110,6 +114,10 @@ class MyApp extends StatelessWidget {
                     create: (context) => CubitCreateProgramMovesList()),
                 BlocProvider(
                     create: (context) => CubitWorkoutBuilder()),
+                BlocProvider(
+                    create: (context) => CubitMove()),
+                BlocProvider(
+                    create: (context) => CubitWorkoutHistory()),
               ],
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,

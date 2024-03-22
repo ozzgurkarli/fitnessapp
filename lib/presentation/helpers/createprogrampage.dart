@@ -5,7 +5,7 @@ import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelprogrammove.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownmoves.dart';
-import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogrammoveslist.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/widgets/packagedropdown.dart';
@@ -75,9 +75,12 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
                           .showAddedMoves(context);
                     },
                         ConstantText.ADDEDMOVES[ConstantText.index],
+                        leftTextMargin: Sizes.width * 0.05,
+                        rightTextMargin: Sizes.width * 0.05,
                         Icons.keyboard_arrow_down,
                         0,
-                        MainAxisAlignment.spaceBetween);
+                        MainAxisAlignment.spaceBetween,
+                        customWidth: Sizes.width/1.6,);
                   })),
               SizedBox(
                 height: Sizes.height / 30,
@@ -85,11 +88,13 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
               CustomizedElevatedButton(
                 () {
                   context.read<CubitCreateProgramMovesList>().addToProgram(
-                        widget.label[0],
-                        CreateProgramPage.moveController,
-                        context);
+                      widget.label[0],
+                      CreateProgramPage.moveController,
+                      context);
                 },
                 ConstantText.ADDMOVE[ConstantText.index],
+                leftTextMargin: Sizes.width * 0.05,
+                rightTextMargin: Sizes.width * 0.05,
                 Icons.add,
                 0,
                 MainAxisAlignment.spaceBetween,
@@ -116,6 +121,8 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
                 0,
                 MainAxisAlignment.spaceBetween,
                 customWidth: Sizes.width / 1.6,
+                leftTextMargin: Sizes.width * 0.05,
+                rightTextMargin: Sizes.width * 0.05,
                 gradientColor: ColorC.defaultGradient,
               ),
             ],

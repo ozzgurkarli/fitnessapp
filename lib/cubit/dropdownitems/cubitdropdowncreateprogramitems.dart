@@ -7,7 +7,7 @@ import 'package:fitnessapp/common/constants/idcounttypes.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
 import 'package:fitnessapp/common/models/modelprogram.dart';
-import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogrammoveslist.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogrammoveslist.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
 import 'package:fitnessapp/database/databaseworkout.dart';
 import 'package:fitnessapp/database/databaseidcount.dart';
@@ -18,6 +18,7 @@ import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:darq/darq.dart';
 
 class CubitDropdownProgramItems extends Cubit<void> {
   CubitDropdownProgramItems() : super(const Placeholder());
@@ -45,7 +46,7 @@ class CubitDropdownProgramItems extends Cubit<void> {
                       Navigator.pop(context);
                       showPrograms(context);
                     }, ConstantText.ADDFROMPROGRAMS[ConstantText.index],
-                        Icons.add, 0, MainAxisAlignment.spaceBetween),
+                        Icons.add, 0, MainAxisAlignment.spaceBetween, customWidth: Sizes.width / 1.6, leftTextMargin: Sizes.width*0.05, rightTextMargin: Sizes.width*0.05,),
                   ),
                   SizedBox(
                     height: Sizes.height / 40,
@@ -60,7 +61,7 @@ class CubitDropdownProgramItems extends Cubit<void> {
                               builder: (context) =>
                                   const CreateNewProgramDetail()));
                     }, ConstantText.CREATENEWPROGRAM[ConstantText.index],
-                        Icons.add, 0, MainAxisAlignment.spaceBetween),
+                        Icons.add, 0, MainAxisAlignment.spaceBetween, customWidth: Sizes.width /1.6, leftTextMargin: Sizes.width*0.05, rightTextMargin: Sizes.width*0.05,),
                   ),
                   SizedBox(
                     height: Sizes.height / 40,
@@ -72,7 +73,7 @@ class CubitDropdownProgramItems extends Cubit<void> {
                       ConstantText.ASKAITOCREATE[ConstantText.index],
                       Icons.add,
                       0,
-                      MainAxisAlignment.spaceBetween,
+                      MainAxisAlignment.spaceBetween, customWidth: Sizes.width / 1.6, leftTextMargin: Sizes.width*0.05, rightTextMargin: Sizes.width*0.05,
                       gradientColor: ColorC.premiumGradient,
                       weight: FontWeight.w800,
                     ),
@@ -110,7 +111,7 @@ class CubitDropdownProgramItems extends Cubit<void> {
                             dbExercise.insertExercise(ModelWorkout(exerciseId, userId, list[index].programId, list[index].programName, Timestamp.now(), false));
                             Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const Ground()), (route) => false);
                           }, list[index].programName,
-                              Icons.add, 0, MainAxisAlignment.spaceBetween),
+                              Icons.add, 0, MainAxisAlignment.spaceBetween, customWidth: Sizes.width / 1.6, leftTextMargin: Sizes.width*0.05, rightTextMargin: Sizes.width*0.05,),
                         ),
                         SizedBox(
                           height: Sizes.height / 40,

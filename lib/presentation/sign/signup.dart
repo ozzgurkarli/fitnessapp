@@ -55,7 +55,7 @@ class _SignUpState extends State<SignUp> {
     context.read<CubitDropdownHeightItems>().listOfHeights();
     context.read<CubitDropdownKgItems>().listOfKgs();
     context.read<CubitDropdownFrequencyItems>().listOfFrequencies();
-    context.read<CubitInputCheckValid>().checkValidSignUp();
+    context.read<CubitInputCheckValid>().checkValidSignUp(context);
 
     context.read<CubitInputName>().isNameValid(SignUp.surnameController.text);
     context
@@ -246,8 +246,13 @@ class _SignUpState extends State<SignUp> {
                     builder: (context, state) {
                       return CustomizedElevatedButton(
                         () {
-                          showDialog(
-                              context: context, builder: (context) => state);
+                          if (state is SnackBar) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(state as SnackBar);
+                          } else {
+                            showDialog(
+                                context: context, builder: (context) => state);
+                          }
                         },
                         ConstantText.CONTINUE[ConstantText.index],
                         Icons.keyboard_arrow_right,

@@ -1,6 +1,6 @@
 import 'package:fitnessapp/common/constants/colors.dart';
-import 'package:fitnessapp/cubit/newprogramscreen/cubitcreateprogramscreenproperties.dart';
-import 'package:fitnessapp/widgets/createprogrampage.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogramscreenproperties.dart';
+import 'package:fitnessapp/presentation/helpers/createprogrampage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

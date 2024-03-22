@@ -94,51 +94,59 @@ class CustomizedTextFieldPassword extends StatelessWidget {
 
 class CustomizedElevatedButton extends StatelessWidget {
   CustomizedElevatedButton(
-      this.onPressed, this.text, this.icon, this.margin, this.alignment,
-      {super.key, this.gradientColor, this.weight, this.customWidth});
+      this.onPressed, this.text, this.icon, this.rightMargin, this.alignment,
+      {super.key, this.gradientColor, this.weight, this.customWidth, this.leftTextMargin, this.rightTextMargin});
 
   final VoidCallback? onPressed;
   String text;
   IconData icon;
   double? customWidth;
-  double margin;
+  double rightMargin;
+  double? leftTextMargin;
+  double? rightTextMargin;
   FontWeight? weight;
   MainAxisAlignment alignment;
   List<Color>? gradientColor;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: customWidth ?? Sizes.width / 3.9,
-      margin: EdgeInsets.only(right: margin),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          gradient:
-              LinearGradient(colors: gradientColor ?? ColorC.defaultGradient)),
-      child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-              elevation: 0,
-              surfaceTintColor: Colors.red,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12))),
-          onPressed: onPressed,
-          child: Row(
-            mainAxisAlignment: alignment,
-            children: [
-              Text(
-                text,
-                style: TextStyle(fontWeight: weight ?? FontWeight.w500),
-              ),
-              Icon(icon)
-            ],
-          )),
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.all(0.0),
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          elevation: 0,
+          surfaceTintColor: Colors.red,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
+      onPressed: onPressed,
+      child: Ink(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            gradient: LinearGradient(
+                colors: gradientColor ?? ColorC.defaultGradient)),
+        child: Container(
+          width: customWidth ?? Sizes.width / 3.9,
+          constraints: const BoxConstraints(minWidth: 88.0, minHeight: 48),
+          margin: EdgeInsets.only(right: rightMargin),
+          child: Padding(
+            padding: EdgeInsets.only(left: leftTextMargin ?? 0, right: rightTextMargin ?? 0),
+            child: Row(
+              mainAxisAlignment: alignment,
+              children: [
+                Text(
+                  text,
+                  style: TextStyle(fontWeight: weight ?? FontWeight.w500),
+                ),
+                Icon(icon)
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
-
-
 
 class CustomizedText extends StatelessWidget {
   CustomizedText(this.text, this.size, {super.key});

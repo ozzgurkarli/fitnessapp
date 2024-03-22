@@ -71,7 +71,8 @@ class _WelcomeState extends State<Welcome> {
                 SizedBox(
                   height: Sizes.height / 70,
                 ),
-                Align(
+                Container(
+                  margin: const EdgeInsets.only(right: 50),
                     alignment: Alignment.bottomRight,
                     child: BlocBuilder<CubitWelcomeButton, Widget>(
                       builder: (context, state) {

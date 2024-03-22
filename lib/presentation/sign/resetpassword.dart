@@ -15,7 +15,6 @@ class ResetPassword extends StatefulWidget {
 
   static bool mailValid = false;
 
-
   @override
   State<ResetPassword> createState() => _SignInState();
 }
@@ -53,8 +52,8 @@ class _SignInState extends State<ResetPassword> {
                         SizedBox(
                           height: Sizes.height / 15,
                           width: Sizes.width / 1.6,
-                          child: CustomizedTextField(
-                              emailController, ConstantText.EMAIL[ConstantText.index], false),
+                          child: CustomizedTextField(emailController,
+                              ConstantText.EMAIL[ConstantText.index], false),
                         ),
                         BlocBuilder<CubitInputMail, Widget>(
                           builder: (context, icon) {
@@ -70,15 +69,27 @@ class _SignInState extends State<ResetPassword> {
                   BlocBuilder<CubitInputResetPasswordValid, bool>(
                     builder: (contextt, state) {
                       return CustomizedElevatedButton(() async {
-                          await context.read<CubitInputResetPasswordValid>().resetPasswordMail(context, emailController.text);
-                      }, ConstantText.CONTINUE[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
+                        await context
+                            .read<CubitInputResetPasswordValid>()
+                            .resetPasswordMail(context, emailController.text);
+                      },
+                          ConstantText.CONTINUE[ConstantText.index],
+                          Icons.keyboard_arrow_right,
+                          0,
+                          MainAxisAlignment.center);
                     },
                   ),
                   SizedBox(
                     height: Sizes.height / 17,
                   ),
                   TextButton(
-                      onPressed: () {Navigator.pop(context);},
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all<Color>(ColorC.thirdColor),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                       child: Text(
                         ConstantText.TURNBACK[ConstantText.index],
                       )),

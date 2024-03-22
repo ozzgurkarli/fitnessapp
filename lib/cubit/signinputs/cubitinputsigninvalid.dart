@@ -2,9 +2,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitnessapp/common/constants/colors.dart';
+import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/constants/user.dart';
 import 'package:fitnessapp/presentation/basic/ground.dart';
-import 'package:fitnessapp/widgets/alertdialogs.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/recordtypes.dart';
 import 'package:fitnessapp/common/models/modeluser.dart';
@@ -32,13 +33,20 @@ class CubitInputSignInValid<T extends Object?> extends Cubit<bool> {
     emit(false);
   }
 
-  Future<void> checkValidSignInHelper(BuildContext context, String email, String password) async {
-
-    if(!SignIn.mailValid || !SignIn.passwordValid){
-      showDialog(
-          context: context,
-          builder: (context) =>
-              (AlertDialogError(ConstantText.SIGNINERROR[ConstantText.index], ConstantText.FILLALLFIELDS[ConstantText.index])));
+  Future<void> checkValidSignInHelper(
+      BuildContext context, String email, String password) async {
+    if (!SignIn.mailValid || !SignIn.passwordValid) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text(ConstantText.SIGNINERROR[ConstantText.index] +
+                ConstantText.FILLALLFIELDS[ConstantText.index])),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
       return;
     }
     String? signInError = await trySignIn(email, password);
@@ -48,16 +56,29 @@ class CubitInputSignInValid<T extends Object?> extends Cubit<bool> {
           context,
           MaterialPageRoute(builder: (context) => const Ground()),
           (route) => false);
-    } else if (signInError == ConstantText.NODATA) {
-      showDialog(
-          context: context,
-          builder: (context) =>
-              AlertDialogError.empty(ConstantText.SIGNINERROR[ConstantText.index]));
+    } else if (signInError == ConstantText.NODATA[ConstantText.index]) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text(ConstantText.SIGNINERROR[ConstantText.index])),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
     } else {
-      showDialog(
-          context: context,
-          builder: (context) =>
-              (AlertDialogError(ConstantText.SIGNINERROR[ConstantText.index], signInError)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text(
+                ConstantText.SIGNINERROR[ConstantText.index] + signInError)),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
     }
   }
 

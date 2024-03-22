@@ -6,7 +6,8 @@ import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdowncreateprogramitems.dart';
-import 'package:fitnessapp/cubit/exercise/cubitworkoutbuilder.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
+import 'package:fitnessapp/presentation/helpers/workouthistory.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
@@ -132,7 +133,8 @@ class _WorkoutsState extends State<Workouts> {
                         ConstantText.ADDPROGRAMTODAY[ConstantText.index],
                         Icons.keyboard_arrow_down,
                         0,
-                        MainAxisAlignment.spaceBetween);
+                        MainAxisAlignment.spaceEvenly,
+                        customWidth: Sizes.width / 2,);
                   })),
               SizedBox(
                 width: Sizes.width / 22,
@@ -142,10 +144,8 @@ class _WorkoutsState extends State<Workouts> {
                   child: BlocBuilder<CubitDropdownProgramItems, void>(
                       builder: (context, state) {
                     return CustomizedElevatedButton(() {
-                      context
-                          .read<CubitDropdownProgramItems>()
-                          .showOptions(context);
-                    }, "", Icons.history, 0, MainAxisAlignment.spaceBetween);
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> const WorkoutHistory()));
+                    }, "", Icons.history, 0, MainAxisAlignment.spaceEvenly);
                   }))
             ],
           ),

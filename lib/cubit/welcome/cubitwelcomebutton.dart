@@ -2,7 +2,6 @@ import 'package:fitnessapp/common/constants/user.dart';
 import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
-import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
 import 'package:fitnessapp/presentation/sign/signin.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,7 @@ class ToHomeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomizedElevatedButton(() {Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const Ground()));}, ConstantText.START[ConstantText.index], Icons.keyboard_arrow_right, Sizes.width / 8,MainAxisAlignment.center);
+          context, MaterialPageRoute(builder: (context) => const Ground()));}, ConstantText.START[ConstantText.index], Icons.keyboard_arrow_right, 0,MainAxisAlignment.center);
   }
 }
 
@@ -41,6 +40,6 @@ class ToSignButton extends StatelessWidget {
     return CustomizedElevatedButton(() {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SignIn()));
-    }, ConstantText.START[ConstantText.index], Icons.keyboard_arrow_right, Sizes.width / 8, MainAxisAlignment.center);
+    }, ConstantText.START[ConstantText.index], Icons.keyboard_arrow_right, 0, MainAxisAlignment.center);
   }
 }

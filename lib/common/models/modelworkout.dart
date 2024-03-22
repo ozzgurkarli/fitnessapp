@@ -7,7 +7,7 @@ class ModelWorkout {
   String programName;
   Timestamp recordDate;
   bool completed;
-  Timestamp? duration;
+  int? duration;
 
   ModelWorkout(this.exerciseId, this.userId, this.programId, this.programName, this.recordDate,
       this.completed,
@@ -23,7 +23,7 @@ class ModelWorkout {
         json["completed"] as bool);
 
     if(ex.completed){
-      ex.duration = json["duration"] as Timestamp;
+      ex.duration = json["duration"] as int;
     }
 
     return ex;
@@ -37,7 +37,7 @@ class ModelWorkout {
       "programName": programName,
       "recordDate": recordDate,
       "completed": completed,
-      "duration": recordDate
+      "duration": duration ?? 0
     };
   }
 }

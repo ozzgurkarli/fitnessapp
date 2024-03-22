@@ -20,7 +20,7 @@ class CubitInputOnChanged extends Cubit<void> {
     } else if (labelText == ConstantText.EMAIL[ConstantText.index]) {
       context.read<CubitInputMail>().isMailValid(value);
     }
-    context.read<CubitInputCheckValid>().checkValidSignUp();
+    context.read<CubitInputCheckValid>().checkValidSignUp(context);
     context.read<CubitInputSignInValid>().checkValidSignIn();
   }
 
@@ -31,7 +31,7 @@ class CubitInputOnChanged extends Cubit<void> {
       controller.text = controller.text.substring(0, 6);
     }
     context.read<CubitInputPassword>().isPasswordValid(value);
-    context.read<CubitInputCheckValid>().checkValidSignUp();
+    context.read<CubitInputCheckValid>().checkValidSignUp(context);
     context.read<CubitInputSignInValid>().checkValidSignIn();
   }
 }

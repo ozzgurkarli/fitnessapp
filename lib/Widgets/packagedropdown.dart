@@ -11,7 +11,7 @@ import 'package:fitnessapp/cubit/signinputs/cubitinputheight.dart';
 import 'package:fitnessapp/cubit/signinputs/cubitinputkg.dart';
 import 'package:fitnessapp/cubit/welcome/cubitwelcomelanguage.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';
-import 'package:fitnessapp/widgets/createprogrampage.dart';
+import 'package:fitnessapp/presentation/helpers/createprogrampage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -73,7 +73,7 @@ class DropDownGender extends StatelessWidget {
                 onChanged: (value) {
                   SignUp.genderController = value;
                   context.read<CubitInputGender>().isGenderValid(value);
-                  context.read<CubitInputCheckValid>().checkValidSignUp();
+                  context.read<CubitInputCheckValid>().checkValidSignUp(context);
                 },
                 onSaved: (value) {
                   SignUp.genderController = value;
@@ -177,7 +177,7 @@ class DropDownKg extends StatelessWidget {
                 onChanged: (value) {
                   SignUp.kgController = value;
                   context.read<CubitInputKg>().isKgValid(value);
-                  context.read<CubitInputCheckValid>().checkValidSignUp();
+                  context.read<CubitInputCheckValid>().checkValidSignUp(context);
                 },
                 onSaved: (value) {
                   SignUp.kgController = value;
@@ -281,7 +281,7 @@ class DropDownHeight extends StatelessWidget {
                 onChanged: (value) {
                   SignUp.heightController = value;
                   context.read<CubitInputHeight>().isHeightValid(value);
-                  context.read<CubitInputCheckValid>().checkValidSignUp();
+                  context.read<CubitInputCheckValid>().checkValidSignUp(context);
                 },
                 onSaved: (value) {
                   SignUp.heightController = value;
@@ -487,7 +487,7 @@ class DropDownFrequency extends StatelessWidget {
                 onChanged: (value) {
                   SignUp.frequencyController = value;
                   context.read<CubitInputFrequency>().isFrequencyValid(value);
-                  context.read<CubitInputCheckValid>().checkValidSignUp();
+                  context.read<CubitInputCheckValid>().checkValidSignUp(context);
                 },
                 onSaved: (value) {
                   SignUp.frequencyController = value;

@@ -40,8 +40,8 @@ class BottomNavBar extends StatelessWidget {
                 text: ConstantText.STATISTICS[ConstantText.index],
               ),
               GButton(
-                icon: Icons.power_settings_new,
-                text: ConstantText.CATALOG[ConstantText.index],
+                icon: Icons.dvr,
+                text: ConstantText.MOVECATALOG[ConstantText.index],
               ),
               GButton(
                 icon: Icons.keyboard_double_arrow_up,

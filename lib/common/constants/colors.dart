@@ -13,8 +13,8 @@ class ColorC
   static const Color premiumGFirst = Color(0xFFFFBF00);
   static const Color premiumGLast = Color(0xFFFF6D00);
 
-  static const Color faultGFirst = Color(0xFFFFBF00);
-  static const Color faultGLast = Color(0xFFFF6D00);
+  static const Color faultGFirst = Color(0xFFFF0000);
+  static const Color faultGLast = Color(0xFF8B0000);
 
   static const Color textColor = Colors.white;
 
