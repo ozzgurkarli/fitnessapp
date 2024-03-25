@@ -121,4 +121,8 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
     dbWorkoutMove.deleteWorkoutMoves(workoutId);
     return await dbWorkout.deleteWorkout(workoutId);
   }
+
+  int currentBulkCounter(int bulk, int addWeight){
+    return (bulk + addWeight);
+  }
 }

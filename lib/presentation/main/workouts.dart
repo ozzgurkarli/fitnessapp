@@ -7,7 +7,7 @@ import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdowncreateprogramitems.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
-import 'package:fitnessapp/presentation/helpers/workouthistory.dart';
+import 'package:fitnessapp/presentation/main/workouthistory.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';

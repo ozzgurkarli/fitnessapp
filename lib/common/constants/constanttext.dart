@@ -88,6 +88,9 @@ class ConstantText {
   static const List<String> NOTCOMPLETED = ["Not completed", "Tamamlanmadı"];
   static const List<String> STARTWORKOUT = ["Start workout", "Antrenmana başla"];
   static const List<String> CANCELWORKOUT = ["Cancel workout", "Antrenmanı iptal et"];
+  
+  static const List<String> CURRENTBULK0 = ["Current", "Güncel"];
+  static const List<String> CURRENTBULK1 = ["Bulk", "Hacim"];
 
   static const List<String> MINUTES = ["minutes", "dakika"];
   

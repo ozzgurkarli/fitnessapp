@@ -7,6 +7,7 @@ import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
 import 'package:fitnessapp/common/models/modelworkoutmove.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
+import 'package:fitnessapp/presentation/helpers/workoutcurrentmoves.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
@@ -66,7 +67,7 @@ class _WorkoutCurrentState extends State<WorkoutCurrent> {
             Padding(
                 padding: EdgeInsets.symmetric(vertical: Sizes.height / 33),
                 child: CustomizedElevatedButton(
-                  () {},
+                  () {Navigator.push(context, MaterialPageRoute(builder: (context)=>const WorkoutCurrentMoves()));},
                   ConstantText.STARTWORKOUT[ConstantText.index],
                   Icons.start,
                   0,
