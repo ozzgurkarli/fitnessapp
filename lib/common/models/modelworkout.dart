@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ModelWorkout {
-  int exerciseId;
+  int workoutId;
   int userId;
   int programId;
   String programName;
@@ -9,13 +9,13 @@ class ModelWorkout {
   bool completed;
   int? duration;
 
-  ModelWorkout(this.exerciseId, this.userId, this.programId, this.programName, this.recordDate,
+  ModelWorkout(this.workoutId, this.userId, this.programId, this.programName, this.recordDate,
       this.completed,
       {this.duration});
 
   factory ModelWorkout.fromJson(Map<dynamic, dynamic> json) {
     var ex = ModelWorkout(
-        json["exerciseId"] as int,
+        json["workoutId"] as int,
         json["userId"] as int,
         json["programId"] as int,
         json["programName"] as String,
@@ -31,7 +31,7 @@ class ModelWorkout {
 
   Map<String, dynamic> toJson() {
     return {
-      "exerciseId": exerciseId,
+      "workoutId": workoutId,
       "userId": userId,
       "programId": programId,
       "programName": programName,

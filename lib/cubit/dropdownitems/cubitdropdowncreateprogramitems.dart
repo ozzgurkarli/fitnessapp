@@ -5,13 +5,17 @@ import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/idcounttypes.dart';
 import 'package:fitnessapp/common/constants/size.dart';
+import 'package:fitnessapp/common/models/modelprogrammove.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
 import 'package:fitnessapp/common/models/modelprogram.dart';
+import 'package:fitnessapp/common/models/modelworkoutmove.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogrammoveslist.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
+import 'package:fitnessapp/database/databaseprogrammove.dart';
 import 'package:fitnessapp/database/databaseworkout.dart';
 import 'package:fitnessapp/database/databaseidcount.dart';
 import 'package:fitnessapp/database/databaseprogram.dart';
+import 'package:fitnessapp/database/databaseworkoutmove.dart';
 import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/presentation/main/createnewprogramdetail.dart';
 import 'package:fitnessapp/widgets/assets.dart';
@@ -26,8 +30,10 @@ class CubitDropdownProgramItems extends Cubit<void> {
   List<DropdownMenuItem> list = [];
 
   DatabaseProgram dbProgram = DatabaseProgram();
-  DatabaseWorkout dbExercise = DatabaseWorkout();
+  DatabaseWorkout dbWorkout = DatabaseWorkout();
   DatabaseIDCount dbIdCount = DatabaseIDCount();
+  DatabaseProgramMove dbProgramMove = DatabaseProgramMove();
+  DatabaseWorkoutMove dbWorkoutMove = DatabaseWorkoutMove();
   SPChanges spChanges = SPChanges();
 
   void showOptions(BuildContext context) {
@@ -42,26 +48,42 @@ class CubitDropdownProgramItems extends Cubit<void> {
                 children: [
                   SizedBox(
                     width: Sizes.width / 1.6,
-                    child: CustomizedElevatedButton(() {
-                      Navigator.pop(context);
-                      showPrograms(context);
-                    }, ConstantText.ADDFROMPROGRAMS[ConstantText.index],
-                        Icons.add, 0, MainAxisAlignment.spaceBetween, customWidth: Sizes.width / 1.6, leftTextMargin: Sizes.width*0.05, rightTextMargin: Sizes.width*0.05,),
+                    child: CustomizedElevatedButton(
+                      () {
+                        Navigator.pop(context);
+                        showPrograms(context);
+                      },
+                      ConstantText.ADDFROMPROGRAMS[ConstantText.index],
+                      Icons.add,
+                      0,
+                      MainAxisAlignment.spaceBetween,
+                      customWidth: Sizes.width / 1.6,
+                      leftTextMargin: Sizes.width * 0.05,
+                      rightTextMargin: Sizes.width * 0.05,
+                    ),
                   ),
                   SizedBox(
                     height: Sizes.height / 40,
                   ),
                   SizedBox(
                     width: Sizes.width / 1.6,
-                    child: CustomizedElevatedButton(() {
-                      context.read<CubitCreateProgramMovesList>().clearList();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  const CreateNewProgramDetail()));
-                    }, ConstantText.CREATENEWPROGRAM[ConstantText.index],
-                        Icons.add, 0, MainAxisAlignment.spaceBetween, customWidth: Sizes.width /1.6, leftTextMargin: Sizes.width*0.05, rightTextMargin: Sizes.width*0.05,),
+                    child: CustomizedElevatedButton(
+                      () {
+                        context.read<CubitCreateProgramMovesList>().clearList();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const CreateNewProgramDetail()));
+                      },
+                      ConstantText.CREATENEWPROGRAM[ConstantText.index],
+                      Icons.add,
+                      0,
+                      MainAxisAlignment.spaceBetween,
+                      customWidth: Sizes.width / 1.6,
+                      leftTextMargin: Sizes.width * 0.05,
+                      rightTextMargin: Sizes.width * 0.05,
+                    ),
                   ),
                   SizedBox(
                     height: Sizes.height / 40,
@@ -73,7 +95,10 @@ class CubitDropdownProgramItems extends Cubit<void> {
                       ConstantText.ASKAITOCREATE[ConstantText.index],
                       Icons.add,
                       0,
-                      MainAxisAlignment.spaceBetween, customWidth: Sizes.width / 1.6, leftTextMargin: Sizes.width*0.05, rightTextMargin: Sizes.width*0.05,
+                      MainAxisAlignment.spaceBetween,
+                      customWidth: Sizes.width / 1.6,
+                      leftTextMargin: Sizes.width * 0.05,
+                      rightTextMargin: Sizes.width * 0.05,
                       gradientColor: ColorC.premiumGradient,
                       weight: FontWeight.w800,
                     ),
@@ -94,7 +119,9 @@ class CubitDropdownProgramItems extends Cubit<void> {
         builder: (context, fList) {
           if (fList.hasData) {
             list = fList.data!;
-            list.sort((a, b) => b.recordDate.compareTo(a.recordDate),);
+            list.sort(
+              (a, b) => b.recordDate.compareTo(a.recordDate),
+            );
             return Center(
               child: SizedBox(
                 width: Sizes.width / 1.6,
@@ -106,12 +133,33 @@ class CubitDropdownProgramItems extends Cubit<void> {
                       children: [
                         SizedBox(
                           width: Sizes.width / 1.6,
-                          child: CustomizedElevatedButton(() async{
-                            int exerciseId = await dbIdCount.getCountAndIncrease(IDCountTypes.exerciseId);
-                            dbExercise.insertExercise(ModelWorkout(exerciseId, userId, list[index].programId, list[index].programName, Timestamp.now(), false));
-                            Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> const Ground()), (route) => false);
-                          }, list[index].programName,
-                              Icons.add, 0, MainAxisAlignment.spaceBetween, customWidth: Sizes.width / 1.6, leftTextMargin: Sizes.width*0.05, rightTextMargin: Sizes.width*0.05,),
+                          child: CustomizedElevatedButton(
+                            () async {
+                              int workoutId = await dbIdCount
+                                  .getCountAndIncrease(IDCountTypes.workoutId);
+                              dbWorkout.insertExercise(ModelWorkout(
+                                  workoutId,
+                                  userId,
+                                  list[index].programId,
+                                  list[index].programName,
+                                  Timestamp.now(),
+                                  false));
+                              insertWorkoutMoves(
+                                  list[index].programId, workoutId);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const Ground()),
+                                  (route) => false);
+                            },
+                            list[index].programName,
+                            Icons.add,
+                            0,
+                            MainAxisAlignment.spaceBetween,
+                            customWidth: Sizes.width / 1.6,
+                            leftTextMargin: Sizes.width * 0.05,
+                            rightTextMargin: Sizes.width * 0.05,
+                          ),
                         ),
                         SizedBox(
                           height: Sizes.height / 40,
@@ -130,5 +178,24 @@ class CubitDropdownProgramItems extends Cubit<void> {
         },
       ),
     );
+  }
+
+  void insertWorkoutMoves(int programId, int workoutId) async {
+    List<ModelProgramMove> pList =
+        await dbProgramMove.getProgramMoves(programId);
+
+    for (int i = 0; i < pList.length; i++) {
+      dbWorkoutMove.insertMove(ModelWorkoutMove(
+        pList[i].muscle,
+        pList[i].index,
+        workoutId: workoutId,
+        moveId: pList[i].moveId,
+        moveName: pList[i].moveName,
+        duration: 0,
+        repeat: 0,
+        weight: 0,
+        setCount: 0
+      ));
+    }
   }
 }

@@ -3,8 +3,11 @@ import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/helpermethods.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
+import 'package:fitnessapp/common/models/modelworkoutmove.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
 import 'package:fitnessapp/database/databaseworkout.dart';
+import 'package:fitnessapp/database/databaseworkoutmove.dart';
+import 'package:fitnessapp/presentation/helpers/workoutcurrent.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,14 +15,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CubitWorkoutBuilder extends Cubit<Widget> {
   CubitWorkoutBuilder() : super(const Center(child: Loading()));
 
-  DatabaseWorkout dbExercise = DatabaseWorkout();
+  DatabaseWorkout dbWorkout = DatabaseWorkout();
+  DatabaseWorkoutMove dbWorkoutMove = DatabaseWorkoutMove();
   SPChanges spChanges = SPChanges();
+
+  late int workoutId;
 
   void workoutsPage() async {
     int userId = await spChanges.readID();
     List<ModelWorkout> list = [];
     emit(FutureBuilder(
-      future: dbExercise.getWorkoutsLast12Hour(userId),
+      future: dbWorkout.getWorkoutsLast12Hour(userId),
       builder: (context, fList) {
         if (fList.hasData) {
           list = fList.data!;
@@ -35,7 +41,12 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
             width: Sizes.width * 43 / 60,
             height: Sizes.height / 10,
             child: ListTile(
-              onTap: () {},
+              onTap: () {
+                workoutId = list.first.workoutId;
+                WorkoutCurrent.workout = list.first;
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WorkoutCurrent()));
+              },
               tileColor: Colors.transparent,
               subtitle: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -48,7 +59,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
                   Text(
                     list.first.completed
                         ? HelperMethods.editDuration(list.first.duration!)
-                        : ConstantText.NOTSTARTED[ConstantText.index],
+                        : ConstantText.NOTCOMPLETED[ConstantText.index],
                     style: const TextStyle(
                         color: ColorC.textColor, fontWeight: FontWeight.w600),
                   )
@@ -85,5 +96,29 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
         }
       },
     ));
+  }
+
+  void workoutCurrentPage(Widget page) async {
+    List<ModelWorkoutMove> list = [];
+    emit(FutureBuilder(
+      future: dbWorkoutMove.getWorkoutMoves(workoutId),
+      builder: (context, fList) {
+        if (fList.hasData) {
+          list = fList.data!;
+          list.sort((a, b) => a.index!.compareTo(b.index!));
+          WorkoutCurrent.moveList = list;
+          return page;
+        } else {
+          return const Center(
+            child: Loading(),
+          );
+        }
+      },
+    ));
+  }
+
+  Future<bool> deleteWorkout()async{
+    dbWorkoutMove.deleteWorkoutMoves(workoutId);
+    return await dbWorkout.deleteWorkout(workoutId);
   }
 }

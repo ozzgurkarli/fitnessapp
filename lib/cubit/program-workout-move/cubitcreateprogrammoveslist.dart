@@ -240,14 +240,14 @@ class CubitCreateProgramMovesList extends Cubit<void> {
 
   List<ModelProgramMove> listProgram() {
     List<ModelProgramMove> mList = [];
-    mList.addAll(list.where((x) => x.moveName == ConstantText.CHEST[0]));
-    mList.addAll(list.where((x) => x.moveName == ConstantText.SHOULDER[0]));
-    mList.addAll(list.where((x) => x.moveName == ConstantText.BACK[0]));
-    mList.addAll(list.where((x) => x.moveName == ConstantText.BICEPS[0]));
-    mList.addAll(list.where((x) => x.moveName == ConstantText.TRICEPS[0]));
-    mList.addAll(list.where((x) => x.moveName == ConstantText.LEG[0]));
-    mList.addAll(list.where((x) => x.moveName == ConstantText.ABDOMEN[0]));
-    mList.addAll(list.where((x) => x.moveName == ConstantText.CARDIO[0]));
+    mList.addAll(list.where((x) => x.muscle == ConstantText.CHEST[0]));
+    mList.addAll(list.where((x) => x.muscle == ConstantText.SHOULDER[0]));
+    mList.addAll(list.where((x) => x.muscle == ConstantText.BACK[0]));
+    mList.addAll(list.where((x) => x.muscle == ConstantText.BICEPS[0]));
+    mList.addAll(list.where((x) => x.muscle == ConstantText.TRICEPS[0]));
+    mList.addAll(list.where((x) => x.muscle == ConstantText.LEG[0]));
+    mList.addAll(list.where((x) => x.muscle == ConstantText.ABDOMEN[0]));
+    mList.addAll(list.where((x) => x.muscle == ConstantText.CARDIO[0]));
 
     return mList;
   }

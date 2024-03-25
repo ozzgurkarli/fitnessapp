@@ -37,69 +37,93 @@ class _MoveCatalogState extends State<MoveCatalog> {
           SizedBox(
             height: Sizes.height / 25,
           ),
+          const Icon(
+            Icons.keyboard_arrow_up,
+            size: 67,
+            color: ColorC.textColor,
+          ),
           SizedBox(
             width: Sizes.width * 43 / 60,
-            height: Sizes.height *24/55,
-            child: PageView.builder(
-              physics: const ScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: muscleList.length ~/ 4,
-              itemBuilder: (context, pageIndex) {
-                return SizedBox(
-                  width: Sizes.width * 43 / 60,
-                  height: Sizes.height *24/55,
-                  child: MediaQuery.removePadding(
-                    context: context,
-                    removeTop: true,
-                    removeBottom: true,
-                    child: ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: muscleList.length ~/ 2,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            SizedBox(
-                              height: Sizes.height / 55,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(
-                                  color: ColorC.thirdColor,
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        'lib/common/assets/${muscleList[index + (muscleList.length ~/ 2 * pageIndex)][0]}.png'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                  borderRadius: BorderRadius.circular(12)),
-                              width: Sizes.width * 43 / 60,
-                              height: Sizes.height / 11,
-                              child: ListTile(
-                                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> MuscleCatalog(muscleList[index + (muscleList.length ~/ 2 * pageIndex)])));},
-                                tileColor: Colors.transparent,
-                                subtitle: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      muscleList[index +
-                                          (muscleList.length ~/
-                                              2 *
-                                              pageIndex)][ConstantText.index],
-                                      style: const TextStyle(
-                                          color: ColorC.textColor,
-                                          fontWeight: FontWeight.w600),
+            height: Sizes.height * 24 / 55,
+            child: MediaQuery.removePadding(
+              context: context,
+              removeTop: true,
+              removeBottom: true,
+              child: PageView.builder(
+                physics: const ScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemCount: muscleList.length ~/ 4,
+                itemBuilder: (context, pageIndex) {
+                  return SizedBox(
+                    width: Sizes.width * 43 / 60,
+                    height: Sizes.height * 24 / 55,
+                    child: MediaQuery.removePadding(
+                      context: context,
+                      removeTop: true,
+                      removeBottom: true,
+                      child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: muscleList.length ~/ 2,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              SizedBox(
+                                height: Sizes.height / 55,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color: ColorC.thirdColor,
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          'lib/common/assets/${muscleList[index + (muscleList.length ~/ 2 * pageIndex)][0]}.png'),
+                                      fit: BoxFit.cover,
                                     ),
-                                  ],
+                                    borderRadius: BorderRadius.circular(12)),
+                                width: Sizes.width * 43 / 60,
+                                height: Sizes.height / 11,
+                                child: ListTile(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => MuscleCatalog(
+                                                muscleList[index +
+                                                    (muscleList.length ~/
+                                                        2 *
+                                                        pageIndex)])));
+                                  },
+                                  tileColor: Colors.transparent,
+                                  subtitle: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        muscleList[index +
+                                            (muscleList.length ~/
+                                                2 *
+                                                pageIndex)][ConstantText.index],
+                                        style: const TextStyle(
+                                            color: ColorC.textColor,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
-          )
+          ),
+          const Icon(
+            Icons.keyboard_arrow_down,
+            size: 67,
+            color: ColorC.textColor,
+          ),
         ],
       )),
     );

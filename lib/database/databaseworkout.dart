@@ -38,4 +38,13 @@ class DatabaseWorkout {
     
     return list;
   }
+
+  Future<bool> deleteWorkout(int workoutId)async{
+    return await refWorkout.where("workoutId", isEqualTo: workoutId).get().then((value) {
+      for (var inf in value.docs) {
+        refWorkout.doc(inf.id).delete();
+      }
+      return true;
+    });
+  }
 }
