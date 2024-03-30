@@ -3,8 +3,6 @@
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputbirthdate.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputonchanged.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,9 +22,6 @@ class CustomizedTextField extends StatelessWidget {
       keyboardType: obsecure ? TextInputType.number : TextInputType.text,
       controller: controller,
       onChanged: (value) {
-        context
-            .read<CubitInputOnChanged>()
-            .onChanged(context, labelText, value, controller);
       },
       obscureText: obsecure,
       style: const TextStyle(
@@ -69,9 +64,6 @@ class CustomizedTextFieldPassword extends StatelessWidget {
                 controller.text.substring(0, controller.text.length - 1);
           }
         }
-        context
-            .read<CubitInputOnChanged>()
-            .onChangedPassword(context, labelText, value, controller);
       },
       obscureText: true,
       style: const TextStyle(
@@ -164,18 +156,14 @@ class CustomizedText extends StatelessWidget {
 }
 
 class CustomizedSignUpDatePicker extends StatelessWidget {
-  CustomizedSignUpDatePicker(this.icon, {super.key});
+  CustomizedSignUpDatePicker({super.key});
 
-  Widget icon;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
+    return SizedBox(
           height: Sizes.height / 18,
-          width: Sizes.width / 4,
+          width: Sizes.width / 3.4,
           child: TextField(
             controller: SignUp.birthDateController,
             style: const TextStyle(
@@ -207,11 +195,7 @@ class CustomizedSignUpDatePicker extends StatelessWidget {
               selectDate(context);
             },
           ),
-        ),
-        Container(
-            margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon),
-      ],
-    );
+        );
   }
 
   Future<void> selectDate(BuildContext context) async {
@@ -223,9 +207,6 @@ class CustomizedSignUpDatePicker extends StatelessWidget {
 
     if (dateTime != null) {
       SignUp.birthDateController.text = dateTime.toString().split(" ")[0];
-      context
-          .read<CubitInputBirthDate>()
-          .isDateValid(SignUp.birthDateController.text);
     }
   }
 }

@@ -5,10 +5,6 @@ import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/cubit/signinputs/cubitinputcheckvalid.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputfrequency.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputgender.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputheight.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputkg.dart';
 import 'package:fitnessapp/cubit/welcome/cubitwelcomelanguage.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';
 import 'package:fitnessapp/presentation/helpers/createprogrampage.dart';
@@ -16,21 +12,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DropDownGender extends StatelessWidget {
-  DropDownGender(this.list, this.controller, this.icon, {super.key});
+  DropDownGender(this.list, this.controller, {super.key});
 
   List<DropdownMenuItem> list;
   int? controller;
-  Widget icon;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
+      margin: EdgeInsets.only(top: Sizes.height/500),
+      child: SizedBox(
             height: Sizes.height / 18,
-            width: Sizes.width / 4,
+            width: Sizes.width / 3.4,
             child: DropdownButtonHideUnderline(
               child: DropdownButtonFormField2(
                 isExpanded: true,
@@ -72,8 +65,6 @@ class DropDownGender extends StatelessWidget {
                 },
                 onChanged: (value) {
                   SignUp.genderController = value;
-                  context.read<CubitInputGender>().isGenderValid(value);
-                  context.read<CubitInputCheckValid>().checkValidSignUp(context);
                 },
                 onSaved: (value) {
                   SignUp.genderController = value;
@@ -111,28 +102,20 @@ class DropDownGender extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon)
-        ],
-      ),
     );
   }
 }
 
 class DropDownKg extends StatelessWidget {
-  DropDownKg(this.list, this.controller, this.icon, {super.key});
+  DropDownKg(this.list, this.controller, {super.key});
 
   List<DropdownMenuItem> list;
   int? controller;
-  Widget icon;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
+      child: SizedBox(
             height: Sizes.height / 18,
             width: Sizes.width / 4,
             child: DropdownButtonHideUnderline(
@@ -176,8 +159,6 @@ class DropDownKg extends StatelessWidget {
                 },
                 onChanged: (value) {
                   SignUp.kgController = value;
-                  context.read<CubitInputKg>().isKgValid(value);
-                  context.read<CubitInputCheckValid>().checkValidSignUp(context);
                 },
                 onSaved: (value) {
                   SignUp.kgController = value;
@@ -215,28 +196,20 @@ class DropDownKg extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon)
-        ],
-      ),
     );
   }
 }
 
 class DropDownHeight extends StatelessWidget {
-  DropDownHeight(this.list, this.controller, this.icon, {super.key});
+  DropDownHeight(this.list, this.controller, {super.key});
 
   List<DropdownMenuItem> list;
   int? controller;
-  Widget icon;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
+      child: SizedBox(
             height: Sizes.height / 18,
             width: Sizes.width / 4,
             child: DropdownButtonHideUnderline(
@@ -280,8 +253,6 @@ class DropDownHeight extends StatelessWidget {
                 },
                 onChanged: (value) {
                   SignUp.heightController = value;
-                  context.read<CubitInputHeight>().isHeightValid(value);
-                  context.read<CubitInputCheckValid>().checkValidSignUp(context);
                 },
                 onSaved: (value) {
                   SignUp.heightController = value;
@@ -319,10 +290,6 @@ class DropDownHeight extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-              margin: EdgeInsets.only(bottom: Sizes.height / 100), child: icon)
-        ],
-      ),
     );
   }
 }
@@ -486,8 +453,6 @@ class DropDownFrequency extends StatelessWidget {
                 },
                 onChanged: (value) {
                   SignUp.frequencyController = value;
-                  context.read<CubitInputFrequency>().isFrequencyValid(value);
-                  context.read<CubitInputCheckValid>().checkValidSignUp(context);
                 },
                 onSaved: (value) {
                   SignUp.frequencyController = value;

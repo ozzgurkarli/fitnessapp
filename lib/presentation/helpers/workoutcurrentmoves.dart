@@ -5,6 +5,7 @@ import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitbulkcounter.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
 import 'package:fitnessapp/presentation/helpers/workoutcurrent.dart';
+import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,21 +42,19 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
                         fontFamily: 'Horizon',
                       ),
                       child: BlocBuilder<CubitBulkCounter, String>(
-                        builder: (context, bulk) {
-                          return AnimatedTextKit(
-                            pause: const Duration(milliseconds: 300),
-                            repeatForever: true,
-                            animatedTexts: [
-                              RotateAnimatedText(
-                                  ConstantText.CURRENTBULK0[ConstantText.index]),
-                              RotateAnimatedText(
-                                  ConstantText.CURRENTBULK1[ConstantText.index]),
-                              RotateAnimatedText(
-                                  bulk),
-                            ],
-                          );
-                        }
-                      ),
+                          builder: (context, bulk) {
+                        return AnimatedTextKit(
+                          pause: const Duration(milliseconds: 300),
+                          repeatForever: true,
+                          animatedTexts: [
+                            RotateAnimatedText(
+                                ConstantText.CURRENTBULK0[ConstantText.index]),
+                            RotateAnimatedText(
+                                ConstantText.CURRENTBULK1[ConstantText.index]),
+                            RotateAnimatedText(bulk),
+                          ],
+                        );
+                      }),
                     ),
                   ],
                 ),
@@ -81,6 +80,28 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
             height: Sizes.height / 3.3,
             child: Image.asset(
                 'lib/common/assets/${WorkoutCurrent.moveList[index].muscle}.png')),
+        CustomizedElevatedButton(
+          () {},
+          ConstantText.STARTWORKOUT[ConstantText.index],
+          Icons.start,
+          0,
+          MainAxisAlignment.spaceBetween,
+          customWidth: Sizes.width / 1.6,
+          leftTextMargin: Sizes.width * 0.07,
+          rightTextMargin: Sizes.width * 0.07,
+          gradientColor: ColorC.thirdGradient,
+        ),
+        CustomizedElevatedButton(
+          () {},
+          ConstantText.STARTWORKOUT[ConstantText.index],
+          Icons.start,
+          0,
+          MainAxisAlignment.spaceBetween,
+          customWidth: Sizes.width / 1.6,
+          leftTextMargin: Sizes.width * 0.07,
+          rightTextMargin: Sizes.width * 0.07,
+          gradientColor: ColorC.thirdGradient,
+        ),
       ],
     );
   }

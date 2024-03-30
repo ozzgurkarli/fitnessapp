@@ -5,9 +5,6 @@ import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputmail.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputpassword.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputsigninvalid.dart';
 import 'package:fitnessapp/presentation/sign/resetpassword.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +25,6 @@ class _SignInState extends State<SignIn> {
   TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    context.read<CubitInputSignInValid>().checkValidSignIn();
 
     return GestureDetector(
       onTap: () {
@@ -49,61 +45,34 @@ class _SignInState extends State<SignIn> {
                   SizedBox(
                     height: Sizes.height / 5,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: Sizes.width / 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: Sizes.height / 15,
-                          width: Sizes.width / 1.6,
-                          child: CustomizedTextField(emailController,
-                              ConstantText.EMAIL[ConstantText.index], false),
-                        ),
-                        BlocBuilder<CubitInputMail, Widget>(
-                          builder: (context, icon) {
-                            return icon;
-                          },
-                        ),
-                      ],
-                    ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: Sizes.height/50),
+                    child: SizedBox(
+                            height: Sizes.height / 15,
+                            width: Sizes.width / 1.6,
+                            child: CustomizedTextField(emailController,
+                                ConstantText.EMAIL[ConstantText.index], false),
+                          ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: Sizes.width / 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
+                  SizedBox(
                           height: Sizes.height / 15,
                           width: Sizes.width / 1.6,
                           child: CustomizedTextFieldPassword(passwordController,
                               ConstantText.PASSWORD[ConstantText.index]),
                         ),
-                        BlocBuilder<CubitInputPassword, Widget>(
-                          builder: (context, icon) {
-                            return icon;
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
                   SizedBox(
                     height: Sizes.height / 17,
                   ),
-                  BlocBuilder<CubitInputSignInValid, bool>(
-                    builder: (contextt, state) {
-                      return CustomizedElevatedButton(() async {
-                        context
-                            .read<CubitInputSignInValid>()
-                            .checkValidSignInHelper(context,
-                                emailController.text, passwordController.text);
-                      },
-                          ConstantText.SIGNIN[ConstantText.index],
-                          Icons.keyboard_arrow_right,
-                          0,
-                          MainAxisAlignment.center);
-                    },
-                  ),
+                  CustomizedElevatedButton(() async {
+                    // context
+                    //     .read<CubitInputSignInValid>()
+                    //     .checkValidSignInHelper(context,
+                    //         emailController.text, passwordController.text);
+                  },
+                      ConstantText.SIGNIN[ConstantText.index],
+                      Icons.keyboard_arrow_right,
+                      0,
+                      MainAxisAlignment.center),
                   SizedBox(
                     height: Sizes.height / 17,
                   ),

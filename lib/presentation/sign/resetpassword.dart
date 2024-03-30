@@ -5,7 +5,6 @@ import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/size.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputmail.dart';
 import 'package:fitnessapp/cubit/signinputs/cubitinputresetpasswordvalid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,43 +41,26 @@ class _SignInState extends State<ResetPassword> {
                   ),
                   const Logo(),
                   SizedBox(
-                    height: Sizes.height / 6,
+                    height: Sizes.height / 4.35,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: Sizes.width / 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
+                  SizedBox(
                           height: Sizes.height / 15,
                           width: Sizes.width / 1.6,
                           child: CustomizedTextField(emailController,
                               ConstantText.EMAIL[ConstantText.index], false),
                         ),
-                        BlocBuilder<CubitInputMail, Widget>(
-                          builder: (context, icon) {
-                            return icon;
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
                   SizedBox(
                     height: Sizes.height / 7.4,
                   ),
-                  BlocBuilder<CubitInputResetPasswordValid, bool>(
-                    builder: (contextt, state) {
-                      return CustomizedElevatedButton(() async {
-                        await context
-                            .read<CubitInputResetPasswordValid>()
-                            .resetPasswordMail(context, emailController.text);
-                      },
-                          ConstantText.CONTINUE[ConstantText.index],
-                          Icons.keyboard_arrow_right,
-                          0,
-                          MainAxisAlignment.center);
-                    },
-                  ),
+                  CustomizedElevatedButton(() async {
+                    await context
+                        .read<CubitInputResetPasswordValid>()
+                        .resetPasswordMail(context, emailController.text);
+                  },
+                      ConstantText.CONTINUE[ConstantText.index],
+                      Icons.keyboard_arrow_right,
+                      0,
+                      MainAxisAlignment.center),
                   SizedBox(
                     height: Sizes.height / 17,
                   ),

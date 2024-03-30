@@ -22,19 +22,8 @@ import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownfrequencyitems.dart'
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownheightitems.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdowngenderitems.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownkgitems.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputbirthdate.dart';
 import 'package:fitnessapp/cubit/signinputs/cubitinputcheckvalid.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputfrequency.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputgender.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputheight.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputkg.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputmail.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputname.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputonchanged.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputpassword.dart';
 import 'package:fitnessapp/cubit/signinputs/cubitinputresetpasswordvalid.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputsigninvalid.dart';
-import 'package:fitnessapp/cubit/signinputs/cubitinputsurname.dart';
 import 'package:fitnessapp/cubit/welcome/cubitwelcometext.dart';
 import 'package:fitnessapp/cubit/welcome/cubitwelcomebutton.dart';
 import 'package:fitnessapp/presentation/basic/welcome.dart';
@@ -91,21 +80,10 @@ class MyApp extends StatelessWidget {
                 BlocProvider(create: (context) => CubitDropdownHeightItems()),
                 BlocProvider(
                     create: (context) => CubitDropdownFrequencyItems()),
-                BlocProvider(create: (context) => CubitInputMail()),
-                BlocProvider(create: (context) => CubitInputPassword()),
-                BlocProvider(create: (context) => CubitInputBirthDate()),
-                BlocProvider(create: (context) => CubitInputName()),
-                BlocProvider(create: (context) => CubitInputSurname()),
-                BlocProvider(create: (context) => CubitInputGender()),
-                BlocProvider(create: (context) => CubitInputHeight()),
-                BlocProvider(create: (context) => CubitInputKg()),
-                BlocProvider(create: (context) => CubitInputFrequency()),
                 BlocProvider(create: (context) => CubitInputCheckValid()),
-                BlocProvider(create: (context) => CubitInputSignInValid()),
                 BlocProvider(
                     create: (context) => CubitInputResetPasswordValid()),
                 BlocProvider(create: (context) => CubitDropdownProgramItems()),
-                BlocProvider(create: (context) => CubitInputOnChanged()),
                 BlocProvider(create: (context) => CubitDropDownLanguage()),
                 BlocProvider(create: (context) => CubitWelcomeLanguage()),
                 BlocProvider(
