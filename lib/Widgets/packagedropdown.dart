@@ -158,10 +158,10 @@ class DropDownKg extends StatelessWidget {
                   return null;
                 },
                 onChanged: (value) {
-                  SignUp.kgController = value;
+                  //SignUp.kgController = value;
                 },
                 onSaved: (value) {
-                  SignUp.kgController = value;
+                  //SignUp.kgController = value;
                 },
                 buttonStyleData: ButtonStyleData(
                   height: 50,
@@ -252,10 +252,10 @@ class DropDownHeight extends StatelessWidget {
                   return value;
                 },
                 onChanged: (value) {
-                  SignUp.heightController = value;
+                  //SignUp.heightController = value;
                 },
                 onSaved: (value) {
-                  SignUp.heightController = value;
+                  //SignUp.heightController = value;
                 },
                 buttonStyleData: ButtonStyleData(
                   height: 50,
@@ -452,10 +452,10 @@ class DropDownFrequency extends StatelessWidget {
                   return null;
                 },
                 onChanged: (value) {
-                  SignUp.frequencyController = value;
+                  //SignUp.frequencyController = value;
                 },
                 onSaved: (value) {
-                  SignUp.frequencyController = value;
+                  //SignUp.frequencyController = value;
                 },
                 buttonStyleData: ButtonStyleData(
                   height: 50,

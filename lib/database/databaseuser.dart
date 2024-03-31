@@ -1,25 +1,48 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/constants/recordtypes.dart';
 import 'package:fitnessapp/common/models/modeluser.dart';
+import 'package:http/http.dart' as http;
 
 class DatabaseUser
 {
   var refUser = FirebaseFirestore.instance.collection("USER");
   var refUserLog = FirebaseFirestore.instance.collection("LOG").doc("USER").collection("USER");
 
-  Future<void> insertUser(ModelUser user)async{
-    refUser.doc().set(user.toJson());
+  Future<http.Response> insertUser(ModelUser user)async{
+
+    final uri = Uri.parse("${Pool.connectionString}/User/Create");
+    late http.Response response;
+
+    try{
+      response = await http.post(uri, headers: <String, String>{
+        'Content-type':'application/json; charset=UTF-8'
+      },body: json.encode(user));
+    }
+    catch(e){
+      return response;
+    }
+
+    return response;
   }
 
-  Future<void> insertUserLog(ModelUser userLog)async{
-    refUserLog.doc().set(userLog.logToJson());
-  }
+  Future<http.Response> findUser(int id) async{
 
-  Future<ModelUser> findUser(int id) async{
-    return await refUser.where("id", isEqualTo: id).get().then((value){
-      return ModelUser.fromJson(value.docs.first.data());
+    final uri = Uri.parse("${Pool.connectionString}/User/GetUser?id=$id");
+    late http.Response response;
 
-    });
+    try{
+      response = await http.get(uri, headers: <String, String>{
+        'Content-type':'application/json; charset=UTF-8'
+      });
+    }
+    catch(e){
+      return response;
+    }
+
+    return response;
   }
 
   Future<ModelUser> findUserByMail(String mail)async{

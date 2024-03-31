@@ -59,9 +59,7 @@ class CubitInputResetPasswordValid extends Cubit<bool> {
         ));
         return;
       }
-      user.recordType = recordTypes.PASSWORDCHANGE;
-      user.recordDate = Timestamp.fromDate(DateTime.now());
-      dbUser.insertUserLog(user);
+      
       auth.resetPasswordMail(email);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         margin: EdgeInsets.all(Sizes.height / 20),

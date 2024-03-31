@@ -1,21 +1,25 @@
-// ignore_for_file: empty_catches
+// ignore_for_file: empty_catches, use_build_context_synchronously
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+
+import 'package:darq/darq.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/idCountTypes.dart';
+import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/constants/size.dart';
-import 'package:fitnessapp/common/constants/user.dart';
-import 'package:fitnessapp/widgets/alertdialogs.dart';
+import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
-import 'package:fitnessapp/common/constants/recordtypes.dart';
 import 'package:fitnessapp/common/models/modeluser.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
 import 'package:fitnessapp/database/databaseauth.dart';
 import 'package:fitnessapp/database/databaseidcount.dart';
 import 'package:fitnessapp/database/databaseuser.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';
+import 'package:fitnessapp/widgets/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 
 class CubitInputCheckValid extends Cubit<Widget> {
   CubitInputCheckValid() : super(const Placeholder());
@@ -25,62 +29,119 @@ class CubitInputCheckValid extends Cubit<Widget> {
   DatabaseIDCount dbIdCount = DatabaseIDCount();
   DatabaseAuth auth = DatabaseAuth();
 
-  void checkValidSignUp(BuildContext context) async {
-    if (SignUp.nameValid &&
-        SignUp.surnameValid &&
-        SignUp.mailValid &&
-        SignUp.passwordValid &&
-        SignUp.genderValid &&
-        SignUp.heightValid &&
-        SignUp.birthDateValid &&
-        SignUp.kgValid &&
-        SignUp.frequencyValid &&
-        SignUp.heightController != null) {
+  void checkValidSignIn(
+      BuildContext context, String mail, String password) async {
+    if (mail.split('@').length > 1 &&
+        mail.split('.').length > 1 &&
+        password.length == 6) {
       await Future<void>.delayed(const Duration(milliseconds: 50));
+      try {
+        await auth.signUser(mail, password);
+      } catch (e) {}
+      return;
+    }
+  }
+
+  void checkValidSignUp(BuildContext context) async {
+    if (SignUp.nameController.text.length > 1 &&
+        SignUp.surnameController.text.length > 1 &&
+        SignUp.emailController.text.split('@').length > 1 &&
+        SignUp.emailController.text.split('.').length > 1 &&
+        SignUp.passwordController.text.length == 6 &&
+        SignUp.genderController != null &&
+        SignUp.birthDateController.text.length > 1) {
+      showDialog(
+        context: context,
+        builder: (context) =>  const Center(child: Loading()),
+      );
+
       if (SignUp.nameController.text.isNotEmpty) {
-        emit(AlertDialogInputValid(SignUp.nameController.text));
+        bool success = true;
+        success = await insertUser(context);
+
+        if (success) {
+          Navigator.pop(context);
+          Navigator.pushAndRemoveUntil(
+              context, MaterialPageRoute(builder: (context) => const Ground()), (route) => false);
+        }
       }
+      emit(const Placeholder());
       return;
     }
 
     emit(SnackBar(
+      margin: EdgeInsets.all(Sizes.height / 20),
+      content: Align(
+          alignment: Alignment.center,
+          child: Text(ConstantText.FILLALLFIELDS[ConstantText.index])),
+      backgroundColor: ColorC.foregroundColor,
+      showCloseIcon: true,
+      closeIconColor: ColorC.thirdColor,
+      behavior: SnackBarBehavior.floating,
+    ));
+  }
+
+  Future<bool> insertUser(BuildContext context) async {
+    try {
+      await auth.createUser();
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         margin: EdgeInsets.all(Sizes.height / 20),
         content: Align(
             alignment: Alignment.center,
-            child: Text(ConstantText.FILLALLFIELDS[ConstantText.index])),
+            child: Text(ConstantText.SIGNUPERROR[ConstantText.index] + e.code)),
         backgroundColor: ColorC.foregroundColor,
         showCloseIcon: true,
         closeIconColor: ColorC.thirdColor,
         behavior: SnackBarBehavior.floating,
       ));
-  }
+      return false;
+    } catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text("${ConstantText.SIGNUPERROR[ConstantText.index]}null")),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
+      return false;
+    }
 
-  Future<void> insertUser() async {
-    await auth.createUser();
-    int id = await dbIdCount.getCountAndIncrease(IDCountTypes.userId);
-    spChanges.insertData(id, SignUp.nameController.text);
-    dbUser.insertUser(ModelUser(
-        id,
+    http.Response response = await dbUser.insertUser(ModelUser(
+        0,
         SignUp.nameController.text,
         SignUp.surnameController.text,
         SignUp.emailController.text,
-        SignUp.heightController!.toDouble(),
-        SignUp.kgController!.toDouble(),
         SignUp.birthDateController.text,
         SignUp.genderController,
-        SignUp.frequencyController));
-    dbUser.insertUserLog(ModelUser.log(
-        id,
-        SignUp.nameController.text,
-        SignUp.surnameController.text,
-        SignUp.emailController.text,
-        SignUp.heightController!.toDouble(),
-        SignUp.kgController!.toDouble(),
-        SignUp.birthDateController.text,
-        SignUp.genderController,
-        SignUp.frequencyController,
-        recordTypes.SIGNUP,
-        Timestamp.fromDate(DateTime.now())));
-    UserC.id = await spChanges.readID();
+        SignUp.invitationCodeController.text));
+
+    if (response.statusCode <= 299) {
+      Pool.user = ModelUser.fromJson(json.decode(response.body));
+      
+    } else {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text(
+                "${ConstantText.SIGNUPERROR[ConstantText.index]} + ${response.body}")),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
+      return false;
+    }
+
+    spChanges.insertData(Pool.user.id!, SignUp.nameController.text);
+
+    return true;
   }
 }

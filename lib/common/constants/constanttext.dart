@@ -26,6 +26,7 @@ class ConstantText {
   static const List<String> EMAIL = ["Email", "Email"];
   static const List<String> PASSWORD = ["Password (6 digit)", "Parola (6 hane)"];
   static const List<String> BIRTHDATE = ["Birth Date", "Doğum Tarihi"];
+  static const List<String> INVITATIONCODE = ["Invitation Code", "Davet Kodu"];
   static const List<String> GENDER = ["Gender", "Cinsiyet"];
   static const List<String> KG = ["Lbs", "Kg"];
   static const List<String> CM = ["ft", "cm"];

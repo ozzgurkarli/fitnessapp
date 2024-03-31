@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable, use_build_context_synchronously
 
+import 'package:fitnessapp/cubit/signinputs/cubitinputcheckvalid.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
@@ -65,7 +66,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   CustomizedElevatedButton(() async {
                     // context
-                    //     .read<CubitInputSignInValid>()
+                    //     .read<CubitInputCheckValid>()
                     //     .checkValidSignInHelper(context,
                     //         emailController.text, passwordController.text);
                   },

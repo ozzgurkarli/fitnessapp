@@ -56,6 +56,10 @@ class CustomizedTextFieldPassword extends StatelessWidget {
       keyboardType: TextInputType.number,
       controller: controller,
       onChanged: (value) {
+        if(controller.text.length>6){
+          controller.text =
+                controller.text.substring(0, 6);
+        }
         try {
           int.parse(value);
         } catch (e) {

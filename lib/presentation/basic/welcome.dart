@@ -24,7 +24,7 @@ class Welcome extends StatefulWidget {
 class _WelcomeState extends State<Welcome> {
   @override
   Widget build(BuildContext context) {
-    context.read<CubitWelcomeButton>().isUserRegistered();
+    context.read<CubitWelcomeButton>().isUserRegistered(context);
     context.read<CubitWelcomeText>().isUserRegistered();
     context.read<CubitDropDownLanguage>().listOfLanguages();
 

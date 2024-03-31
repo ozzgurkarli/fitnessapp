@@ -15,25 +15,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
-  static bool nameValid = false;
-  static bool surnameValid = false;
-  static bool passwordValid = false;
-  static bool mailValid = false;
-  static bool birthDateValid = false;
-  static bool genderValid = false;
-  static bool heightValid = false;
-  static bool kgValid = false;
-  static bool frequencyValid = false;
-
   static TextEditingController nameController = TextEditingController();
   static TextEditingController surnameController = TextEditingController();
   static TextEditingController passwordController = TextEditingController();
   static TextEditingController emailController = TextEditingController();
   static TextEditingController birthDateController = TextEditingController();
   static int? genderController;
-  static int? heightController;
-  static int? kgController;
-  static int? frequencyController;
+  static TextEditingController invitationCodeController = TextEditingController();
 
   @override
   State<SignUp> createState() => _SignUpState();
@@ -67,7 +55,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   CustomizedText(ConstantText.SIGNUP[ConstantText.index], 17),
                   SizedBox(
-                    height: Sizes.height / 20,
+                    height: Sizes.height / 17,
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(vertical: Sizes.height / 100),
@@ -135,19 +123,26 @@ class _SignUpState extends State<SignUp> {
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: Sizes.height / 100),
+                    child: SizedBox(
+                      height: Sizes.height / 18,
+                      width: Sizes.width / 1.6,
+                      child: CustomizedTextField(SignUp.invitationCodeController,
+                          ConstantText.INVITATIONCODE[ConstantText.index], false),
+                    ),
+                  ),
                   SizedBox(
-                    height: Sizes.height / 40,
+                    height: Sizes.height / 17,
                   ),
                   BlocBuilder<CubitInputCheckValid, Widget>(
                     builder: (context, state) {
                       return CustomizedElevatedButton(
                         () {
-                          if (state is SnackBar) {
-                            ScaffoldMessenger.of(context).showSnackBar(state);
-                          } else {
-                            showDialog(
-                                context: context, builder: (context) => state);
-                          }
+                            context.read<CubitInputCheckValid>().checkValidSignUp(context);
+                            if(state is SnackBar){
+                              ScaffoldMessenger.of(context).showSnackBar(state);
+                            }
                         },
                         ConstantText.CONTINUE[ConstantText.index],
                         Icons.keyboard_arrow_right,
