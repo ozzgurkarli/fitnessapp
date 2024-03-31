@@ -20,6 +20,7 @@ class ConstantText {
   static const List<String> RESETMAILSENTFAIL = ["An error occurred while sending the password reset link to the email. \r\n\r\nMessage: ", "Parola sıfırlama linki e-postaya gönderilirken bir hata oluştu. \r\n\r\nMesaj: "];
   static const List<String> SIGNINERROR = ["An error occurred while logging in. \r\n\r\nMessage: ", "Giriş yapılırken bir hata meydana geldi. \r\n\r\nMesaj: "];
   static const List<String> SIGNUPERROR = ["An error occurred while creating the account. \r\n\r\nMessage: ", "Hesap oluşturulurken bir hata meydana geldi. \r\n\r\nMesaj: "];
+  static const List<String> USERNOTFOUND = ["User not found.", "Kullanıcı bulunamadı."];
 
   static const List<String> NAME = ["Name", "Ad"];
   static const List<String> SURNAME = ["Surname", "Soyad"];

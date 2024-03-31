@@ -2,10 +2,8 @@
 
 import 'dart:convert';
 
-import 'package:darq/darq.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
-import 'package:fitnessapp/common/constants/idCountTypes.dart';
 import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/presentation/basic/ground.dart';
@@ -35,10 +33,33 @@ class CubitInputCheckValid extends Cubit<Widget> {
         mail.split('.').length > 1 &&
         password.length == 6) {
       await Future<void>.delayed(const Duration(milliseconds: 50));
-      try {
-        await auth.signUser(mail, password);
-      } catch (e) {}
-      return;
+      showDialog(
+        context: context,
+        builder: (context) => const Center(child: Loading()),
+      );
+
+      bool success = true;
+      success = await loginUser(context, mail, password);
+
+      if (success) {
+        Navigator.pop(context);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => const Ground()),
+            (route) => false);
+      } 
+    }
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          margin: EdgeInsets.all(Sizes.height / 20),
+          content: Align(
+              alignment: Alignment.center,
+              child: Text(ConstantText.FILLALLFIELDS[ConstantText.index])),
+          backgroundColor: ColorC.foregroundColor,
+          showCloseIcon: true,
+          closeIconColor: ColorC.thirdColor,
+          behavior: SnackBarBehavior.floating,
+        ));
     }
   }
 
@@ -52,7 +73,7 @@ class CubitInputCheckValid extends Cubit<Widget> {
         SignUp.birthDateController.text.length > 1) {
       showDialog(
         context: context,
-        builder: (context) =>  const Center(child: Loading()),
+        builder: (context) => const Center(child: Loading()),
       );
 
       if (SignUp.nameController.text.isNotEmpty) {
@@ -62,14 +83,15 @@ class CubitInputCheckValid extends Cubit<Widget> {
         if (success) {
           Navigator.pop(context);
           Navigator.pushAndRemoveUntil(
-              context, MaterialPageRoute(builder: (context) => const Ground()), (route) => false);
+              context,
+              MaterialPageRoute(builder: (context) => const Ground()),
+              (route) => false);
         }
       }
-      emit(const Placeholder());
       return;
     }
-
-    emit(SnackBar(
+    else{
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       margin: EdgeInsets.all(Sizes.height / 20),
       content: Align(
           alignment: Alignment.center,
@@ -79,6 +101,85 @@ class CubitInputCheckValid extends Cubit<Widget> {
       closeIconColor: ColorC.thirdColor,
       behavior: SnackBarBehavior.floating,
     ));
+    }
+  }
+
+  Future<bool> loginUser(
+      BuildContext context, String mail, String password) async {
+    try {
+      await auth.signUser(mail, password);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text(ConstantText.SIGNINERROR[ConstantText.index] + e.code)),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
+      return false;
+    } catch (e) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text("${ConstantText.SIGNINERROR[ConstantText.index]}null")),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
+      return false;
+    }
+
+    http.Response response = await dbUser.loginUser(ModelUser(
+        0,
+        SignUp.nameController.text,
+        SignUp.surnameController.text,
+        SignUp.emailController.text,
+        SignUp.birthDateController.text,
+        SignUp.genderController,
+        SignUp.invitationCodeController.text));
+
+    if (response.statusCode <= 299) {
+      Pool.user = ModelUser.fromJson(json.decode(response.body));
+    } else {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text(
+                "${ConstantText.SIGNINERROR[ConstantText.index]} + ${response.body}")),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
+      return false;
+    }
+
+    if (Pool.user.id == null) {
+      Navigator.pop(context);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text(
+                "${ConstantText.SIGNINERROR[ConstantText.index]} + ${response.body}")),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
+      return false;
+    }
+
+    return true;
   }
 
   Future<bool> insertUser(BuildContext context) async {
@@ -123,7 +224,6 @@ class CubitInputCheckValid extends Cubit<Widget> {
 
     if (response.statusCode <= 299) {
       Pool.user = ModelUser.fromJson(json.decode(response.body));
-      
     } else {
       Navigator.pop(context);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

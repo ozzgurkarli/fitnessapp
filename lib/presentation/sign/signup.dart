@@ -34,7 +34,6 @@ class _SignUpState extends State<SignUp> {
     context.read<CubitDropdownHeightItems>().listOfHeights();
     context.read<CubitDropdownKgItems>().listOfKgs();
     context.read<CubitDropdownFrequencyItems>().listOfFrequencies();
-    context.read<CubitInputCheckValid>().checkValidSignUp(context);
 
     return GestureDetector(
       onTap: () {

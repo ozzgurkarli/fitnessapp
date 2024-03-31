@@ -31,7 +31,6 @@ class BottomNavBar extends StatelessWidget {
             onTabChange: (value) => onTabChange!(value),
             tabs:  [
               GButton(
-                style: GnavStyle.google,
                 icon: Icons.fitness_center_outlined,
                 text: ConstantText.MYWORKOUTS[ConstantText.index],
               ),

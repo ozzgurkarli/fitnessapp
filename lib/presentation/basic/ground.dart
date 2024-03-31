@@ -1,6 +1,7 @@
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/database/databaseuser.dart';
 import 'package:fitnessapp/presentation/main/movecatalog.dart';
+import 'package:fitnessapp/presentation/main/statics.dart';
 import 'package:fitnessapp/presentation/main/workouts.dart';
 import 'package:fitnessapp/widgets/packagenavbar.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +25,9 @@ class _HomeState extends State<Ground> {
 
   late final List<Widget> pages = [
     const Workouts(),
-    const Workouts(),
+    const Statics(),
     const MoveCatalog(),
-    const Workouts(),
+    const Statics(),
   ];
 
   DatabaseUser db = DatabaseUser();

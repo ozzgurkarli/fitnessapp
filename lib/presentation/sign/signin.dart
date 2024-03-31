@@ -65,10 +65,10 @@ class _SignInState extends State<SignIn> {
                     height: Sizes.height / 17,
                   ),
                   CustomizedElevatedButton(() async {
-                    // context
-                    //     .read<CubitInputCheckValid>()
-                    //     .checkValidSignInHelper(context,
-                    //         emailController.text, passwordController.text);
+                    context
+                        .read<CubitInputCheckValid>()
+                        .checkValidSignIn(context,
+                            emailController.text, passwordController.text);
                   },
                       ConstantText.SIGNIN[ConstantText.index],
                       Icons.keyboard_arrow_right,
