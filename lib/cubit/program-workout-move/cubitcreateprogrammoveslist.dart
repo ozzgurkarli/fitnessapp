@@ -206,11 +206,11 @@ class CubitCreateProgramMovesList extends Cubit<void> {
         
     int programId = await dbCount.getCountAndIncrease(IDCountTypes.programId);
     ModelProgram program = ModelProgram(
-        Pool.user.id!, programId, controller.text, Timestamp.fromDate(DateTime.now()));
+        Pool.user.id!, programId, controller.text);
     List<ModelProgramMove> mList = listProgram();
 
     for (int i = 0; i < mList.length; i++) {
-      insertProgramMove(mList[i], programId, i);
+      insertProgramMove(program, mList[i], programId, i);
     }
 
     dbProgram.insertProgram(program);
@@ -218,11 +218,11 @@ class CubitCreateProgramMovesList extends Cubit<void> {
   }
 
   void insertProgramMove(
-      ModelProgramMove pMove, int programId, int index) async {
+      ModelProgram program, ModelProgramMove pMove, int programId, int index) async {
     pMove.programId = programId;
     pMove.index = index;
 
-    dbProgramMove.insertMove(pMove);
+    program.moves == null ? program.moves = [pMove] : program.moves!.add(pMove);
   }
 
   void clearList() {

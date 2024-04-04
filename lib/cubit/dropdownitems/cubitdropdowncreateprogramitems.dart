@@ -120,7 +120,7 @@ class CubitDropdownProgramItems extends Cubit<void> {
           if (fList.hasData) {
             list = fList.data!;
             list.sort(
-              (a, b) => b.recordDate.compareTo(a.recordDate),
+              (a, b) => b.programId.compareTo(a.programId),
             );
             return Center(
               child: SizedBox(

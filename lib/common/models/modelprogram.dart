@@ -1,20 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitnessapp/common/models/modelprogrammove.dart';
 
 class ModelProgram
 {
   int userId;
   int programId;
   String programName;
-  Timestamp recordDate;
+  List? moves;
 
-  ModelProgram(this.userId, this.programId, this.programName, this.recordDate);
+  ModelProgram(this.userId, this.programId, this.programName, {this.moves});
 
   factory ModelProgram.fromJson(Map<dynamic, dynamic> json) {
     return ModelProgram(
         json["userId"] as int,
         json["programId"] as int,
         json["programName"] as String,
-        json["recordDate"] as Timestamp);
+        moves: json["programName"] as List);
   }
 
   Map<String, dynamic> toJson() {
@@ -22,7 +23,7 @@ class ModelProgram
       "userId": userId,
       "programId": programId,
       "programName": programName,
-      "recordDate": recordDate
+      "moves": moves
     };
   }
 }
