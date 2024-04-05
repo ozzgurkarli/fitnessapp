@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/idcounttypes.dart';
+import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelprogrammove.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
@@ -114,13 +115,10 @@ class CubitDropdownProgramItems extends Cubit<void> {
     showDialog(
       context: context,
       barrierColor: Colors.black87,
-      builder: (context) => FutureBuilder(
-        future: dbProgram.getProgramsById(userId),
-        builder: (context, fList) {
-          if (fList.hasData) {
-            list = fList.data!;
+      builder: (context){
+        list = Pool.programs;
             list.sort(
-              (a, b) => b.programId.compareTo(a.programId),
+              (a, b) => b.id.compareTo(a.id),
             );
             return Center(
               child: SizedBox(
@@ -140,12 +138,12 @@ class CubitDropdownProgramItems extends Cubit<void> {
                               dbWorkout.insertExercise(ModelWorkout(
                                   workoutId,
                                   userId,
-                                  list[index].programId,
+                                  list[index].id,
                                   list[index].programName,
                                   Timestamp.now(),
                                   false));
                               insertWorkoutMoves(
-                                  list[index].programId, workoutId);
+                                  list[index].id, workoutId);
                               Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
@@ -170,13 +168,7 @@ class CubitDropdownProgramItems extends Cubit<void> {
                 ),
               ),
             );
-          } else if (ConnectionState.waiting == fList.connectionState) {
-            return const Center(child: Loading());
-          } else {
-            return const Loading();
-          }
-        },
-      ),
+      }
     );
   }
 

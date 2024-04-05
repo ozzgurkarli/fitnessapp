@@ -13,13 +13,11 @@ class DatabaseProgram
 
     final uri = Uri.parse("${Pool.connectionString}/Program/Create");
     late http.Response response;
-    var xxx = program.toJson();
-    String encodedjs = json.encode(xxx);
-    String encoded = json.encode(program.toJson());
+
     try{
       response = await http.post(uri, headers: <String, String>{
         'Content-type':'application/json; charset=UTF-8'
-      },body: json.encode(program));
+      },body: json.encode(program.toJson()));
     }
     catch(e){
       return response;
@@ -28,14 +26,24 @@ class DatabaseProgram
     return response;
   }
 
-  Future<List<ModelProgram>> getProgramsById(int userId)async{
-    List<ModelProgram> list = [];
-    await refProgram.where("userId", isEqualTo: userId).get().then((value){
-      for(var inf in value.docs){
-        list.add(ModelProgram.fromJson(inf.data()));
-      }
-    });
+  Future<http.Response?> getProgramsById(int userId)async{
 
-    return list;
+    if(Pool.programs.isNotEmpty){
+      return null;
+    }
+
+    final uri = Uri.parse("${Pool.connectionString}/Program/GetProgramsByUserId?id=$userId");
+    late http.Response response;
+
+    try{
+      response = await http.get(uri, headers: <String, String>{
+        'Content-type':'application/json; charset=UTF-8'
+      });
+    }
+    catch(e){
+      return response;
+    }
+
+    return response;
   }
 }

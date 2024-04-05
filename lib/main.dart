@@ -6,6 +6,7 @@ import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownlanguage.dart';
 import 'package:fitnessapp/cubit/dropdownitems/cubitdropdownmoves.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitbulkcounter.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitmove.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitprogram.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogrammoveslist.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogramscreenproperties.dart';
@@ -99,6 +100,8 @@ class MyApp extends StatelessWidget {
                     create: (context) => CubitWorkoutHistory()),
                 BlocProvider(
                     create: (context) => CubitBulkCounter()),
+                BlocProvider(
+                    create: (context) => CubitProgram()),
               ],
               child: MaterialApp(
                 debugShowCheckedModeBanner: false,

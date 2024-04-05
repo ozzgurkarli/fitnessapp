@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
@@ -16,6 +18,7 @@ import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/presentation/helpers/createprogrampage.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CubitCreateProgramMovesList extends Cubit<void> {
@@ -161,7 +164,7 @@ class CubitCreateProgramMovesList extends Cubit<void> {
   }
 
   void createProgram(BuildContext context) async {
-    if(list.isEmpty){
+    if (list.isEmpty) {
       return;
     }
     TextEditingController controller = TextEditingController();
@@ -171,8 +174,12 @@ class CubitCreateProgramMovesList extends Cubit<void> {
         builder: (context) {
           return AlertDialog(
             backgroundColor: ColorC.backgroundColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            title: Text(ConstantText.PROGRAMNAME[ConstantText.index], style: TextStyle(color: ColorC.textColor),),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            title: Text(
+              ConstantText.PROGRAMNAME[ConstantText.index],
+              style: TextStyle(color: ColorC.textColor),
+            ),
             content: TextField(
               autofocus: true,
               textCapitalization: TextCapitalization.words,
@@ -199,30 +206,57 @@ class CubitCreateProgramMovesList extends Cubit<void> {
                           BorderSide(width: 3, color: ColorC.foregroundColor))),
             ),
             actions: [
-              CustomizedElevatedButton(() {Navigator.pop(context); }, ConstantText.COMPLETE[ConstantText.index], Icons.check, 20, MainAxisAlignment.center, customWidth: Sizes.width/3.5,)
+              CustomizedElevatedButton(
+                () {
+                  Navigator.pop(context);
+                },
+                ConstantText.COMPLETE[ConstantText.index],
+                Icons.check,
+                20,
+                MainAxisAlignment.center,
+                customWidth: Sizes.width / 3.5,
+              )
             ],
           );
         });
-        
-    int programId = await dbCount.getCountAndIncrease(IDCountTypes.programId);
-    ModelProgram program = ModelProgram(
-        Pool.user.id!, programId, controller.text);
+
+    ModelProgram program = ModelProgram(0, Pool.user.id!, controller.text);
     List<ModelProgramMove> mList = listProgram();
 
     for (int i = 0; i < mList.length; i++) {
-      insertProgramMove(program, mList[i], programId, i);
+      insertProgramMove(program, mList[i], i);
     }
 
-    dbProgram.insertProgram(program);
-    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>const Ground()), (route) => false);
+    http.Response response = await dbProgram.insertProgram(program);
+    if (response.statusCode <= 299) {
+      Pool.programs.add(ModelProgram.fromJson(json.decode(response.body)));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        margin: EdgeInsets.all(Sizes.height / 20),
+        content: Align(
+            alignment: Alignment.center,
+            child: Text(
+                "${ConstantText.SIGNINERROR[ConstantText.index]} + ${response.body}")),
+        backgroundColor: ColorC.foregroundColor,
+        showCloseIcon: true,
+        closeIconColor: ColorC.thirdColor,
+        behavior: SnackBarBehavior.floating,
+      ));
+    }
+    Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => const Ground()),
+        (route) => false);
   }
 
   void insertProgramMove(
-      ModelProgram program, ModelProgramMove pMove, int programId, int index) async {
-    pMove.programId = programId;
+      ModelProgram program, ModelProgramMove pMove, int index) async {
     pMove.index = index;
+    pMove.programId = 0;
 
-    program.moves == null ? program.moves = [pMove] : program.moves!.add(pMove);
+    program.programMoves == null
+        ? program.programMoves = [pMove]
+        : program.programMoves!.add(pMove);
   }
 
   void clearList() {

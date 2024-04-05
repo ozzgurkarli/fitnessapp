@@ -1,10 +1,12 @@
 import 'package:fitnessapp/common/constants/colors.dart';
+import 'package:fitnessapp/cubit/program-workout-move/cubitprogram.dart';
 import 'package:fitnessapp/database/databaseuser.dart';
 import 'package:fitnessapp/presentation/main/movecatalog.dart';
 import 'package:fitnessapp/presentation/main/statics.dart';
 import 'package:fitnessapp/presentation/main/workouts.dart';
 import 'package:fitnessapp/widgets/packagenavbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Ground extends StatefulWidget {
   const Ground({super.key});
@@ -33,6 +35,7 @@ class _HomeState extends State<Ground> {
   DatabaseUser db = DatabaseUser();
   @override
   Widget build(BuildContext context) {
+    context.read<CubitProgram>().getPrograms(context);
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
       bottomNavigationBar: BottomNavBar(onTabChange: (index) => NavigateBottomBar(index),),

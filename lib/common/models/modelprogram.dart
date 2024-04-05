@@ -3,27 +3,29 @@ import 'package:fitnessapp/common/models/modelprogrammove.dart';
 
 class ModelProgram
 {
+  int id;
   int userId;
-  int programId;
   String programName;
-  List? moves;
+  List? programMoves;
+  DateTime? recordDate;
 
-  ModelProgram(this.userId, this.programId, this.programName, {this.moves});
+  ModelProgram( this.id, this.userId, this.programName,{this.programMoves, this.recordDate});
 
   factory ModelProgram.fromJson(Map<dynamic, dynamic> json) {
     return ModelProgram(
+        json["id"] as int,
         json["userId"] as int,
-        json["programId"] as int,
         json["programName"] as String,
-        moves: json["programName"] as List);
+        recordDate: DateTime.tryParse(json["recordDate"] as String),
+        programMoves: json["programMoves"] as List);
   }
 
   Map<String, dynamic> toJson() {
     return {
+      "Id": id,
       "userId": userId,
-      "programId": programId,
       "programName": programName,
-      "moves": moves
+      "programMoves": programMoves
     };
   }
 }
