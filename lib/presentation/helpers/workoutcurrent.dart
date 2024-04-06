@@ -3,6 +3,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
+import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
 import 'package:fitnessapp/common/models/modelworkoutmove.dart';
@@ -55,7 +56,7 @@ class _WorkoutCurrentState extends State<WorkoutCurrent> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextLiquidFill(
-              text: WorkoutCurrent.workout.programName,
+              text: Pool.lastWorkout.programName!,
               waveColor: ColorC.backgroundColor,
               boxBackgroundColor: ColorC.thirdColor,
               textStyle: const TextStyle(

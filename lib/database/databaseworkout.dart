@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
+import 'package:http/http.dart' as http;
 
 class DatabaseWorkout {
   var refWorkout = FirebaseFirestore.instance.collection("WORKOUT");
@@ -8,24 +10,42 @@ class DatabaseWorkout {
     refWorkout.doc().set(exercise.toJson());
   }
 
-  Future<List<ModelWorkout>?> getWorkoutsLast12Hour(int userId) async {
-    List<ModelWorkout> list = [];
-    await refWorkout
-        .where("userId", isEqualTo: userId)
-        .where("recordDate",
-            isGreaterThan: Timestamp.fromDate(
-                DateTime.now().add(const Duration(hours: -12))))
-        .get()
-        .then((value) {
-      for (var inf in value.docs) {
-        list.add(ModelWorkout.fromJson(inf.data()));
-      }
-    });
+  Future<http.Response> insertWorkoutByProgramId(int programId)async{
 
-    if(list.isNotEmpty){
-      return list;
+    final uri = Uri.parse('${Pool.connectionString}/Workout/CreateByProgramId?id=$programId');
+    late http.Response response;
+
+    try{
+      response = await http.post(uri, headers: <String, String>{
+        'Content-type':'application/json; charset=UTF-8'
+      });
     }
-    return null;
+    catch(e){
+      return response;
+    }
+
+    return response;
+  }
+
+  Future<http.Response?> getWorkoutLast12Hour(int userId)async{
+    if(Pool.workoutSearched){
+      return null;
+    }
+
+    final uri = Uri.parse('${Pool.connectionString}/Workout/GetWorkoutInLast12Hour?id=$userId');
+    late http.Response response;
+
+    try{
+      response = await http.get(uri, headers: <String, String>{
+        'Content-type':'application/json; charset=UTF-8'
+      });
+    }
+    catch(e){
+      return response;
+    }
+
+    Pool.workoutSearched = true;
+    return response;
   }
 
   Future<List<ModelWorkout>> getWorkoutsAll(int userId) async {

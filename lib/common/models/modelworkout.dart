@@ -1,28 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ModelWorkout {
-  int workoutId;
-  int userId;
-  int programId;
-  String programName;
-  Timestamp recordDate;
-  bool completed;
+  int id;
+  int? userId;
+  int? programId;
+  String? programName;
+  List? workoutMoves;
+  DateTime? recordDate;
+  bool? completed;
   int? duration;
 
-  ModelWorkout(this.workoutId, this.userId, this.programId, this.programName, this.recordDate,
-      this.completed,
-      {this.duration});
+  ModelWorkout(this.id,
+      {this.userId, this.programId, this.programName,
+      this.completed,this.duration, this.workoutMoves, this.recordDate,});
 
   factory ModelWorkout.fromJson(Map<dynamic, dynamic> json) {
     var ex = ModelWorkout(
-        json["workoutId"] as int,
-        json["userId"] as int,
-        json["programId"] as int,
-        json["programName"] as String,
-        json["recordDate"] as Timestamp,
-        json["completed"] as bool);
+        json["id"] as int,
+        userId: json["userId"] as int,
+        programId: json["programId"] as int,
+        programName: json["programName"] as String,
+        completed: json["completed"] as bool,
+        recordDate: DateTime.tryParse(json["recordDate"] as String),
+        workoutMoves: json["workoutMoves"] as List);
 
-    if(ex.completed){
+    if(ex.completed!){
       ex.duration = json["duration"] as int;
     }
 
@@ -31,7 +33,7 @@ class ModelWorkout {
 
   Map<String, dynamic> toJson() {
     return {
-      "workoutId": workoutId,
+      "Id": id,
       "userId": userId,
       "programId": programId,
       "programName": programName,

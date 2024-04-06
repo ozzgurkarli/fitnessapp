@@ -28,7 +28,7 @@ class DatabaseProgram
 
   Future<http.Response?> getProgramsById(int userId)async{
 
-    if(Pool.programs.isNotEmpty){
+    if(Pool.programsSearched){
       return null;
     }
 
@@ -44,6 +44,7 @@ class DatabaseProgram
       return response;
     }
 
+    Pool.programsSearched = true;
     return response;
   }
 }
