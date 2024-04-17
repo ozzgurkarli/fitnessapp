@@ -179,23 +179,4 @@ class CubitDropdownProgramItems extends Cubit<void> {
       }
     );
   }
-
-  void insertWorkoutMoves(int programId, int workoutId) async {
-    List<ModelProgramMove> pList =
-        await dbProgramMove.getProgramMoves(programId);
-
-    for (int i = 0; i < pList.length; i++) {
-      dbWorkoutMove.insertMove(ModelWorkoutMove(
-        pList[i].muscle,
-        pList[i].index,
-        workoutId: workoutId,
-        moveId: pList[i].moveId,
-        moveName: pList[i].moveName,
-        duration: 0,
-        repeat: 0,
-        weight: 0,
-        setCount: 0
-      ));
-    }
-  }
 }

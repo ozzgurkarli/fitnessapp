@@ -18,7 +18,7 @@ class CubitProgram extends Cubit<void> {
   DatabaseProgram dbProgram = DatabaseProgram();
 
   void getPrograms(BuildContext context) async {
-    http.Response? response = await dbProgram.getProgramsById(Pool.user.id!);
+    http.Response? response = await dbProgram.getProgramsByUserId(Pool.user.id!);
 
     if (response != null) {
       if (response.statusCode <= 299) {

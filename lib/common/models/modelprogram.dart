@@ -1,5 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fitnessapp/common/models/modelprogrammove.dart';
+// ignore_for_file: empty_catches
 
 class ModelProgram
 {
@@ -12,12 +11,20 @@ class ModelProgram
   ModelProgram( this.id, this.userId, this.programName,{this.programMoves, this.recordDate});
 
   factory ModelProgram.fromJson(Map<dynamic, dynamic> json) {
-    return ModelProgram(
+    ModelProgram model = ModelProgram(
         json["id"] as int,
         json["userId"] as int,
         json["programName"] as String,
-        recordDate: DateTime.tryParse(json["recordDate"] as String),
-        programMoves: json["programMoves"] as List);
+        recordDate: DateTime.tryParse(json["recordDate"] as String));
+
+    try{
+      model.programMoves = json["programMoves"] as List;
+    }
+    catch(e){
+      return model;
+    }
+
+    return model;
   }
 
   Map<String, dynamic> toJson() {
