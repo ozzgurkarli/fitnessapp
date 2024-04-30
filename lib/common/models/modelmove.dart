@@ -1,19 +1,22 @@
 class ModelMove{
-  ModelMove(this.moveId, this.moveName);
+  ModelMove(this.id, this.moveName, this.muscle);
 
-  int moveId;
+  int id;
   String moveName;
+  String muscle;
 
   factory ModelMove.fromJson(Map<dynamic, dynamic> json) {
     return ModelMove(
-        json["moveId"] as int,
-        json["moveName"] as String);
+        json["id"] as int,
+        json["moveName"] as String,
+        json["muscle"] as String);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "moveId": moveId,
+      "id": id,
       "moveName": moveName,
+      "muscle": muscle
     };
   }
 }

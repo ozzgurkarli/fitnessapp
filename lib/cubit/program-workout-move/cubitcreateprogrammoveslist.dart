@@ -107,8 +107,6 @@ class CubitCreateProgramMovesList extends Cubit<void> {
       return;
     }
     list.add(ModelProgramMove(muscle, indexCounter++, moveName: moveName));
-    list[indexCounter - 1].moveId =
-        await findIdByMoveName(list[indexCounter - 1], moveName!);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       margin: EdgeInsets.all(Sizes.height / 20),
       content: Align(
@@ -266,10 +264,6 @@ class CubitCreateProgramMovesList extends Cubit<void> {
 
   Future<int> findIdByMoveName(ModelProgramMove item, String moveName) async {
     return await dbMove.getIdByMoveName(item, moveName);
-  }
-
-  Future<String> findNameByMoveId(ModelProgramMove item) async {
-    return await dbMove.getNameByMoveId(item);
   }
 
   List<ModelProgramMove> listProgram() {

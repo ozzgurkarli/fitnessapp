@@ -28,7 +28,7 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
   bool lastPage = false;
   @override
   Widget build(BuildContext context) {
-    context.read<CubitDropDownMoves>().listOfMoves(widget.label[0]);
+    context.read<CubitDropDownMoves>().listOfMoves(context, widget.label[0]);
     widget.label[0] == ConstantText.CARDIO[0]
         ? lastPage = true
         : lastPage = false;
@@ -53,7 +53,7 @@ class _CreateProgramPageState extends State<CreateProgramPage> {
               FutureBuilder(
                 future: context
                     .read<CubitDropDownMoves>()
-                    .listOfMoves(widget.label[0]),
+                    .listOfMoves(context, widget.label[0]),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return DropDownMove(snapshot.data!);

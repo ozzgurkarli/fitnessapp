@@ -19,7 +19,7 @@ class MuscleCatalog extends StatefulWidget {
 class _MuscleCatalogState extends State<MuscleCatalog> {
   @override
   Widget build(BuildContext context) {
-    context.read<CubitMove>().getMovesByMuscle(widget.muscleName[0]);
+    context.read<CubitMove>().getMovesByMuscle(context, widget.muscleName[0]);
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
       appBar: AppBar(
@@ -34,7 +34,7 @@ class _MuscleCatalogState extends State<MuscleCatalog> {
             SafeArea(child: BlocBuilder<CubitMove, List<ModelMove>>(
                 builder: (context, moveList) {
               moveList.sort(
-                (a, b) => a.moveId.compareTo(b.moveId),
+                (a, b) => a.id.compareTo(b.id),
               );
               return SizedBox(
                 width: Sizes.width / 1.6,

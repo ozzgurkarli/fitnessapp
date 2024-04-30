@@ -1,14 +1,11 @@
 import 'dart:convert';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/models/modelprogram.dart';
 import 'package:http/http.dart' as http;
 
 class DatabaseProgram
 {
-  var refProgram = FirebaseFirestore.instance.collection("PROGRAM");
-
   Future<http.Response> insertProgram(ModelProgram program)async{
 
     final uri = Uri.parse("${Pool.connectionString}/Program/Create");
@@ -26,7 +23,7 @@ class DatabaseProgram
     return response;
   }
 
-  Future<http.Response?> getProgramsById(int userId)async{
+  Future<http.Response?> getProgramsByUserId(int userId)async{
 
     if(Pool.programsSearched){
       return null;
