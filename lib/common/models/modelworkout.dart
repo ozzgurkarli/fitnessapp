@@ -15,8 +15,7 @@ class ModelWorkout {
       this.completed,this.duration, this.workoutMoves, this.recordDate,});
 
   factory ModelWorkout.fromJson(Map<dynamic, dynamic> json) {
-    var ex = ModelWorkout(
-        json["id"] as int,
+    var ex = ModelWorkout(0,
         userId: json["userId"] as int,
         programId: json["programId"] as int,
         programName: json["programName"] as String,
@@ -24,6 +23,12 @@ class ModelWorkout {
         recordDate: DateTime.tryParse(json["recordDate"] as String),
         workoutMoves: json["workoutMoves"] as List);
 
+    try{
+          ex.id = json["workoutId"] as int;
+        }
+        catch(e){
+          ex.id = json["id"] as int;
+        }
     if(ex.completed!){
       ex.duration = json["duration"] as int;
     }
@@ -33,7 +38,7 @@ class ModelWorkout {
 
   Map<String, dynamic> toJson() {
     return {
-      "Id": id,
+      "workoutId": id,
       "userId": userId,
       "programId": programId,
       "programName": programName,

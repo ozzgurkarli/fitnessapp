@@ -14,7 +14,6 @@ import 'package:fitnessapp/common/models/modelprogram.dart';
 import 'package:fitnessapp/common/models/modelworkoutmove.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitcreateprogrammoveslist.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
-import 'package:fitnessapp/database/databaseprogrammove.dart';
 import 'package:fitnessapp/database/databaseworkout.dart';
 import 'package:fitnessapp/database/databaseidcount.dart';
 import 'package:fitnessapp/database/databaseprogram.dart';
@@ -36,7 +35,6 @@ class CubitDropdownProgramItems extends Cubit<void> {
   DatabaseProgram dbProgram = DatabaseProgram();
   DatabaseWorkout dbWorkout = DatabaseWorkout();
   DatabaseIDCount dbIdCount = DatabaseIDCount();
-  DatabaseProgramMove dbProgramMove = DatabaseProgramMove();
   DatabaseWorkoutMove dbWorkoutMove = DatabaseWorkoutMove();
   SPChanges spChanges = SPChanges();
 

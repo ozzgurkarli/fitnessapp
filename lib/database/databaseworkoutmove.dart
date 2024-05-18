@@ -5,9 +5,6 @@ class DatabaseWorkoutMove
 {
   var refWorkoutMove = FirebaseFirestore.instance.collection("WORKOUT-MOVE");
 
-  void insertMove(ModelWorkoutMove move){
-    refWorkoutMove.doc().set(move.toJson());
-  }
 
   Future<List<ModelWorkoutMove>> getWorkoutMoves(int workoutId) async {
     List<ModelWorkoutMove> list = [];

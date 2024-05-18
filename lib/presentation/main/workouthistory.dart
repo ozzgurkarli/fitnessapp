@@ -18,7 +18,7 @@ class WorkoutHistory extends StatefulWidget {
 class _WorkoutHistoryState extends State<WorkoutHistory> {
   @override
   Widget build(BuildContext context) {
-    context.read<CubitWorkoutHistory>().workoutHistoryMap();
+    context.read<CubitWorkoutHistory>().workoutHistoryMap(context);
 
     return Scaffold(
       appBar: AppBar(

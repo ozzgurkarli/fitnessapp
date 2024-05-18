@@ -31,7 +31,7 @@ class CubitProgram extends Cubit<void> {
           content: Align(
               alignment: Alignment.center,
               child: Text(
-                  "${ConstantText.SIGNINERROR[ConstantText.index]} + ${response.body}")),
+                  "${ConstantText.ERROR[ConstantText.index]} + ${response.body}")),
           backgroundColor: ColorC.foregroundColor,
           showCloseIcon: true,
           closeIconColor: ColorC.thirdColor,

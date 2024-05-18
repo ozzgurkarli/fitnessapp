@@ -1,4 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:convert';
+
+import 'package:fitnessapp/common/constants/colors.dart';
+import 'package:fitnessapp/common/constants/constanttext.dart';
+import 'package:fitnessapp/common/constants/size.dart';
+import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:darq/darq.dart';
 import 'package:fitnessapp/common/constants/helpermethods.dart';
 import 'package:fitnessapp/common/constants/pool.dart';
@@ -13,9 +19,31 @@ class CubitWorkoutHistory extends Cubit<Map<String, List<ModelWorkout>>> {
   SPChanges spChanges = SPChanges();
   DatabaseWorkout dbWorkout = DatabaseWorkout();
 
-  void workoutHistoryMap() async {
-    List<ModelWorkout> workoutList =
+  void workoutHistoryMap(BuildContext context) async {
+    List<ModelWorkout> workoutList =[];
+    http.Response? response =
         await dbWorkout.getWorkoutsAll(Pool.user.id!);
+
+    if(response != null){
+      if(response.statusCode <= 299){
+        for(var item in json.decode(response.body)){
+          workoutList.add(ModelWorkout.fromJson(item));
+        }
+      }
+      else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          margin: EdgeInsets.all(Sizes.height / 20),
+          content: Align(
+              alignment: Alignment.center,
+              child: Text(
+                  "${ConstantText.ERROR[ConstantText.index]} + ${response.body}")),
+          backgroundColor: ColorC.foregroundColor,
+          showCloseIcon: true,
+          closeIconColor: ColorC.thirdColor,
+          behavior: SnackBarBehavior.floating,
+        ));
+      }
+    }
     workoutList = workoutList.reversed.toList();
     var workoutIterable = workoutList.groupBy((element) => element.recordDate);
     Map<String, List<ModelWorkout>> workoutMap = {};

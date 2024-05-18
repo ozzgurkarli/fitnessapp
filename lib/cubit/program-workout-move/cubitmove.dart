@@ -39,32 +39,4 @@ class CubitMove extends Cubit<List<ModelMove>>
       }
   }
 
-  int findMuscleId(String muscleName){
-    if(muscleName == ConstantText.ABDOMEN[0]){
-      return Muscle.ABDOMEN;
-    }
-    else if(muscleName == ConstantText.BACK[0]){
-      return Muscle.BACK;
-    }
-    else if(muscleName == ConstantText.BICEPS[0]){
-      return Muscle.BICEPS;
-    }
-    else if(muscleName == ConstantText.CARDIO[0]){
-      return Muscle.CARDIO;
-    }
-    else if(muscleName == ConstantText.CHEST[0]){
-      return Muscle.CHEST;
-    }
-    else if(muscleName == ConstantText.LEG[0]){
-      return Muscle.LEG;
-    }
-    else if(muscleName == ConstantText.SHOULDER[0]){
-      return Muscle.SHOULDER;
-    }
-    else if(muscleName == ConstantText.TRICEPS[0]){
-      return Muscle.TRICEPS;
-    }
-
-    return 99;
-  }
 }

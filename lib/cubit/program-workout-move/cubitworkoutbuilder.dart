@@ -83,7 +83,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
             child: ListTile(
               onTap: () {
                 workoutId = Pool.lastWorkout.id!;
-                WorkoutCurrent.workout = list.first;
+                WorkoutCurrent.workout = Pool.lastWorkout;
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => WorkoutCurrent()));
               },
@@ -98,7 +98,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
                   ),
                   Text(
                     Pool.lastWorkout.completed!
-                        ? HelperMethods.editDuration(list.first.duration!)
+                        ? HelperMethods.editDuration(Pool.lastWorkout.duration!)
                         : ConstantText.NOTCOMPLETED[ConstantText.index],
                     style: const TextStyle(
                         color: ColorC.textColor, fontWeight: FontWeight.w600),
@@ -125,7 +125,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
               child: ListTile(
                 onTap: () {
                   workoutId = Pool.lastWorkout.id!;
-                  WorkoutCurrent.workout = list.first;
+                  WorkoutCurrent.workout = Pool.lastWorkout;
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -142,7 +142,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
                     ),
                     Text(
                       Pool.lastWorkout.completed!
-                          ? HelperMethods.editDuration(list.first.duration!)
+                          ? HelperMethods.editDuration(Pool.lastWorkout.duration!)
                           : ConstantText.NOTCOMPLETED[ConstantText.index],
                       style: const TextStyle(
                           color: ColorC.textColor, fontWeight: FontWeight.w600),

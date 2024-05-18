@@ -48,15 +48,21 @@ class DatabaseWorkout {
     return response;
   }
 
-  Future<List<ModelWorkout>> getWorkoutsAll(int userId) async {
-    List<ModelWorkout> list = [];
-    await refWorkout.where("userId", isEqualTo: userId).get().then((value) {
-      for (var inf in value.docs) {
-        list.add(ModelWorkout.fromJson(inf.data()));
-      }
-    });
+  Future<http.Response?> getWorkoutsAll(int userId) async {
+
+    final uri = Uri.parse('${Pool.connectionString}/Workout/GetWorkoutsByUserId?id=$userId');
+    late http.Response response;
+
+    try{
+      response = await http.get(uri, headers: <String, String>{
+        'Content-type':'application/json; charset=UTF-8'
+      });
+    }
+    catch(e){
+      return response;
+    }
     
-    return list;
+    return response;
   }
 
   Future<bool> deleteWorkout(int workoutId)async{

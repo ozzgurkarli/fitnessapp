@@ -13,7 +13,6 @@ import 'package:fitnessapp/common/models/modelprogrammove.dart';
 import 'package:fitnessapp/database/databaseidcount.dart';
 import 'package:fitnessapp/database/databasemove.dart';
 import 'package:fitnessapp/database/databaseprogram.dart';
-import 'package:fitnessapp/database/databaseprogrammove.dart';
 import 'package:fitnessapp/presentation/basic/ground.dart';
 import 'package:fitnessapp/presentation/helpers/createprogrampage.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
@@ -25,7 +24,6 @@ class CubitCreateProgramMovesList extends Cubit<void> {
   CubitCreateProgramMovesList() : super(List.empty());
 
   DatabaseMove dbMove = DatabaseMove();
-  DatabaseProgramMove dbProgramMove = DatabaseProgramMove();
   DatabaseIDCount dbCount = DatabaseIDCount();
   DatabaseProgram dbProgram = DatabaseProgram();
 
@@ -106,7 +104,7 @@ class CubitCreateProgramMovesList extends Cubit<void> {
     if (!checkValid(moveName, context)) {
       return;
     }
-    list.add(ModelProgramMove(muscle, indexCounter++, moveName: moveName));
+    list.add(ModelProgramMove(muscle, indexCounter++, moveName: moveName, moveId: 0));
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       margin: EdgeInsets.all(Sizes.height / 20),
       content: Align(
@@ -260,10 +258,6 @@ class CubitCreateProgramMovesList extends Cubit<void> {
   void clearList() {
     list.clear();
     indexCounter = 0;
-  }
-
-  Future<int> findIdByMoveName(ModelProgramMove item, String moveName) async {
-    return await dbMove.getIdByMoveName(item, moveName);
   }
 
   List<ModelProgramMove> listProgram() {
