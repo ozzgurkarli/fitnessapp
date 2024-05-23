@@ -78,6 +78,9 @@ class ConstantText {
   static const List<String> LEG = ["Leg", "Bacak"];
   static const List<String> SHOULDER = ["Shoulder", "Omuz"];
   static const List<String> TRICEPS = ["Triceps", "Arka Kol"];
+  
+  static const List<String> WEIGHT = ["Weight", "Ağırlık"];
+  static const List<String> REPEAT = ["Repeat", "Tekrar"];
 
   static const List<String> PROGRAMNAME = ["Program name", "Program adı"];
   static const List<String> SELECTMOVE = ["Select move", "Hareket seç"];
@@ -91,6 +94,10 @@ class ConstantText {
   static const List<String> NOTCOMPLETED = ["Not completed", "Tamamlanmadı"];
   static const List<String> STARTWORKOUT = ["Start workout", "Antrenmana başla"];
   static const List<String> CANCELWORKOUT = ["Cancel workout", "Antrenmanı iptal et"];
+  
+  static const List<String> COMPLETESET = ["Complete Set", "Seti Tamamla"];
+  static const List<String> NEXTMOVE = ["Next Move", "Sonraki Hareket"];
+  static const List<String> PREVIOUSMOVE = ["Previous Move", "Önceki Hareket"];
   
   static const List<String> CURRENTBULK0 = ["Current", "Güncel"];
   static const List<String> CURRENTBULK1 = ["Bulk", "Hacim"];

@@ -25,7 +25,7 @@ class DatabaseUser
   }
 
   Future<http.Response> loginUser(ModelUser user)async{
-
+    user.gender = 0;
     final uri = Uri.parse("${Pool.connectionString}/User/Login");
     late http.Response response;
 

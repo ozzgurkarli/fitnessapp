@@ -186,7 +186,10 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
         if (fList.hasData) {
           list = fList.data!;
           list.sort((a, b) => a.index!.compareTo(b.index!));
-          WorkoutCurrent.moveList = list;
+          WorkoutCurrent.moveList = [];
+          for(var item in Pool.lastWorkout.workoutMoves!){
+            WorkoutCurrent.moveList.add(ModelWorkoutMove.fromJson(item));
+          }
           return page;
         } else {
           return const Center(

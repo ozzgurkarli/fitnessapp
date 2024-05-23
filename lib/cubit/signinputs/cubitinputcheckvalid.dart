@@ -13,6 +13,7 @@ import 'package:fitnessapp/database/_spchanges.dart';
 import 'package:fitnessapp/database/databaseauth.dart';
 import 'package:fitnessapp/database/databaseidcount.dart';
 import 'package:fitnessapp/database/databaseuser.dart';
+import 'package:fitnessapp/presentation/sign/signin.dart';
 import 'package:fitnessapp/presentation/sign/signup.dart';
 import 'package:fitnessapp/widgets/assets.dart';
 import 'package:flutter/material.dart';
@@ -138,12 +139,12 @@ class CubitInputCheckValid extends Cubit<Widget> {
 
     http.Response response = await dbUser.loginUser(ModelUser(
         0,
-        SignUp.nameController.text,
-        SignUp.surnameController.text,
-        SignUp.emailController.text,
-        SignUp.birthDateController.text,
-        SignUp.genderController,
-        SignUp.invitationCodeController.text));
+        "",
+        "",
+        mail,
+        "",
+        0,
+        ""));
 
     if (response.statusCode <= 299) {
       Pool.user = ModelUser.fromJson(json.decode(response.body));
@@ -178,6 +179,8 @@ class CubitInputCheckValid extends Cubit<Widget> {
       ));
       return false;
     }
+    
+    spChanges.insertData(Pool.user.id!, Pool.user.name!);
 
     return true;
   }

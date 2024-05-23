@@ -8,11 +8,6 @@ class DatabaseWorkoutMove
 
   Future<List<ModelWorkoutMove>> getWorkoutMoves(int workoutId) async {
     List<ModelWorkoutMove> list = [];
-    await refWorkoutMove.where("workoutId", isEqualTo: workoutId).get().then((value) {
-      for (var inf in value.docs) {
-        list.add(ModelWorkoutMove.fromJson(inf.data()));
-      }
-    });
     
     return list;
   }

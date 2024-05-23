@@ -21,8 +21,7 @@ class ModelWorkoutMove
         moveName: json["moveName"] as String,
         setCount: json["setCount"] as int,
         repeat: json["repeat"] as int,
-        weight: json["weight"] as double,
-        duration: json["duration"] as int,);
+        weight: json["weight"] as double,);
   }
 
   Map<String, dynamic> toJson() {

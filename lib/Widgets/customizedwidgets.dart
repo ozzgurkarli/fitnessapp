@@ -8,12 +8,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomizedTextField extends StatelessWidget {
-  CustomizedTextField(this.controller, this.labelText, this.obsecure,
+  CustomizedTextField(this.controller, this.labelText, this.obsecure, this.whiteText,
       {super.key});
 
   TextEditingController controller;
   String labelText;
   bool obsecure;
+  bool whiteText;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,7 @@ class CustomizedTextField extends StatelessWidget {
           color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16),
       decoration: InputDecoration(
           labelText: labelText,
+          labelStyle: TextStyle(color: whiteText ? Colors.white: Colors.grey),
           disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(width: 3, color: ColorC.foregroundColor)),
           focusedBorder: const OutlineInputBorder(

@@ -7,6 +7,7 @@ import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
 import 'package:fitnessapp/presentation/helpers/workoutcurrent.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WorkoutCurrentMoves extends StatefulWidget {
@@ -17,6 +18,10 @@ class WorkoutCurrentMoves extends StatefulWidget {
 }
 
 class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
+
+  TextEditingController weightController = TextEditingController();
+  TextEditingController repeatController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +68,7 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
             PageView.builder(
               itemCount: WorkoutCurrent.moveList.length,
               itemBuilder: (context, index) {
-                return currentMove(context, index);
+                return GestureDetector(onTap: () {FocusManager.instance.primaryFocus?.unfocus();}, child: SingleChildScrollView(child: currentMove(context, index)));
               },
             )
           ],
@@ -76,14 +81,32 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
     return Column(
       children: [
         Container(
-            margin: EdgeInsets.only(top: Sizes.height * 6 / 33),
+            margin: EdgeInsets.only(top: Sizes.height * 5 / 33),
             height: Sizes.height / 3.3,
             child: Image.asset(
                 'lib/common/assets/${WorkoutCurrent.moveList[index].muscle}.png')),
+        SizedBox(height: Sizes.height/100,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(WorkoutCurrent.moveList[index].moveName!, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17, color: Colors.white),),
+            IconButton(onPressed: (){}, icon: const Icon(Icons.info_outline, color: Colors.white,))
+          ],
+        ),
+        SizedBox(height: Sizes.height/20,),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(width: Sizes.width/4, child: CustomizedTextField(weightController, "${ConstantText.WEIGHT[ConstantText.index]} (${ConstantText.KG[ConstantText.index]})", true, true)),
+            SizedBox(width: Sizes.width/8,),
+            SizedBox(width: Sizes.width/4, child: CustomizedTextField(weightController, ConstantText.REPEAT[ConstantText.index], true, true)),
+          ],
+        ),
+        SizedBox(height: Sizes.height/50,),
         CustomizedElevatedButton(
           () {},
-          ConstantText.STARTWORKOUT[ConstantText.index],
-          Icons.start,
+          ConstantText.COMPLETESET[ConstantText.index],
+          Icons.check,
           0,
           MainAxisAlignment.spaceBetween,
           customWidth: Sizes.width / 1.6,
@@ -91,10 +114,23 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
           rightTextMargin: Sizes.width * 0.07,
           gradientColor: ColorC.thirdGradient,
         ),
+        SizedBox(height: Sizes.height/20,),
         CustomizedElevatedButton(
           () {},
-          ConstantText.STARTWORKOUT[ConstantText.index],
-          Icons.start,
+          ConstantText.PREVIOUSMOVE[ConstantText.index],
+          Icons.arrow_back,
+          0,
+          MainAxisAlignment.spaceBetween,
+          customWidth: Sizes.width / 1.6,
+          leftTextMargin: Sizes.width * 0.07,
+          rightTextMargin: Sizes.width * 0.07,
+          gradientColor: ColorC.thirdGradient,
+        ),
+        SizedBox(height: Sizes.height/100,),
+        CustomizedElevatedButton(
+          () {},
+          ConstantText.NEXTMOVE[ConstantText.index],
+          Icons.arrow_forward,
           0,
           MainAxisAlignment.spaceBetween,
           customWidth: Sizes.width / 1.6,

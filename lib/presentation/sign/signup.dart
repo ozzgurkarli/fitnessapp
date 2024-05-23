@@ -65,7 +65,7 @@ class _SignUpState extends State<SignUp> {
                           height: Sizes.height / 18,
                           width: Sizes.width / 3.4,
                           child: CustomizedTextField(SignUp.nameController,
-                              ConstantText.NAME[ConstantText.index], false),
+                              ConstantText.NAME[ConstantText.index], false, false),
                         ),
                         SizedBox(
                           width: Sizes.width / 27.2,
@@ -74,7 +74,7 @@ class _SignUpState extends State<SignUp> {
                           height: Sizes.height / 18,
                           width: Sizes.width / 3.4,
                           child: CustomizedTextField(SignUp.surnameController,
-                              ConstantText.SURNAME[ConstantText.index], false),
+                              ConstantText.SURNAME[ConstantText.index], false, false),
                         ),
                       ],
                     ),
@@ -85,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                       height: Sizes.height / 18,
                       width: Sizes.width / 1.6,
                       child: CustomizedTextField(SignUp.emailController,
-                          ConstantText.EMAIL[ConstantText.index], false),
+                          ConstantText.EMAIL[ConstantText.index], false, false),
                     ),
                   ),
                   Padding(
@@ -128,7 +128,7 @@ class _SignUpState extends State<SignUp> {
                       height: Sizes.height / 18,
                       width: Sizes.width / 1.6,
                       child: CustomizedTextField(SignUp.invitationCodeController,
-                          ConstantText.INVITATIONCODE[ConstantText.index], false),
+                          ConstantText.INVITATIONCODE[ConstantText.index], false, false),
                     ),
                   ),
                   SizedBox(
