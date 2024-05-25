@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
@@ -18,12 +20,16 @@ class WorkoutCurrentMoves extends StatefulWidget {
 }
 
 class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
-
   TextEditingController weightController = TextEditingController();
   TextEditingController repeatController = TextEditingController();
 
+  double bulk = 0;
+
+  PageController controller = PageController();
+
   @override
   Widget build(BuildContext context) {
+    context.read<CubitBulkCounter>().currentBulk(bulk);
     return Scaffold(
       backgroundColor: ColorC.thirdColor,
       body: Center(
@@ -47,16 +53,14 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
                         fontFamily: 'Horizon',
                       ),
                       child: BlocBuilder<CubitBulkCounter, String>(
-                          builder: (context, bulk) {
+                          builder: (context, bulkx) {
                         return AnimatedTextKit(
                           pause: const Duration(milliseconds: 300),
                           repeatForever: true,
                           animatedTexts: [
                             RotateAnimatedText(
-                                ConstantText.CURRENTBULK0[ConstantText.index]),
-                            RotateAnimatedText(
                                 ConstantText.CURRENTBULK1[ConstantText.index]),
-                            RotateAnimatedText(bulk),
+                            RotateAnimatedText(bulkx),
                           ],
                         );
                       }),
@@ -67,8 +71,14 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
             ),
             PageView.builder(
               itemCount: WorkoutCurrent.moveList.length,
+              controller: controller,
               itemBuilder: (context, index) {
-                return GestureDetector(onTap: () {FocusManager.instance.primaryFocus?.unfocus();}, child: SingleChildScrollView(child: currentMove(context, index)));
+                return GestureDetector(
+                    onTap: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    },
+                    child: SingleChildScrollView(
+                        child: currentMove(context, index)));
               },
             )
           ],
@@ -78,6 +88,7 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
   }
 
   Widget currentMove(BuildContext context, int index) {
+    bool parseable = false;
     return Column(
       children: [
         Container(
@@ -85,26 +96,93 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
             height: Sizes.height / 3.3,
             child: Image.asset(
                 'lib/common/assets/${WorkoutCurrent.moveList[index].muscle}.png')),
-        SizedBox(height: Sizes.height/100,),
+        SizedBox(
+          height: Sizes.height / 100,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(WorkoutCurrent.moveList[index].moveName!, style: TextStyle(fontWeight: FontWeight.w500, fontSize: 17, color: Colors.white),),
-            IconButton(onPressed: (){}, icon: const Icon(Icons.info_outline, color: Colors.white,))
+            Text(
+              WorkoutCurrent.moveList[index].moveName!,
+              style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 17,
+                  color: Colors.white),
+            ),
+            IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.info_outline,
+                  color: Colors.white,
+                ))
           ],
         ),
-        SizedBox(height: Sizes.height/20,),
+        SizedBox(
+          height: Sizes.height / 20,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(width: Sizes.width/4, child: CustomizedTextField(weightController, "${ConstantText.WEIGHT[ConstantText.index]} (${ConstantText.KG[ConstantText.index]})", true, true)),
-            SizedBox(width: Sizes.width/8,),
-            SizedBox(width: Sizes.width/4, child: CustomizedTextField(weightController, ConstantText.REPEAT[ConstantText.index], true, true)),
+            SizedBox(
+                width: Sizes.width / 4,
+                child: CustomizedTextField(
+                    weightController,
+                    "${ConstantText.WEIGHT[ConstantText.index]} (${ConstantText.KG[ConstantText.index]})",
+                    false,
+                    true,
+                    true)),
+            SizedBox(
+              width: Sizes.width / 8,
+            ),
+            SizedBox(
+                width: Sizes.width / 4,
+                child: CustomizedTextField(
+                    repeatController,
+                    ConstantText.REPEAT[ConstantText.index],
+                    false,
+                    true,
+                    true)),
           ],
         ),
-        SizedBox(height: Sizes.height/50,),
+        SizedBox(
+          height: Sizes.height / 50,
+        ),
         CustomizedElevatedButton(
-          () {},
+          () {
+            parseable = true;
+            try{double.parse(weightController.text);}
+            catch(e){
+              parseable = false;
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                margin: EdgeInsets.all(Sizes.height / 20),
+                content: Align(
+                    alignment: Alignment.center, child: Text(ConstantText.INVALIDWEIGHTTYPE[ConstantText.index])),
+                backgroundColor: ColorC.foregroundColor,
+                showCloseIcon: true,
+                closeIconColor: ColorC.thirdColor,
+                behavior: SnackBarBehavior.floating,
+              ));
+            }
+            try{double.parse(repeatController.text);}
+            catch(e){
+              parseable = false;
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                margin: EdgeInsets.all(Sizes.height / 20),
+                content: Align(
+                    alignment: Alignment.center, child: Text(ConstantText.INVALIDREPEATTYPE[ConstantText.index])),
+                backgroundColor: ColorC.foregroundColor,
+                showCloseIcon: true,
+                closeIconColor: ColorC.thirdColor,
+                behavior: SnackBarBehavior.floating,
+              ));
+            }
+
+            if(parseable){
+              bulk += (double.parse(weightController.text) *
+                  int.parse(repeatController.text));
+              context.read<CubitBulkCounter>().currentBulk(bulk);
+            }
+          },
           ConstantText.COMPLETESET[ConstantText.index],
           Icons.check,
           0,
@@ -114,9 +192,17 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
           rightTextMargin: Sizes.width * 0.07,
           gradientColor: ColorC.thirdGradient,
         ),
-        SizedBox(height: Sizes.height/20,),
+        SizedBox(
+          height: Sizes.height / 20,
+        ),
         CustomizedElevatedButton(
-          () {},
+          index == 0
+              ? null
+              : () {
+                  controller.animateToPage(controller.page!.toInt() - 1,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeIn);
+                },
           ConstantText.PREVIOUSMOVE[ConstantText.index],
           Icons.arrow_back,
           0,
@@ -126,9 +212,17 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
           rightTextMargin: Sizes.width * 0.07,
           gradientColor: ColorC.thirdGradient,
         ),
-        SizedBox(height: Sizes.height/100,),
+        SizedBox(
+          height: Sizes.height / 100,
+        ),
         CustomizedElevatedButton(
-          () {},
+          index == WorkoutCurrent.moveList.length - 1
+              ? null
+              : () {
+                  controller.animateToPage(controller.page!.toInt() + 1,
+                      duration: const Duration(milliseconds: 400),
+                      curve: Curves.easeIn);
+                },
           ConstantText.NEXTMOVE[ConstantText.index],
           Icons.arrow_forward,
           0,

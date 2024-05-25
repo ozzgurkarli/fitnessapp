@@ -47,7 +47,7 @@ class _SignInState extends State<ResetPassword> {
                           height: Sizes.height / 15,
                           width: Sizes.width / 1.6,
                           child: CustomizedTextField(emailController,
-                              ConstantText.EMAIL[ConstantText.index], false, false),
+                              ConstantText.EMAIL[ConstantText.index], false, false, false),
                         ),
                   SizedBox(
                     height: Sizes.height / 7.4,

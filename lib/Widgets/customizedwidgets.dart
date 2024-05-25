@@ -8,19 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomizedTextField extends StatelessWidget {
-  CustomizedTextField(this.controller, this.labelText, this.obsecure, this.whiteText,
+  CustomizedTextField(this.controller, this.labelText, this.obsecure, this.whiteText, this.kboardType,
       {super.key});
 
   TextEditingController controller;
   String labelText;
   bool obsecure;
+  bool kboardType;
   bool whiteText;
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       textCapitalization: TextCapitalization.words,
-      keyboardType: obsecure ? TextInputType.number : TextInputType.text,
+      keyboardType: obsecure ? TextInputType.number : kboardType ? TextInputType.number : TextInputType.text,
       controller: controller,
       onChanged: (value) {
       },

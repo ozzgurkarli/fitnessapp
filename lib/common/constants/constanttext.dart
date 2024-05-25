@@ -34,6 +34,9 @@ class ConstantText {
   static const List<String> CM = ["ft", "cm"];
   static const List<String> HEIGHT = ["Height", "Boy"];
   static const List<String> FREQUENCY = ["Sports frequency", "Spor sıklığı"];
+  
+  static const List<String> INVALIDWEIGHTTYPE = ["Only numbers and the '.' character can be entered in the weight field.", "Ağırlık alanına sadece rakamlar ve '.' karakteri girilebilir."];
+  static const List<String> INVALIDREPEATTYPE = ["Only numbers can be entered in the repeat field.", "Tekrar alanına sadece rakamlar girilebilir."];
 
   static const List<String> COMPLETE = ["Complete", "Tamamla"];
   static const List<String> START = ["Start", "Başla"];
