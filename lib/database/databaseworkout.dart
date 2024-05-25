@@ -1,14 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitnessapp/common/constants/pool.dart';
-import 'package:fitnessapp/common/models/modelworkout.dart';
 import 'package:http/http.dart' as http;
 
 class DatabaseWorkout {
   var refWorkout = FirebaseFirestore.instance.collection("WORKOUT");
-
-  void insertExercise(ModelWorkout exercise) {
-    refWorkout.doc().set(exercise.toJson());
-  }
 
   Future<http.Response> insertWorkoutByProgramId(int programId)async{
 

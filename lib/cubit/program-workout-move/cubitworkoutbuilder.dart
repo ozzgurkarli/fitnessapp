@@ -181,7 +181,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
   void workoutCurrentPage(Widget page) async {
     List<ModelWorkoutMove> list = [];
     emit(FutureBuilder(
-      future: dbWorkoutMove.getWorkoutMoves(workoutId),
+      future: dbWorkoutMove.emptyMethod(),
       builder: (context, fList) {
         if (fList.hasData) {
           list = fList.data!;

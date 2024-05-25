@@ -149,35 +149,8 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
         ),
         CustomizedElevatedButton(
           () {
-            parseable = true;
-            try{double.parse(weightController.text);}
-            catch(e){
-              parseable = false;
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                margin: EdgeInsets.all(Sizes.height / 20),
-                content: Align(
-                    alignment: Alignment.center, child: Text(ConstantText.INVALIDWEIGHTTYPE[ConstantText.index])),
-                backgroundColor: ColorC.foregroundColor,
-                showCloseIcon: true,
-                closeIconColor: ColorC.thirdColor,
-                behavior: SnackBarBehavior.floating,
-              ));
-            }
-            try{double.parse(repeatController.text);}
-            catch(e){
-              parseable = false;
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                margin: EdgeInsets.all(Sizes.height / 20),
-                content: Align(
-                    alignment: Alignment.center, child: Text(ConstantText.INVALIDREPEATTYPE[ConstantText.index])),
-                backgroundColor: ColorC.foregroundColor,
-                showCloseIcon: true,
-                closeIconColor: ColorC.thirdColor,
-                behavior: SnackBarBehavior.floating,
-              ));
-            }
-
-            if(parseable){
+            if(context.read<CubitBulkCounter>().addBulk(context, WorkoutCurrent.moveList[index], weightController.text, repeatController.text)){
+              
               bulk += (double.parse(weightController.text) *
                   int.parse(repeatController.text));
               context.read<CubitBulkCounter>().currentBulk(bulk);

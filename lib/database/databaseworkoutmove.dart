@@ -4,9 +4,8 @@ import 'package:fitnessapp/common/models/modelworkoutmove.dart';
 class DatabaseWorkoutMove
 {
   var refWorkoutMove = FirebaseFirestore.instance.collection("WORKOUT-MOVE");
-
-
-  Future<List<ModelWorkoutMove>> getWorkoutMoves(int workoutId) async {
+  
+  Future<List<ModelWorkoutMove>> emptyMethod() async {
     List<ModelWorkoutMove> list = [];
     
     return list;
