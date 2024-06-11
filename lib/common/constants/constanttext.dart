@@ -73,6 +73,8 @@ class ConstantText {
   static const List<String> ADDFROMPROGRAMS = ["Add from my programs", "Programlarımdan ekle"];
   static const List<String> ADDPROGRAMTODAY = ["Add workout to day", "Güne antrenman ekle"];
 
+  static const List<String> CONNECTIONREFUSED = ["Connection Refused.", "Bağlantı Reddedildi."];
+
   static const List<String> ABDOMEN = ["Abdomen", "Karın"];
   static const List<String> BACK = ["Back", "Sırt"];
   static const List<String> BICEPS = ["Biceps", "Ön Kol"];

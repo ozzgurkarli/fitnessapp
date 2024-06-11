@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/models/modeluser.dart';
 import 'package:http/http.dart' as http;
@@ -44,7 +45,7 @@ class DatabaseUser
   Future<http.Response> findUser(int id) async{
 
     final uri = Uri.parse("${Pool.connectionString}/User/GetUser?id=$id");
-    late http.Response response;
+    http.Response response = http.Response("a", 999);
 
     try{
       response = await http.get(uri, headers: <String, String>{
@@ -52,6 +53,7 @@ class DatabaseUser
       });
     }
     catch(e){
+      
       return response;
     }
 

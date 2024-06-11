@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 
-import 'package:darq/darq.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/constants/size.dart';
@@ -14,6 +13,7 @@ import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/database/_spchanges.dart';
 import 'package:fitnessapp/presentation/sign/signin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,11 +28,16 @@ class CubitWelcomeButton extends Cubit<Widget> {
     } else {
       DatabaseUser dbUser = DatabaseUser();
       http.Response response = await dbUser.findUser(await sp.readID());
+      
       if (response.statusCode <= 299) {
         Pool.user =ModelUser.fromJson( json.decode(response.body));
         
         emit(const ToHomeButton());
-      } else {
+      }
+      else if(response.statusCode == 999){
+        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+      } 
+      else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           margin: EdgeInsets.all(Sizes.height / 20),
           content: Align(
