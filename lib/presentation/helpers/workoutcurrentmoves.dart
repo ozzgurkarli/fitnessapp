@@ -154,6 +154,8 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
               bulk += (double.parse(weightController.text) *
                   int.parse(repeatController.text));
               context.read<CubitBulkCounter>().currentBulk(bulk);
+
+              
             }
           },
           ConstantText.COMPLETESET[ConstantText.index],

@@ -4,7 +4,9 @@ import 'package:fitnessapp/common/constants/constanttext.dart';
 import 'package:fitnessapp/common/constants/helpermethods.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelworkout.dart';
+import 'package:fitnessapp/common/models/modelworkoutmove.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitworkouthistory.dart';
+import 'package:fitnessapp/presentation/helpers/workouthistorydetail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -99,7 +101,8 @@ class _WorkoutHistoryState extends State<WorkoutHistory> {
                                           width: Sizes.width * 43 / 60,
                                           height: Sizes.height / 10,
                                           child: ListTile(
-                                            onTap: () {},
+                                            onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context)=> WorkoutHistoryDetail(moveList: map.values
+                                                      .toList()[index][innerIndex].workoutMoves)));},
                                             tileColor: Colors.transparent,
                                             subtitle: Row(
                                               mainAxisAlignment:
