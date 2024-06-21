@@ -62,4 +62,17 @@ class CubitWorkoutHistory extends Cubit<Map<String, List<ModelWorkout>>> {
 
     emit(workoutMap);
   }
+
+  double findHeaviestWeight(List<dynamic> list){
+
+    double heaviest = 0;
+
+    for(var item in list){
+      if(item["weight"] > heaviest){
+        heaviest = item["weight"];
+      }  
+    }
+
+    return heaviest;
+  }
 }
