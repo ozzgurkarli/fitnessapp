@@ -26,7 +26,7 @@ class _WorkoutHistoryDetailState extends State<WorkoutHistoryDetail> {
       body: Center(
         child: SizedBox(
                     width: Sizes.width,
-                    height: Sizes.height, 
+                    height: Sizes.height,  
           child: ListView.builder(
               itemCount: widget.moveList.length,
               itemBuilder: (context, index) {
