@@ -101,11 +101,14 @@ class ConstantText {
   static const List<String> CANCELWORKOUT = ["Cancel workout", "Antrenmanı iptal et"];
   
   static const List<String> COMPLETESET = ["Complete Set", "Seti Tamamla"];
+  static const List<String> SETCOUNT = ["Set Count", "Set Sayısı"];
   static const List<String> NEXTMOVE = ["Next Move", "Sonraki Hareket"];
   static const List<String> PREVIOUSMOVE = ["Previous Move", "Önceki Hareket"];
   
   static const List<String> CURRENTBULK0 = ["Current", "Güncel"];
   static const List<String> CURRENTBULK1 = ["Bulk", "Hacim"];
+  
+  static const List<String> HEAVIESTWEIGHT = ["Heaviest Weight", "En Yüksek Ağırlık"];
 
   static const List<String> MINUTES = ["minutes", "dakika"];
   
