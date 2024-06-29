@@ -34,6 +34,7 @@ class ConstantText {
   static const List<String> CM = ["ft", "cm"];
   static const List<String> HEIGHT = ["Height", "Boy"];
   static const List<String> FREQUENCY = ["Sports frequency", "Spor sıklığı"];
+  static const List<String> TOTAL = ["Total", "Toplam"];
   
   static const List<String> INVALIDWEIGHTTYPE = ["Only numbers and the '.' character can be entered in the weight field.", "Ağırlık alanına sadece rakamlar ve '.' karakteri girilebilir."];
   static const List<String> INVALIDREPEATTYPE = ["Only numbers can be entered in the repeat field.", "Tekrar alanına sadece rakamlar girilebilir."];
@@ -101,7 +102,7 @@ class ConstantText {
   static const List<String> CANCELWORKOUT = ["Cancel workout", "Antrenmanı iptal et"];
   
   static const List<String> COMPLETESET = ["Complete Set", "Seti Tamamla"];
-  static const List<String> SETCOUNT = ["Set Count", "Set Sayısı"];
+  static const List<String> COMPLETEDSETCOUNT = ["Completed Set Count", "Tamamlanan Set Sayısı"];
   static const List<String> NEXTMOVE = ["Next Move", "Sonraki Hareket"];
   static const List<String> PREVIOUSMOVE = ["Previous Move", "Önceki Hareket"];
   

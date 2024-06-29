@@ -1,8 +1,7 @@
-import 'dart:ffi';
-
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
+import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitbulkcounter.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
@@ -150,12 +149,26 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
         CustomizedElevatedButton(
           () {
             if(context.read<CubitBulkCounter>().addBulk(context, WorkoutCurrent.moveList[index], weightController.text, repeatController.text)){
-              
+              Pool.lastWorkout.workoutMoves![index]["setCount"] = Pool.lastWorkout.workoutMoves![index]["setCount"]! + 1;
+              WorkoutCurrent.moveList[index].setCount = WorkoutCurrent.moveList[index].setCount! + 1;
               bulk += (double.parse(weightController.text) *
                   int.parse(repeatController.text));
               context.read<CubitBulkCounter>().currentBulk(bulk);
-
               
+              repeatController.text = "";
+              weightController.text = "";
+
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  margin: EdgeInsets.all(Sizes.height / 20),
+                                  content: Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                          "${ConstantText.COMPLETEDSETCOUNT[ConstantText.index]}: ${WorkoutCurrent.moveList[index].setCount}")),
+                                  backgroundColor: ColorC.foregroundColor,
+                                  showCloseIcon: true,
+                                  closeIconColor: ColorC.thirdColor,
+                                  behavior: SnackBarBehavior.floating,
+                                ));
             }
           },
           ConstantText.COMPLETESET[ConstantText.index],
