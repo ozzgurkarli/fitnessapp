@@ -21,6 +21,13 @@ class _WorkoutHistoryDetailState extends State<WorkoutHistoryDetail> {
   int totalSet = 0;
   @override
   Widget build(BuildContext context) {
+    if(widget.moveList is List<ModelWorkoutMove>){
+      List<dynamic> tempList = List.empty(growable: true);
+      for(var item in widget.moveList){
+        tempList.add(item.toJson());      
+      }
+      widget.moveList = tempList;
+    }
     highestWeight = context
         .read<CubitWorkoutHistory>()
         .findHighest(widget.moveList, "weight");
@@ -97,7 +104,7 @@ class _WorkoutHistoryDetailState extends State<WorkoutHistoryDetail> {
                                   backStrokeWidth: 10,
                                   maxValue: totalWeight,
                                   valueNotifier: ValueNotifier(
-                                      widget.moveList[index]["weight"]!),
+                                      widget.moveList[index]["weight"] ?? 0 ),
                                   mergeMode: true,
                                   onGetText: (double value) {
                                     return Text(
@@ -160,7 +167,7 @@ class _WorkoutHistoryDetailState extends State<WorkoutHistoryDetail> {
                                           color: ColorC.backgroundColor),
                                     ),
                                     Text(
-                                      "${widget.moveList[index]["highestWeight"]!} ${ConstantText.KG[ConstantText.index]}",
+                                      "${widget.moveList[index]["highestWeight"] ?? 0} ${ConstantText.KG[ConstantText.index]}",
                                       style: const TextStyle(
                                           fontSize: 18,
                                           fontWeight: FontWeight.w500,

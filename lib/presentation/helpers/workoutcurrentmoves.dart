@@ -6,6 +6,7 @@ import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitbulkcounter.dart';
 import 'package:fitnessapp/cubit/program-workout-move/cubitworkoutbuilder.dart';
 import 'package:fitnessapp/presentation/helpers/workoutcurrent.dart';
+import 'package:fitnessapp/presentation/helpers/workouthistorydetail.dart';
 import 'package:fitnessapp/widgets/customizedwidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -148,27 +149,33 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
         ),
         CustomizedElevatedButton(
           () {
-            if(context.read<CubitBulkCounter>().addBulk(context, WorkoutCurrent.moveList[index], weightController.text, repeatController.text)){
-              Pool.lastWorkout.workoutMoves![index]["setCount"] = Pool.lastWorkout.workoutMoves![index]["setCount"]! + 1;
-              WorkoutCurrent.moveList[index].setCount = WorkoutCurrent.moveList[index].setCount! + 1;
+            if (context.read<CubitBulkCounter>().addBulk(
+                context,
+                WorkoutCurrent.moveList[index],
+                weightController.text,
+                repeatController.text)) {
+              Pool.lastWorkout.workoutMoves![index]["setCount"] =
+                  Pool.lastWorkout.workoutMoves![index]["setCount"]! + 1;
+              WorkoutCurrent.moveList[index].setCount =
+                  WorkoutCurrent.moveList[index].setCount! + 1;
               bulk += (double.parse(weightController.text) *
                   int.parse(repeatController.text));
               context.read<CubitBulkCounter>().currentBulk(bulk);
-              
+
               repeatController.text = "";
               weightController.text = "";
 
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  margin: EdgeInsets.all(Sizes.height / 20),
-                                  content: Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                          "${ConstantText.COMPLETEDSETCOUNT[ConstantText.index]}: ${WorkoutCurrent.moveList[index].setCount}")),
-                                  backgroundColor: ColorC.foregroundColor,
-                                  showCloseIcon: true,
-                                  closeIconColor: ColorC.thirdColor,
-                                  behavior: SnackBarBehavior.floating,
-                                ));
+                margin: EdgeInsets.all(Sizes.height / 20),
+                content: Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                        "${ConstantText.COMPLETEDSETCOUNT[ConstantText.index]}: ${WorkoutCurrent.moveList[index].setCount}")),
+                backgroundColor: ColorC.foregroundColor,
+                showCloseIcon: true,
+                closeIconColor: ColorC.thirdColor,
+                behavior: SnackBarBehavior.floating,
+              ));
             }
           },
           ConstantText.COMPLETESET[ConstantText.index],
@@ -211,8 +218,30 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
                       duration: const Duration(milliseconds: 400),
                       curve: Curves.easeIn);
                 },
-          ConstantText.NEXTMOVE[ConstantText.index],
+          index == WorkoutCurrent.moveList.length - 1
+              ? ConstantText.COMPLETE[ConstantText.index]
+              : ConstantText.NEXTMOVE[ConstantText.index],
           Icons.arrow_forward,
+          0,
+          MainAxisAlignment.spaceBetween,
+          customWidth: Sizes.width / 1.6,
+          leftTextMargin: Sizes.width * 0.07,
+          rightTextMargin: Sizes.width * 0.07,
+          gradientColor: ColorC.thirdGradient,
+        ),
+        SizedBox(
+          height: Sizes.height / 50,
+        ),
+        CustomizedElevatedButton(
+          () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WorkoutHistoryDetail(
+                        moveList: WorkoutCurrent.moveList)));
+          },
+          ConstantText.SEESUMMARY[ConstantText.index],
+          Icons.summarize_outlined,
           0,
           MainAxisAlignment.spaceBetween,
           customWidth: Sizes.width / 1.6,

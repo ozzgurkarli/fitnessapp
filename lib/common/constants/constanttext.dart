@@ -46,6 +46,8 @@ class ConstantText {
   static const List<String> HISTORY = ["History", "Geçmiş"];
   static const List<String> NEXT = ["Next", "Sonraki"];
   static const List<String> CREATE = ["Create", "Oluştur"];
+  
+  static const List<String> SEESUMMARY = ["See Summary", "Özeti Gör"];
 
   static const List<String> SIGNIN = ["Sign In", "Giriş Yap"];
   static const List<String> CREATEACCOUNT = ["Sign Up", "Hesap Oluştur"];
