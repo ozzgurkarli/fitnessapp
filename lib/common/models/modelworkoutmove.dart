@@ -14,7 +14,8 @@ class ModelWorkoutMove
   ModelWorkoutMove(this.muscle, this.index, {this.moveId, this.id, this.workoutId, this.moveName, this.duration, this.repeat, this.setCount, this.weight}): super();
 
   factory ModelWorkoutMove.fromJson(Map<dynamic, dynamic> json) {
-    return ModelWorkoutMove(
+    if(json["id"] != null){
+      return ModelWorkoutMove(
         json["muscle"] as String,
         json["index"] as int,
         id: json["id"] as int,
@@ -23,6 +24,13 @@ class ModelWorkoutMove
         moveName: json["moveName"] as String,
         setCount: json["setCount"] as int,
         repeat: json["repeat"] as int,
+        weight: json["weight"] as double,);
+    }
+    return ModelWorkoutMove(
+        json["muscle"] as String,
+        json["index"] as int,
+        moveName: json["moveName"] as String,
+        setCount: json["setCount"] as int,
         weight: json["weight"] as double,);
   }
 

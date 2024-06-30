@@ -29,7 +29,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
     int userId = await spChanges.readID();
     List<ModelWorkout> list = [];
     emit(FutureBuilder(
-      future: dbWorkout.getWorkoutLast12Hour(userId),
+      future: dbWorkout.getWorkoutNotCompleted(userId),
       builder: (context, response) {
         if (response.hasData) {
           if (response.data!.statusCode <= 299) {
@@ -47,7 +47,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
                         content: Align(
                             alignment: Alignment.center,
                             child: Text(ConstantText
-                                .NOWORKOUTFOUNDIN12HOURS[ConstantText.index])),
+                                .NOWORKOUTFOUNDNOTCOMPLETED[ConstantText.index])),
                         backgroundColor: ColorC.foregroundColor,
                         showCloseIcon: true,
                         closeIconColor: ColorC.thirdColor,
@@ -163,7 +163,7 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
                       content: Align(
                           alignment: Alignment.center,
                           child: Text(ConstantText
-                              .NOWORKOUTFOUNDIN12HOURS[ConstantText.index])),
+                              .NOWORKOUTFOUNDNOTCOMPLETED[ConstantText.index])),
                       backgroundColor: ColorC.foregroundColor,
                       showCloseIcon: true,
                       closeIconColor: ColorC.thirdColor,
@@ -203,6 +203,11 @@ class CubitWorkoutBuilder extends Cubit<Widget> {
   Future<bool> deleteWorkout() async {
     dbWorkoutMove.deleteWorkoutMoves(workoutId);
     return await dbWorkout.deleteWorkout(workoutId);
+  }
+
+  Future<http.Response?> completeWorkout(int workoutIdx) async {
+    Pool.workoutSearched = false;
+    return await dbWorkout.completeWorkout(workoutIdx);
   }
 
   int currentBulkCounter(int bulk, int addWeight) {

@@ -1,8 +1,10 @@
 import 'package:fitnessapp/common/constants/colors.dart';
 import 'package:fitnessapp/common/constants/constanttext.dart';
+import 'package:fitnessapp/common/constants/pool.dart';
 import 'package:fitnessapp/common/constants/size.dart';
 import 'package:fitnessapp/common/models/modelworkoutmove.dart';
 import 'package:fitnessapp/database/databaseworkoutmove.dart';
+import 'package:fitnessapp/presentation/helpers/workoutcurrent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,8 +49,10 @@ class CubitBulkCounter extends Cubit<String> {
       ));
     }
 
-    dbWorkoutMove.updateWorkoutMove(ModelWorkoutMove("", 0, setCount: 0, id: move.id, moveId:0, workoutId: move.workoutId, duration: 0, moveName: "", weight: double.parse(weightController), repeat: int.parse(repeatController)));
-
+    if(parseable){
+      Pool.lastWorkout.workoutMoves!.where((x)=> x["id"] == move.id).first["weight"] = Pool.lastWorkout.workoutMoves!.where((x)=> x["id"] == move.id).first["weight"]! + (double.parse(weightController) * int.parse(repeatController));
+      dbWorkoutMove.updateWorkoutMove(ModelWorkoutMove("", 0, setCount: 0, id: move.id, moveId:0, workoutId: move.workoutId, duration: 0, moveName: "", weight: double.parse(weightController), repeat: int.parse(repeatController)));
+    }
     return parseable;
   }
 }

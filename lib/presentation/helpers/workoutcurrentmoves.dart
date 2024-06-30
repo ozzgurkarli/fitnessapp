@@ -89,6 +89,9 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
 
   Widget currentMove(BuildContext context, int index) {
     bool parseable = false;
+    if(WorkoutCurrent.moveList[0].index == 999){
+      WorkoutCurrent.moveList.removeWhere((element) => element.index == 999);
+    }
     return Column(
       children: [
         Container(
@@ -212,7 +215,7 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
         ),
         CustomizedElevatedButton(
           index == WorkoutCurrent.moveList.length - 1
-              ? null
+              ? (){context.read<CubitWorkoutBuilder>().completeWorkout(WorkoutCurrent.workout.id); Navigator.pop(context);Navigator.pop(context);context.read<CubitWorkoutBuilder>().workoutsPage();}
               : () {
                   controller.animateToPage(controller.page!.toInt() + 1,
                       duration: const Duration(milliseconds: 400),
@@ -238,7 +241,7 @@ class _WorkoutCurrentMovesState extends State<WorkoutCurrentMoves> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => WorkoutHistoryDetail(
-                        moveList: WorkoutCurrent.moveList)));
+                        moveList: Pool.lastWorkout.workoutMoves!)));
           },
           ConstantText.SEESUMMARY[ConstantText.index],
           Icons.summarize_outlined,

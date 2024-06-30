@@ -38,7 +38,7 @@ class _WorkoutHistoryDetailState extends State<WorkoutHistoryDetail> {
         .read<CubitWorkoutHistory>()
         .findTotal(widget.moveList, "setCount");
     if(widget.moveList[0]["moveName"] != ConstantText.TOTAL[ConstantText.index]){
-      widget.moveList.insert(0, {"highestWeight": highestWeight, "setCount": totalSet, "weight": totalWeight, "moveName": ConstantText.TOTAL[ConstantText.index], "muscle": ConstantText.WEIGHT[ConstantText.index] });
+      widget.moveList.insert(0, {"index": 999, "highestWeight": highestWeight, "setCount": totalSet, "weight": totalWeight, "moveName": ConstantText.TOTAL[ConstantText.index], "muscle": ConstantText.WEIGHT[ConstantText.index] });
     }
     else{
       totalSet = widget.moveList[0]["setCount"];
@@ -107,14 +107,22 @@ class _WorkoutHistoryDetailState extends State<WorkoutHistoryDetail> {
                                       widget.moveList[index]["weight"] ?? 0 ),
                                   mergeMode: true,
                                   onGetText: (double value) {
-                                    return Text(
-                                      '${value.toInt()} kg',
+                                    return Column(children: [Text(
+                                      '${value.toInt()}',
                                       style: const TextStyle(
                                         fontSize: 16,
                                         fontWeight: FontWeight.bold,
                                         color: Colors.white,
                                       ),
-                                    );
+                                    ),
+                                    Text(
+                                      ConstantText.KG[ConstantText.index],
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    )],);
                                   },
                                 ),
                                 SizedBox(

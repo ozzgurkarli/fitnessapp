@@ -22,12 +22,12 @@ class DatabaseWorkout {
     return response;
   }
 
-  Future<http.Response?> getWorkoutLast12Hour(int userId)async{
+  Future<http.Response?> getWorkoutNotCompleted(int userId)async{
     if(Pool.workoutSearched){
       return null;
     }
 
-    final uri = Uri.parse('${Pool.connectionString}/Workout/GetWorkoutInLast12Hour?id=$userId');
+    final uri = Uri.parse('${Pool.connectionString}/Workout/GetWorkoutNotCompleted?id=$userId');
     late http.Response response;
 
     try{
@@ -58,6 +58,21 @@ class DatabaseWorkout {
     }
     
     return response;
+  }
+
+  Future<http.Response?> completeWorkout(int workoutId)async{
+    final uri = Uri.parse('${Pool.connectionString}/Workout/CompleteWorkout?id=$workoutId');
+    late http.Response response;
+
+    try{
+      response = await http.get(uri, headers: <String, String>{
+        'Content-type':'application/json; charset=UTF-8'
+      });
+    }
+    catch(e){
+      return response;
+    }
+    
   }
 
   Future<bool> deleteWorkout(int workoutId)async{

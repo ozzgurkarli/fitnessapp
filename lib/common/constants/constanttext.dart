@@ -115,7 +115,7 @@ class ConstantText {
 
   static const List<String> MINUTES = ["minutes", "dakika"];
   
-  static const List<String> NOWORKOUTFOUNDIN12HOURS = ["No workouts started in the last 12 hours were found", "Son 12 saat içerisinde başlatılmış antrenman bulunamadı"];
+  static const List<String> NOWORKOUTFOUNDNOTCOMPLETED = ["No workouts not completed were found", "Tamamlanmamış antrenman bulunamadı"];
 
   static const List<String> JANUARY = ["January", "Ocak"];
   static const List<String> FEBRUARY = ["February", "Şubat"];
