@@ -35,18 +35,8 @@ class BottomNavBar extends StatelessWidget {
                 text: ConstantText.MYWORKOUTS[ConstantText.index],
               ),
               GButton(
-                icon: Icons.trending_up,
-                text: ConstantText.STATISTICS[ConstantText.index],
-              ),
-              GButton(
-                icon: Icons.dvr,
-                text: ConstantText.MOVECATALOG[ConstantText.index],
-              ),
-              GButton(
-                icon: Icons.keyboard_double_arrow_up,
-                text: ConstantText.HELPER[ConstantText.index],
-                backgroundGradient:
-                    const LinearGradient(colors: ColorC.premiumGradient),
+                icon: Icons.person_outline,
+                text: ConstantText.PROFILE[ConstantText.index],
               ),
             ]),
       ),

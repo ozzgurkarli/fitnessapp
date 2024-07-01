@@ -67,6 +67,7 @@ class ConstantText {
   static const List<String> EVERYDAY = ["Every day", "Her gün"];
 
   static const List<String> MYWORKOUTS = ["My Workouts", "Antrenmanlarım"];
+  static const List<String> PROFILE = ["Profile", "Profil"];
   static const List<String> STATISTICS = ["Statistics", "Istatistik"];
   static const List<String> MOVECATALOG = ["Move Catalog", "Hareket Kataloğu"];
   static const List<String> HELPER = ["Helper", "Yardımcı"];
