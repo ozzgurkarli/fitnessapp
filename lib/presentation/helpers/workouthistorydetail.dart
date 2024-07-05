@@ -43,7 +43,7 @@ class _WorkoutHistoryDetailState extends State<WorkoutHistoryDetail> {
     // else{
     //   totalSet = widget.moveList[0]["setCount"];
     //   totalWeight = widget.moveList[0]["weight"];
-    // }
+    // } 
     return Scaffold(
       backgroundColor: ColorC.backgroundColor,
       body: Center(
